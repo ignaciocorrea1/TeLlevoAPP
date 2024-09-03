@@ -1,13 +1,42 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>recuperar</ion-title>
+<ion-header [translucent]="true" class="header-page header-recover">
+  <ion-toolbar class="toolbar-above toolbar-recover">
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">recuperar</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div id="container">
+    <!-- titulo de la pagina -->
+    <div class="titulo">
+      <ion-text class="custom-font">
+        Restablecer
+        contraseña
+      </ion-text>
+    </div>
+    <!-- formulario de recuperación -->
+    <div class="form-recover">
+      <div class="form-below">
+        <div class="instructions">
+          <ion-text>
+            Por favor, ingrese su nombre de usuario para restablecer la contraseña.
+          </ion-text>
+        </div>
+      </div>
+      <div class="form-above">
+        <ion-input
+          type="text"
+          class="form-input custom-font" 
+          label="Usuario" 
+          labelPlacement="floating" 
+          fill="outline" 
+          shape="round" 
+          placeholder="Ingrese su usuario">
+        </ion-input>
+      </div>
+      <div class="form-below custom-font">
+        <ion-button class="button" shape="round" strong="true">
+          Ingresar
+        </ion-button>
+      </div>
+    </div>
+  </div>
 </ion-content>

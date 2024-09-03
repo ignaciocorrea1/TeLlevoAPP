@@ -1,0 +1,60 @@
+/* header del recover */
+
+#container .titulo {
+  margin-top: 14vh;
+  margin-bottom: 8vh;
+  text-align: center;
+}
+#container .titulo ion-text {
+  color: var(--morado-oscuro);
+  font-weight: 900;
+  font-size: 1.7em;
+}  
+  
+  /* formulario - dos contenedores: inputs y botones */
+  #container .form-recover {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #container .form-recover .form-above,
+  #container .form-recover .form-below {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 90vw;
+  }
+  
+  #container .form-recover .form-above {
+    padding-top: 4vh;
+    padding-bottom: 8vh;
+  }
+  
+  #container .form-recover .form-below {
+    height: 13vh;
+  }
+
+  #container .form-recover .form-below .instructions{
+    text-align: left;
+  }
+  
+  #container .form-recover .form-below ion-text {
+    margin-top: auto;
+    padding: 2px;
+    width: 80vw;
+    text-align: right;
+    font-weight: bold;
+    font-size: 0.8em;
+    color: var(--morado-oscuro);
+    transition: all 0.07s;
+  
+    &:active {
+      color: var(--morado-claro);
+    }
+  }
+  
+  
+  
