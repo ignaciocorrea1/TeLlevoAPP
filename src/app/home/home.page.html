@@ -1,20 +1,47 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header [translucent]="true" class="header-page header-login">
+  <ion-toolbar class="toolbar-above toolbar-login">
+    <ion-title class="custom-font"> TeLlevoAPP </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <!-- auto -->
+     <div class="auto-container">
+      <img class="auto-img" src="/assets/images/auto.png" alt="">
+      <img class="sombra-img" src="/assets/images/sombra.png" alt="">
+     </div>
+
+    <!-- formulario de ingreso -->
+    <div class="form-ingreso">
+      <div class="form-above">
+        <ion-input
+          type="text"
+          class="form-input custom-font" 
+          label="Usuario" 
+          labelPlacement="floating" 
+          fill="outline" 
+          shape="round" 
+          placeholder="Ingrese su usuario"
+        ></ion-input>
+        <ion-input
+          type="password"
+          class="form-input custom-font"
+          label="Contraseña" 
+          labelPlacement="floating" 
+          fill="outline" 
+          shape="round" 
+          placeholder="Ingrese su contraseña"
+        ></ion-input>
+      </div>
+      <div class="form-below custom-font">
+        <ion-text>
+          ¿Has olvidado tu contraseña?
+        </ion-text>
+        <ion-button class="button" shape="round" strong="true">
+          Ingresar
+        </ion-button>
+      </div>
+    </div>
   </div>
 </ion-content>

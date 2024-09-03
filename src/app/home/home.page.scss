@@ -1,27 +1,80 @@
-#container {
+/* header del login */
+.header-login {
+  height: 20vh;
+  display: flex;
+  align-items: flex-end;
   text-align: center;
+}
 
+/* title del toolbar */
+.header-login .toolbar-login ion-title {
+  color: var(--morado-oscuro);
+  font-weight: 900;
+  font-size: 2em;
+}
+
+/* auto */
+#container .auto-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  width: 100%;
+  height: 20vh;
+  overflow: hidden;
+}
+
+#container .auto-container .auto-img {
+  width: 60%;
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  z-index: 1;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+#container .auto-container .sombra-img {
+  width: 70%;
+  top: -2vh;
+  position: relative;
+  z-index: 0;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
 
-  color: #8c8c8c;
-
-  margin: 0;
+/* formulario - dos contenedores: inputs y botones */
+#container .form-ingreso {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#container a {
-  text-decoration: none;
+#container .form-ingreso .form-above,
+#container .form-ingreso .form-below {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 90vw;
 }
+
+#container .form-ingreso .form-above {
+  height: 20vh;
+}
+
+#container .form-ingreso .form-below {
+  margin-top: 1vh;
+  height: 13vh;
+}
+
+#container .form-ingreso .form-below ion-text {
+  width: 80vw;
+  text-align: right;
+  font-weight: bold;
+  font-size: 0.8em;
+  color: var(--morado-oscuro);
+  transition: all 0.07s;
+
+  &:active {
+    color: var(--morado-claro);
+  }
+}
+
+

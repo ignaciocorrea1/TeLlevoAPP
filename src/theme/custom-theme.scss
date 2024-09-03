@@ -1,0 +1,30 @@
+/* Estilos generales */
+
+/* Headers */
+.header-page {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+/* Fonts */
+.custom-font {
+    font-family: var(--custom-font) !important;
+}
+
+/* Inputs */
+.form-input {
+    width: 85vw;
+    font-weight: 600;
+    --color: var(--morado-oscuro);
+    --border-width: 0.2em;
+    --border-color: var(--morado-oscuro) !important;
+    --placeholder-color: var(--morado-medio);
+    --highlight-color-focused: var(--morado-oscuro);
+}
+
+/* Botones */
+.button {
+    --box-shadow: none;
+    --background: var(--morado-claro);
+    --ripple-color: var(--morado-oscuro);
+}

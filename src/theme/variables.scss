@@ -1,2 +1,12 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+:root {
+    --custom-font: "Outfit", sans-serif;
+    --morado-oscuro: #7D0BB5;
+    --morado-medio: #8C3DE0;
+    --morado-claro: #AA59FF;
+    --morado-gris: #F0E9F7;
+    --verde: #E2FFE8;
+}
