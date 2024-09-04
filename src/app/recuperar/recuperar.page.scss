@@ -1,8 +1,18 @@
 /* header del recover */
 
+ion-header ion-toolbar{
+  --background: var(--morado-gris);
+}
+
+ion-content{
+  --background: var(--morado-gris);
+}
+
+/* titulo de la pagina */
+
 #container .titulo {
-  margin-top: 14vh;
-  margin-bottom: 8vh;
+  margin-top: 8vh;
+  margin-bottom: 17vh;
   text-align: center;
 }
 #container .titulo ion-text {
@@ -26,35 +36,20 @@
     align-items: center;
     justify-content: space-between;
     width: 90vw;
-  }
-  
-  #container .form-recover .form-above {
-    padding-top: 4vh;
-    padding-bottom: 8vh;
-  }
-  
-  #container .form-recover .form-below {
-    height: 13vh;
-  }
-
-  #container .form-recover .form-below .instructions{
-    text-align: left;
+    margin-top: 2vh;
   }
   
   #container .form-recover .form-below ion-text {
     margin-top: auto;
     padding: 2px;
     width: 80vw;
-    text-align: right;
+    text-align: left;
     font-weight: bold;
     font-size: 0.8em;
     color: var(--morado-oscuro);
-    transition: all 0.07s;
-  
-    &:active {
-      color: var(--morado-claro);
-    }
   }
   
-  
-  
+  ion-label p{
+    color: var(--morado-oscuro);
+    opacity: 50%;
+  }

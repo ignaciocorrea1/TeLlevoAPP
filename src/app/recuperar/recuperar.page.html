@@ -16,7 +16,7 @@
     <div class="form-recover">
       <div class="form-below">
         <div class="instructions">
-          <ion-text>
+          <ion-text class="custom-font">
             Por favor, ingrese su nombre de usuario para restablecer la contraseña.
           </ion-text>
         </div>
@@ -29,11 +29,15 @@
           labelPlacement="floating" 
           fill="outline" 
           shape="round" 
-          placeholder="Ingrese su usuario">
+          placeholder="Ingrese su usuario"
+          [(ngModel)]="user.username">
         </ion-input>
+        <ion-label>
+          <p opacity="50%" align="center" class="custom-font">{{mensaje}}</p>
+        </ion-label>
       </div>
       <div class="form-below custom-font">
-        <ion-button class="button" shape="round" strong="true">
+        <ion-button class="button" shape="round" strong="true" (click)="validar()" >
           Ingresar
         </ion-button>
       </div>
