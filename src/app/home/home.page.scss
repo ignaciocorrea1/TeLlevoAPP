@@ -69,14 +69,14 @@
 
 #container .auto-container .auto-img {
   z-index: 2;
-  animation: movimientoAuto 10s infinite 1s;
+  // animation: movimientoAuto 10s infinite 1s;
 }
 
 #container .auto-container .sombra-img {
   z-index: 1;
   top: -2vh;
   width: 65%;
-  animation: movimientoSombra 10s infinite 1s;
+  // animation: movimientoSombra 10s infinite 1s;
 }
 
 #container .auto-container .humo-img {
@@ -86,37 +86,37 @@
   filter: drop-shadow(
     0 0 2px black
   );
-  animation: movimientoHumo 10s infinite 1s;
+  // animation: movimientoHumo 10s infinite 1s;
 }
 
 /* animacion */
 
 /* movimiento de la sombra + las ruedas */
-@keyframes movimientoSombra {
-  33.3% {
-    transform: translateX(-16%) translateY(8%);
-  }
-  66.6% {
-    transform: translateX(-71%) translateY(31%) scale(1.2);
-  }
-}
+// @keyframes movimientoSombra {
+//   33.3% {
+//     transform: translateX(-16%) translateY(8%);
+//   }
+//   66.6% {
+//     transform: translateX(-71%) translateY(31%) scale(1.2);
+//   }
+// } 
 
-/* movimiento del auto */
-@keyframes movimientoAuto {
-  33.3% {
-    transform: translateX(-10%) translateY(8%) skewY(2deg);
-  }
-  66.6% {
-    transform: translateX(-75%) translateY(35%) skewY(-2.5deg) scale(1.2);
-  }
-}
+// /* movimiento del auto */
+// @keyframes movimientoAuto {
+//   33.3% {
+//     transform: translateX(-10%) translateY(8%) skewY(2deg);
+//   }
+//   66.6% {
+//     transform: translateX(-75%) translateY(35%) skewY(-2.5deg) scale(1.2);
+//   }
+// }
 
-/* movimiento del humo */
-@keyframes movimientoHumo {
-  33.3% {
-    transform: translateX(-20%) translateY(6%) skewY(2deg);
-  }
-  66.6% {
-    transform: translateX(-70%) translateY(29%) skewY(-1.1deg) scale(1.2);
-  }
-}
+// /* movimiento del humo */
+// @keyframes movimientoHumo {
+//   33.3% {
+//     transform: translateX(-20%) translateY(6%) skewY(2deg);
+//   }
+//   66.6% {
+//     transform: translateX(-70%) translateY(29%) skewY(-1.1deg) scale(1.2);
+//   }
+// }

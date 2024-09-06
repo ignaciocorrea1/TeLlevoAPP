@@ -16,6 +16,8 @@
     <div class="form-ingreso">
       <div class="form-above">
         <ion-input
+          [(ngModel)]="user.username" 
+          id="username" 
           type="text"
           class="form-input custom-font"
           label="Usuario"
@@ -25,6 +27,8 @@
           placeholder="Ingrese su usuario"
         ></ion-input>
         <ion-input
+          [(ngModel)]="user.password"  
+          id="password" 
           type="password"
           class="form-input custom-font"
           label="Contraseña"
@@ -35,11 +39,17 @@
         ></ion-input>
       </div>
       <div class="form-below custom-font">
-        <ion-text> ¿Has olvidado tu contraseña? </ion-text>
+        <ion-text [routerLink]="['/recuperar']">
+          ¿Has olvidado tu contraseña?
+        </ion-text>
 
-        <ion-text id="error-msg" style="color: red; text-align: center; display: none;"></ion-text>
-        
-        <ion-button class="button" shape="round" strong="true">
+        <ion-text
+          id="error-msg" 
+          style="opacity: 50%;"
+          class="ion-text-center custom-font"
+        ></ion-text>
+
+        <ion-button (click)="validarLogin()" class="button" shape="round" strong="true">
           Ingresar
         </ion-button>
       </div>
