@@ -48,6 +48,7 @@ export class HomePage {
         };
 
         this.router.navigate(["/inicio"], navigationExtras);*/
+        this.router.navigate(["/inicio"])
 
         console.log("Username: "+this.user.username);
         console.log("Password: "+this.user.password);
