@@ -1,0 +1,21 @@
+#main-content {
+    ion-toolbar {
+        --background: var(--morado-oscuro);
+
+        ion-buttons .btn-menu {
+            --color: white;
+            --background: transparent;
+        }
+    }
+}
+
+.menu-container {
+    ion-header {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+
+        ion-toolbar {
+            --background: var(--morado-oscuro);
+        }
+    }
+}
