@@ -8,6 +8,16 @@ ion-content{
   --background: var(--morado-gris);
 }
 
+ion-header .back-button{
+  display: block; 
+  --background: transparent; 
+  --color: var(--morado-oscuro);
+  --background-hover: transparent;
+  /* &:active{
+    --background: transparent;
+  } */
+}
+
 /* titulo de la pagina */
 
 #container .titulo {
