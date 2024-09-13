@@ -21,6 +21,7 @@ export class RecuperarPage implements OnInit {
       //if (this.user.password.length == 4) {
         //Funciona
       this.mensaje = '';
+      this.router.navigate(["/home"]);
         /* console.log(this.user.username);
         let navigationExtras: NavigationExtras = {
           state: {

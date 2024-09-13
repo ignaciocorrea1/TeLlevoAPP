@@ -8,36 +8,56 @@ import { AnimationController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
-  constructor(private router:Router, private animationController:AnimationController) {}
-
   // Se crea un objeto del tipo usuario
   user = {
     "username": "",
     "password": ""
   };
 
-  // Funcion para validar los campos
-  validarLogin(){
+  constructor(private router:Router, private animationController:AnimationController) {}
+
+  limpiarInputs() {
     // Se obtienen los inputs
     const inputU = document.getElementById("username") as HTMLIonInputElement;
     const inputP = document.getElementById("password") as HTMLIonInputElement;
 
+    if (inputU && inputP) {
+        // Se vacian los campos
+        inputU.value = "";
+        inputP.value = "";
+    };
+  };
+
+  msgError(input:string) {
     // Se obtiene el mensaje de error
     const msgError = document.getElementById("error-msg") as HTMLIonTextElement;
-    
+
     // Se resetea el display
     if (msgError) {
       msgError.style.display = "none";
     };
+    
+    if (input === "password") {
+      // Si la contraseña esta incorrecta
+      msgError.style.display = "block";
+      msgError.textContent = "Contraseña incorrecta.";
+    } else if (input === "user"){
+      // Si el usuario esta incorrecto
+      msgError.style.display = "block";
+      msgError.textContent = "Usuario incorrecto.";
+    } else {
+      msgError.style.display = "none";
+    };
+  };
 
+  // Funcion para validar los campos
+  validarLogin(){
     // Si el usuario está correcto
     if (this.user.username != "") {
       // Si la contraseña está correcta
       if (this.user.password != "") {
-        // Se vacian los campos
-        inputU.value = "";
-        inputP.value = "";
+
+        this.limpiarInputs();
 
         // Se envian los datos del usuario y se redirecciona al inicio
         let navigationExtras : NavigationExtras = {
@@ -52,16 +72,10 @@ export class HomePage {
         console.log("Username: "+this.user.username);
         console.log("Password: "+this.user.password);
       } else {
-        // Si la contraseña esta incorrecta
-
-        msgError.style.display = "block";
-        msgError.textContent = "Contraseña incorrecta.";
+        this.msgError("password")
       }
     } else {
-      // Si el usuario esta incorrecto
-      
-      msgError.style.display = "block";
-      msgError.textContent = "Usuario incorrecto.";
+      this.msgError("user")
     };
   };
 
@@ -122,6 +136,14 @@ export class HomePage {
   };
 
   ngAfterContentInit() {
-    this.animacionAuto()
+    this.animacionAuto();
   };
+
+  // Se vacian los campos al volver a la vista
+  ionViewWillEnter() {
+    this.user.username = "";
+    this.user.password = "";
+    this.limpiarInputs();
+    this.msgError("ninguno");
+  }
 };

@@ -24,14 +24,36 @@
 
     ion-content {
         --background: var(--morado-claro);
-        --color: white;
 
-        ion-list, ion-item {
-            background: var(--morado-claro);
-            --background: var(--morado-claro);
+        .lista-opciones {
+            ion-list, ion-item {
+                color: white;
+                font-weight: 600;
+                background: var(--morado-claro);
+                --background: var(--morado-claro);
+
+                ion-label {
+                    transition: all 0.15s;
+
+                    &:active {
+                        color: var(--morado-gris);
+                    }
+                }
+            }
         }
-        ion-button {
-            color: white;
+        
+        .cerrar {
+            position: absolute;
+            bottom: 5vh;
+            ion-text {
+                color: white;
+                font-weight: 600;
+                transition: all 0.1s;
+    
+                &:active {
+                    color: var(--morado-gris);
+                }
+            }
         }
     }
 }

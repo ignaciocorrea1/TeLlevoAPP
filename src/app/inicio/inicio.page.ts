@@ -22,6 +22,7 @@ export class InicioPage implements OnInit {
     };
     this.user.username = state.username;
     this.user.password = state.password;
+
   };
 
   ngOnInit() {
