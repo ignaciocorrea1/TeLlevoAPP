@@ -1,11 +1,9 @@
-#main-content {
-    ion-toolbar {
-        --background: var(--morado-oscuro);
-
-        ion-buttons .btn-menu {
-            --color: white;
-            --background: transparent;
-        }
+#main-content ion-toolbar {
+    --background: var(--morado-oscuro);
+    
+    .btn-menu {
+        --color: white;
+        --background: transparent;
     }
 }
 
@@ -13,9 +11,27 @@
     ion-header {
         box-shadow: none;
         -webkit-box-shadow: none;
-
+        
         ion-toolbar {
-            --background: var(--morado-oscuro);
+            --background: var(--morado-claro);
+
+            ion-title {
+                --color: white;
+                font-weight: bold;
+            }
+        }
+    }
+
+    ion-content {
+        --background: var(--morado-claro);
+        --color: white;
+
+        ion-list, ion-item {
+            background: var(--morado-claro);
+            --background: var(--morado-claro);
+        }
+        ion-button {
+            color: white;
         }
     }
 }

@@ -40,15 +40,14 @@ export class HomePage {
         inputP.value = "";
 
         // Se envian los datos del usuario y se redirecciona al inicio
-        /*let navigationExtras : NavigationExtras = {
+        let navigationExtras : NavigationExtras = {
           state: {
             username: this.user.username,
             password: this.user.password,
           },
         };
 
-        this.router.navigate(["/inicio"], navigationExtras);*/
-        this.router.navigate(["/inicio"])
+        this.router.navigate(["/inicio"], navigationExtras);
 
         console.log("Username: "+this.user.username);
         console.log("Password: "+this.user.password);

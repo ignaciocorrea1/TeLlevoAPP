@@ -1,9 +1,31 @@
-<ion-content [fullscreen]="true">
-  <!-- Header -->
-  <app-header></app-header>
+<ion-content [fullscreen]="true" id="inicio-container">
+  <!-- header -->
+  <app-header class="header-comp"></app-header>
 
   <!-- main -->
-  <div class="inicio-container">
-    
+  <div class="main-container">
+    <!-- Bienvenida al usuario -->
+    <div class="bienvenida">
+      <ion-text class="ion-text-center">
+        <h5 class="custom-font">Bienvenido {{user.username}}</h5>
+      </ion-text>
+    </div>
+
+    <!-- Opciones del usuario -->
+    <div class="opciones">
+      <ion-list lines="none">
+        <ion-item>
+          <ion-button class="button-global custom-font btn-opcion" shape="round" strong="true">
+            Programar viajes
+          </ion-button>
+        </ion-item>
+
+        <ion-item>
+          <ion-button class="button-global custom-font btn-opcion" shape="round" strong="true">
+            Ver viajes
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </div>
   </div>
 </ion-content>
