@@ -28,3 +28,13 @@
     --background: var(--morado-claro);
     --ripple-color: var(--morado-oscuro);
 }
+
+.button-back {
+    display: block; 
+  --background: transparent; 
+  --color: var(--morado-oscuro);
+  --background-hover: transparent;
+  /* &:active{
+    --background: transparent;
+  } */
+}

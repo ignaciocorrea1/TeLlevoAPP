@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AnimationController } from '@ionic/angular';
+import { AuthenticatorService } from '../Servicios/authenticator.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomePage {
     "password": ""
   };
 
-  constructor(private router:Router, private animationController:AnimationController) {}
+  constructor(private router:Router, private animationController:AnimationController, private auth:AuthenticatorService) {}
 
   limpiarInputs() {
     // Se obtienen los inputs
@@ -37,14 +38,14 @@ export class HomePage {
       msgError.style.display = "none";
     };
     
-    if (input === "password") {
-      // Si la contraseña esta incorrecta
+    if (input === "user") {
+      // Si el usuario o la contraseña estan
       msgError.style.display = "block";
-      msgError.textContent = "Contraseña incorrecta.";
-    } else if (input === "user"){
-      // Si el usuario esta incorrecto
+      msgError.textContent = "Credenciales no validas.";
+    } else if (input === "ninguno"){
+      // Si faltan campos por rellenar
       msgError.style.display = "block";
-      msgError.textContent = "Usuario incorrecto.";
+      msgError.textContent = "Faltan campos por rellenar.";
     } else {
       msgError.style.display = "none";
     };
@@ -52,12 +53,9 @@ export class HomePage {
 
   // Funcion para validar los campos
   validarLogin(){
-    // Si el usuario está correcto
-    if (this.user.username != "") {
-      // Si la contraseña está correcta
-      if (this.user.password != "") {
-
-        this.limpiarInputs();
+    // Si el usuario está correcto, se logea y el estado de usuario pasa a true
+    if (this.auth.login(this.user.username, this.user.password)) {
+      this.limpiarInputs();
 
         // Se envian los datos del usuario y se redirecciona al inicio
         let navigationExtras : NavigationExtras = {
@@ -71,9 +69,6 @@ export class HomePage {
 
         console.log("Username: "+this.user.username);
         console.log("Password: "+this.user.password);
-      } else {
-        this.msgError("password")
-      }
     } else {
       this.msgError("user")
     };
@@ -144,6 +139,6 @@ export class HomePage {
     this.user.username = "";
     this.user.password = "";
     this.limpiarInputs();
-    this.msgError("ninguno");
+    this.msgError("vacio");
   }
 };

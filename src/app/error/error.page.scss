@@ -1,0 +1,28 @@
+ion-content {
+    --background: var(--morado-gris);
+
+    // .header-error .toolbar-error {
+    //     --background: transparent;
+    // }
+
+    .msg-container {
+        margin-top: 25vh;
+        
+        .msg-error {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+    
+            .error-titulo {
+                color: var(--morado-oscuro);
+                font-weight: bold;
+                letter-spacing: 1vw;
+            }
+    
+            .error-texto {
+                margin: 0;
+            }
+        }
+    }
+}
