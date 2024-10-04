@@ -37,7 +37,7 @@ export class RecuperarPage implements OnInit {
       } */
     } else {
       console.log('Usuario no cumple (min: 3, max: 8)');
-      this.mensaje = 'Usuario no cumple (min: 3, max: 8)';
+      this.mensaje = 'No se encontró el usuario ingresado';
       //Tampoco funciona
     }
   }

@@ -38,14 +38,10 @@ export class HomePage {
       msgError.style.display = "none";
     };
     
-    if (input === "user") {
+    if (input === "login") {
       // Si el usuario o la contraseña estan
       msgError.style.display = "block";
       msgError.textContent = "Credenciales no validas.";
-    } else if (input === "ninguno"){
-      // Si faltan campos por rellenar
-      msgError.style.display = "block";
-      msgError.textContent = "Faltan campos por rellenar.";
     } else {
       msgError.style.display = "none";
     };
@@ -66,11 +62,8 @@ export class HomePage {
         };
 
         this.router.navigate(["/inicio"], navigationExtras);
-
-        console.log("Username: "+this.user.username);
-        console.log("Password: "+this.user.password);
     } else {
-      this.msgError("user")
+      this.msgError("login")
     };
   };
 

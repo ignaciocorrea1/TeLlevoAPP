@@ -4,12 +4,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthenticatorService {
-  //Generamos una variable boolean para rectificar el actual estado de conexion con el autentificador
+  // Generamos una variable boolean para rectificar el actual estado de conexion con el autentificador
   connectionStatus: boolean = false;
 
   constructor() { }
-  //Generamos funcion para validar usuario contraseña 
-  //Si equivale a los datos configurados entregara valor true si no Indicara falso 
+  // Generamos funcion para validar usuario contraseña 
+  // Si equivale a los datos configurados entregara valor true si no Indicara falso 
   login(user: String, pass: String): boolean {
     if (user != "" && pass != "") {
       this.connectionStatus = true;
@@ -18,7 +18,6 @@ export class AuthenticatorService {
     }
     this.connectionStatus = false;
     return false
-    
   }
   //Logout para desconectar del sistema 
   logout() {
