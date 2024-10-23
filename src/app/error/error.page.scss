@@ -1,10 +1,6 @@
 ion-content {
     --background: var(--morado-gris);
 
-    // .header-error .toolbar-error {
-    //     --background: transparent;
-    // }
-
     .msg-container {
         margin-top: 30vh;
         
@@ -17,12 +13,25 @@ ion-content {
             .error-titulo {
                 color: var(--morado-oscuro);
                 font-weight: bold;
+                font-size: 3em;
                 letter-spacing: 1vw;
             }
     
             .error-texto {
                 margin: 0;
+                font-size: 1.1em;
             }
+        }
+    }
+
+    .msg-container-2 {
+        
+        .msg-error-2 {
+            text-align: center;
+            text-decoration: underline;
+            color: var(--morado-oscuro);
+            font-weight: bold;
+            font-size: 1.2em;
         }
     }
 }
