@@ -7,6 +7,20 @@ import { Observable } from 'rxjs';
 })
 export class ApicontrollerService {
 
+  /* 
+    - Observable representa la respuesta de la solicitud
+    - Suscribe ejecutar codigo cuando el observable emite una respuesta
+
+    ** Solicitud get para obtener el usuario ** 
+
+    ** Solicitud post para agrega un usuario ** 
+
+    ** Solicitud put para actualizar la contraseña ** 
+
+    ** Solicitud delete no se hizo de momento **
+
+  */
+
   constructor(private http: HttpClient) { }
 
   // Ruta de la api
@@ -16,5 +30,10 @@ export class ApicontrollerService {
   getUsuario(user: String, pass: String):Observable<any> {
     const url = `${this.apiUrl}/usuarios/?correo=${user}&contasenia=${pass}`
     return this.http.get(url)
+  }
+
+  // Agregar usuario
+  postUsuario(user: any): Observable<any> {
+    return this.http.post(this.apiUrl + "/usuarios/", user);
   }
 }

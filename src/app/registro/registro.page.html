@@ -1,13 +1,105 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>registro</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">registro</ion-title>
+<ion-content [fullscreen]="true" id="registro-container">
+  <ion-header class="header-page header-registro">
+    <ion-toolbar class="toolbar-above toolbar-registro">
+      <ion-buttons slot="start">
+        <ion-back-button class="button-back"></ion-back-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
+
+  <div class="main-registro">
+    <div class="titulo">
+      <ion-text class="custom-font ion-text-center t-morado-oscuro">
+        <h1>Registro</h1>
+      </ion-text>
+    </div>
+
+    <div class="form-registro">
+      <ion-input
+        [(ngModel)]="user.rut"
+        id="rut"
+        type="text"
+        class="form-input custom-font"
+        label="Rut"
+        labelPlacement="floating"
+        fill="outline"
+        placeholder="Ingrese su rut"
+      ></ion-input>
+      <ion-input
+        [(ngModel)]="user.nombres"
+        id="nombres"
+        type="text"
+        class="form-input custom-font"
+        label="Nombre(s)"
+        labelPlacement="floating"
+        fill="outline"
+        placeholder="Ingrese su nombre(s)"
+      ></ion-input>
+      <ion-input
+        [(ngModel)]="user.paterno"
+        id="paterno"
+        type="text"
+        class="form-input custom-font"
+        label="Apellido paterno"
+        labelPlacement="floating"
+        fill="outline"
+        placeholder="Ingrese su apellido paterno"
+      ></ion-input>
+      <ion-input
+        [(ngModel)]="user.materno"
+        id="materno"
+        type="text"
+        class="form-input custom-font"
+        label="Materno"
+        labelPlacement="floating"
+        fill="outline"
+        placeholder="Ingrese su apellido materno"
+      ></ion-input>
+      <ion-input
+        [(ngModel)]="user.correo"
+        id="correo"
+        type="text"
+        class="form-input custom-font"
+        label="Correo"
+        labelPlacement="floating"
+        fill="outline"
+        placeholder="Ingrese su correo"
+      ></ion-input>
+      <ion-input
+        [(ngModel)]="user.contrasenia"
+        id="password"
+        type="password"
+        class="form-input custom-font"
+        label="Contraseña"
+        labelPlacement="floating"
+        fill="outline"
+        placeholder="Ingrese su contraseña"
+      ></ion-input>
+      <ion-input
+        [(ngModel)]="user.contrasenia2"
+        id="password2"
+        type="password"
+        class="form-input custom-font"
+        label="Confirmar contraseña"
+        labelPlacement="floating"
+        fill="outline"
+        placeholder="Ingrese su contraseña"
+      ></ion-input>
+
+      <ion-text
+        id="error-msg"
+        style="opacity: 50%"
+        class="ion-text-center custom-font"
+      ></ion-text>
+
+      <ion-button
+        (click)="registrar()"
+        class="button-global custom-font"
+        shape="round"
+        strong="true"
+      >
+        Registrarse
+      </ion-button>
+    </div>
+  </div>
 </ion-content>

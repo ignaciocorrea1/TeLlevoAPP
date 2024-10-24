@@ -38,3 +38,44 @@
     --background: transparent;
   } */
 }
+
+/* Colores */
+.t-morado-oscuro {
+    color: var(--morado-oscuro);
+}
+
+.e-morado-oscuro {
+    --background: var(--morado-oscuro);
+}
+
+.t-morado-medio {
+    color: var(--morado-medio);
+}
+
+.e-morado-medio {
+    --background: var(--morado-medio);
+}
+
+.t-morado-claro {
+    color: var(--morado-claro);
+}
+
+.e-morado-claro {
+    --background: var(--morado-claro);
+}
+
+.t-morado-gris {
+    color: var(--morado-gris);
+}
+
+.e-morado-gris {
+    --background: var(--morado-gris);
+}
+
+.t-verde {
+    color: var(--verde);
+}
+
+.e-verde {
+    --background: var(--verde);
+}

@@ -1,0 +1,29 @@
+#registro-container,
+#registro-container ion-header, ion-toolbar {
+    --background: var(--morado-gris);
+}
+
+#registro-container .main-registro {
+
+    .titulo ion-text h1 {
+        font-weight: 900;
+    }
+
+    .form-registro {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        :first-child {
+            margin-top: 10vh;
+        }
+
+        ion-input {
+            margin-bottom: 2vh;
+            --border-radius: 0.5em;
+        }
+
+    }
+    
+}
