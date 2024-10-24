@@ -32,6 +32,10 @@ ion-content {
             color: var(--morado-oscuro);
             font-weight: bold;
             font-size: 1.2em;
+
+            &:active {
+                color: var(--morado-claro);
+            }
         }
     }
 }

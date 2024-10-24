@@ -39,9 +39,14 @@
         ></ion-input>
       </div>
       <div class="form-below custom-font">
-        <ion-text [routerLink]="['/recuperar']">
-          ¿Has olvidado tu contraseña?
-        </ion-text>
+        <div class="opciones">
+          <ion-text class="registrarse" [routerLink]="['/registro']">
+            Registrarse
+          </ion-text>
+          <ion-text class="olvidar" [routerLink]="['/recuperar']">
+            ¿Has olvidado tu contraseña?
+          </ion-text>
+        </div>
 
         <ion-text
           id="error-msg"

@@ -34,6 +34,16 @@
 #container .form-ingreso .form-below {
   margin-top: 1vh;
   height: 12vh;
+
+  .opciones {
+    display: flex;
+    justify-content: space-between;
+    width: 80vw;
+
+    .registrarse {
+      width: 20vw;
+    }
+  }
 }
 
 #container .form-ingreso .form-below ion-text {

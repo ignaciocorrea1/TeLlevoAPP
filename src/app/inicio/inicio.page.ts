@@ -9,19 +9,34 @@ import { Router } from '@angular/router';
 export class InicioPage implements OnInit {
   // Usuario
   user = {
-    username : "",
-    password : ""
-  };
+    "id": "",
+    "rut": "",
+    "nombres": "",
+    "paterno": "",
+    "materno": "",
+    "correo": "",
+    "contrasenia": ""
+  }
 
   constructor(private router:Router) { 
     // Se reciben los datos enviados desde el login
     const navegacion = this.router.getCurrentNavigation();
     const state = navegacion?.extras.state as {
-      username: '';
-      password: '';
+      id: "";
+      rut: "";
+      nombres: "";
+      paterno: "";
+      materno: "";
+      correo: "";
+      contrasenia: "";
     };
-    this.user.username = state.username;
-    this.user.password = state.password;
+    this.user.id = state.id;
+    this.user.rut = state.rut;
+    this.user.nombres = state.nombres;
+    this.user.paterno = state.paterno;
+    this.user.materno = state.materno;
+    this.user.correo = state.correo;
+    this.user.contrasenia = state.contrasenia;
 
   };
 

@@ -1,76 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AnimationController } from '@ionic/angular';
 import { AuthenticatorService } from '../Servicios/authenticator.service';
-import { ApicontrollerService } from '../Servicios/apicontroller.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit{
+export class HomePage {
   // Se crea un objeto del tipo usuario
   user = {
     "username": "",
     "password": ""
   };
 
-  // Lista de usuarios
-  usuariosR: any[] = [];
-
   constructor(
     private router:Router, 
     private animationController:AnimationController, 
-    private auth:AuthenticatorService,
-    private api:ApicontrollerService
+    private auth:AuthenticatorService
   ) {}
 
   // Funcion para validar los campos
-  validarLogin(){
-    // Si el usuario está correcto, se logea y el estado de usuario pasa a true
-    if (this.auth.login(this.user.username, this.user.password)) {
-      this.limpiarInputs();
-
-        // Se envian los datos del usuario y se redirecciona al inicio
-        let navigationExtras : NavigationExtras = {
+  validarLogin() {
+    this.auth.login(this.user.username, this.user.password, (logeado: boolean, usuarioObtenido?: any) => {
+      if (logeado && usuarioObtenido) {
+        this.limpiarInputs();
+  
+        // Se envían los datos del usuario y se redirecciona al inicio
+        let navigationExtras: NavigationExtras = {
           state: {
-            username: this.user.username,
-            password: this.user.password,
+            id: usuarioObtenido.id,
+            rut: usuarioObtenido.rut,
+            nombres: usuarioObtenido.nombres,
+            paterno: usuarioObtenido.paterno,
+            materno: usuarioObtenido.materno,
+            correo: usuarioObtenido.correo,
+            contrasenia: usuarioObtenido.contrasenia
           },
         };
-
+  
         this.router.navigate(["/inicio"], navigationExtras);
-    } else {
-      this.msgError("login")
-    };
-  };
-
-  // Funcion para cargar los usuarios registrados
-  cargarUsuarios() {
-    this.api.getUsuarios().subscribe(
-      (data) => {
-        this.usuariosR = data;
-        console.log(this.usuariosR)
-      },
-      (error) => {
-        console.log("Error en la carga de usuarios " + error)
+      } else {
+        this.msgError("login");  // Mostrar error si el login falla
       }
-    );
-  };
-
-  // Funcion para validar que el usuario este registrado
-  // validarUsuario(usuario:string) {
-  //   let usuarios = this.cargarUsuarios();
-
-  //   usuarios.forEach(tmp => {
-  //     if (tmp.correo === usuario) {
-  //       console.log("Existe")
-  //     } else {
-  //       console.log("No existe")
-  //     }
-  //   });
-  // };
+    });
+  }
 
   // Limpiar los campos user y pass
   limpiarInputs() {
@@ -159,10 +134,6 @@ export class HomePage implements OnInit{
     animacionS.play();
     animacionH.play();
   };
-
-  ngOnInit() {
-    this.cargarUsuarios()
-  }
 
   ngAfterContentInit() {
     this.animacionAuto();

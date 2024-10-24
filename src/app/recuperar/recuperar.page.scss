@@ -21,34 +21,34 @@ ion-content{
   font-size: 1.7em;
 }  
   
-  /* formulario - dos contenedores: inputs y botones */
-  #container .form-recover {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  #container .form-recover .form-above,
-  #container .form-recover .form-below {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 90vw;
-    margin-top: 2vh;
-  }
-  
-  #container .form-recover .form-below ion-text {
-    display: block;
-    width: 85vw;
-    text-align: left;
-    font-weight: bold;
-    font-size: 0.8em;
-    color: var(--morado-oscuro);
-  }
-  
-  ion-label p{
-    color: var(--morado-oscuro);
-    opacity: 50%;
-  }
+/* formulario - dos contenedores: inputs y botones */
+#container .form-recover {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#container .form-recover .form-above,
+#container .form-recover .form-below {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 90vw;
+  margin-top: 2vh;
+}
+
+#container .form-recover .form-below ion-text {
+  display: block;
+  width: 85vw;
+  text-align: left;
+  font-weight: bold;
+  font-size: 0.8em;
+  color: var(--morado-oscuro);
+}
+
+ion-label p{
+  color: var(--morado-oscuro);
+  opacity: 50%;
+}

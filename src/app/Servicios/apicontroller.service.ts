@@ -12,8 +12,9 @@ export class ApicontrollerService {
   // Ruta de la api
   apiUrl = "http://127.0.0.1:8000/api";
 
-  // Obtener usuarios
-  getUsuarios():Observable<any> {
-    return this.http.get(this.apiUrl + "/usuarios")
+  // Obtener usuario
+  getUsuario(user: String, pass: String):Observable<any> {
+    const url = `${this.apiUrl}/usuarios/?correo=${user}&contasenia=${pass}`
+    return this.http.get(url)
   }
 }

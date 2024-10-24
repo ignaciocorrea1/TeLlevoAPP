@@ -22,10 +22,13 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'registro',
+    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./error/error.module').then( m => m.ErrorPageModule)
   },
-
 ];
 
 @NgModule({
