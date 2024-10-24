@@ -5,9 +5,15 @@ import { ApicontrollerService } from './apicontroller.service';
   providedIn: 'root'
 })
 export class AuthenticatorService {
-  connectionStatus: boolean = false;
+
+  /*  
+    Usar callback hace que el login no se siga ejecutando hasta obtener una respuesta
+    desde validarUsuario.
+  */
 
   constructor(private api:ApicontrollerService) { }
+
+  connectionStatus: boolean = false;
 
   // login
   login(user: String, pass: String, callback: (resultado: boolean, usuario?: any) => void) {
@@ -55,6 +61,24 @@ export class AuthenticatorService {
         callback(false);  
       }
     );
+  };
+
+  // Validar solo el usuario
+  validarSoloUsuario(user: String, callback: (resultado: boolean, usuario?: any) => void) {
+    this.api.getSoloUsuario(user).subscribe(
+      (data) => {
+        if (data.length > 0) {
+          const usuarioObtenido = data[0];
+          callback(true, usuarioObtenido)
+        }
+        else {
+          callback(false)
+        }
+      },
+      (error) => {
+        callback(false)
+      }
+    )
   };
 
   //Logout para desconectar del sistema 

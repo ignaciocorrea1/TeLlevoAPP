@@ -10,40 +10,79 @@
   <div id="container">
     <!-- titulo de la pagina -->
     <div class="titulo">
-      <ion-text class="custom-font">
-        Restablecer
-        contraseña
-      </ion-text>
+      <ion-text class="custom-font"> Restablecer contraseña </ion-text>
     </div>
     <!-- formulario de recuperación -->
     <div class="form-recover">
       <div class="form-below">
         <div class="instructions">
-          <ion-text class="custom-font">
-            Por favor, ingrese su nombre de usuario para restablecer la contraseña.
+          <ion-text class="custom-font ion-text-center" id="explicacion">
+            {{!mostrarCambio ? 'Por favor, ingrese su nombre de usuario para restableces la contraseña.' : 'Por favor, ingrese la nueva contraseña'}}
           </ion-text>
         </div>
       </div>
-      <div class="form-above">
+      <div class="form-above" id="inputs" *ngIf="!mostrarCambio">
         <ion-input
+          id="usuario"
           type="text"
-          class="form-input custom-font" 
-          label="Usuario" 
-          labelPlacement="floating" 
-          fill="outline" 
-          shape="round" 
-          placeholder="Ingrese su usuario"
-          [(ngModel)]="user.username">
+          class="form-input custom-font"
+          label="Usuario"
+          labelPlacement="floating"
+          fill="outline"
+          shape="round"
+          style="margin-top: 2vh;"
+          placeholder="Ingrese su correo"
+          [(ngModel)]="user.username"
+        >
         </ion-input>
-        <ion-label>
-          <p opacity="50%" align="center" class="custom-font">{{mensaje}}</p>
-        </ion-label>
-      </div>
-      <div class="form-below custom-font">
-        <ion-button class="button-global" shape="round" strong="true" (click)="validar()" >
+
+        <ion-button
+          class="button-global"
+          shape="round"
+          strong="true" 
+          style="margin-top: 2vh;"
+          (click)="validar()"
+        >
           Recuperar
         </ion-button>
       </div>
+
+      <!-- Inputs para cambio de contraseña -->
+      <div class="form-recover" *ngIf="mostrarCambio" id="inputs">
+        <ion-input
+          [(ngModel)]="contrasenias.contrasenia1"
+          id="pass1" 
+          type="password"
+          fill="outline"
+          shape="round"
+          style="margin-top: 2vh; margin-bottom: 2vh;"
+          placeholder="Ingrese la nueva contraseña"
+          class="form-input"
+        ></ion-input>
+        <ion-input
+          [(ngModel)]="contrasenias.contrasenia2"
+          id="pass2" 
+          type="password"
+          fill="outline"
+          shape="round"
+          placeholder="Confirmar contraseña"
+          class="form-input"
+        ></ion-input>
+
+        <ion-button
+          (click)="cambiarContrasenia()"
+          class="button-global"
+          style="margin-top: 2vh;"
+          shape="round"
+          strong="true"
+        >
+          Cambiar
+        </ion-button>
+      </div>
+      
+      <ion-label>
+        <p opacity="50%" align="center" class="custom-font">{{mensaje}}</p>
+      </ion-label>
     </div>
   </div>
 </ion-content>
