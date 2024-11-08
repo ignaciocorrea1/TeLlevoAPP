@@ -31,7 +31,7 @@ export class AuthenticatorService {
   validarUsuario(user: String, pass: String, callback: (resultado: boolean, usuario?: any) => void) {
     // Se realiza la solicitud
     this.api.getUsuario(user, pass).subscribe(
-      (data) => {
+      data => {
         if (data.length > 0) {
           // Si encuentra datos se asigna el primer objeto a una constante
           const usuarioObtenido = data[0];  
@@ -56,7 +56,7 @@ export class AuthenticatorService {
           callback(false);  
         }
       },
-      (error) => {
+      error => {
         this.connectionStatus = false;
         callback(false);  
       }
@@ -66,7 +66,7 @@ export class AuthenticatorService {
   // Validar solo el usuario
   validarSoloUsuario(user: String, callback: (resultado: boolean, usuario?: any) => void) {
     this.api.getSoloUsuario(user).subscribe(
-      (data) => {
+      data => {
         if (data.length > 0) {
           const usuarioObtenido = data[0];
           callback(true, usuarioObtenido)
@@ -75,7 +75,7 @@ export class AuthenticatorService {
           callback(false)
         }
       },
-      (error) => {
+      error => {
         callback(false)
       }
     )

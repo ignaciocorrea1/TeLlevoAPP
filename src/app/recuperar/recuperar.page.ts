@@ -56,13 +56,13 @@ export class RecuperarPage implements OnInit {
   
         const usuarioID = Number(this.usuarioEcontrado.id);
         this.api.putUsuario(usuarioID, usuarioActualizado).subscribe(
-          (respuesta) => {
+          respuesta => {
             console.log("Actualizado", respuesta)
             
             // Se redirecciona al inicio
             this.redireccionamiento();
           },
-          (error) => {
+          error => {
             console.log("Eror", error)
           }
         );

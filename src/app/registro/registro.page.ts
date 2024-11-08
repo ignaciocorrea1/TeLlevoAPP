@@ -36,7 +36,8 @@ export class RegistroPage implements OnInit {
         "paterno": this.user.paterno,
         "materno": this.user.materno,
         "correo": this.user.correo,
-        "contrasenia": this.user.contrasenia
+        "contrasenia": this.user.contrasenia,
+        "tipo": "pasajero"
       }
 
       // Se asigna un usuario
@@ -47,7 +48,7 @@ export class RegistroPage implements OnInit {
         },
         error => {
           this.msgError("registro")
-          console.log("Registro erroneo")
+          console.log("Registro erroneo", error)
         }
       )
     } else {
@@ -96,6 +97,10 @@ export class RegistroPage implements OnInit {
       msgError.style.display = "none";
     };
   };
+
+  labelPos(input:string) {
+    
+  }
 
   ngOnInit() {
   }
