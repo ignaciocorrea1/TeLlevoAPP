@@ -22,8 +22,17 @@ export class RegistroPage implements OnInit {
     "materno": "",
     "correo": "",
     "contrasenia": "",
-    "contrasenia2": ""
+    "contrasenia2": "",
+    "tipo": ""
   }
+
+  selectedR = false;
+  selectedN = false;
+  selectedP = false;
+  selectedM = false;
+  selectedC = false;
+  selectedCc = false;
+  selectedCCC = false;
 
   // Registrar
   registrar() {
@@ -98,9 +107,9 @@ export class RegistroPage implements OnInit {
     };
   };
 
-  labelPos(input:string) {
-    
-  }
+  // labelPos(input:string) {
+     
+  // }
 
   ngOnInit() {
   }

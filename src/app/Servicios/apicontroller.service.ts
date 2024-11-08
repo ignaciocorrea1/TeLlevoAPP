@@ -24,7 +24,7 @@ export class ApicontrollerService {
   constructor(private http: HttpClient) { }
 
   // Ruta de la api
-  apiUrl = "http://127.0.0.1:8000/api";
+  apiUrl = "https://bct1wqzs-8000.brs.devtunnels.ms/api";
 
   // Obtener usuario - Usuario y contraseña para el login
   getUsuario(user: String, pass: String):Observable<any> {
