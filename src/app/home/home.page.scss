@@ -1,65 +1,59 @@
+ion-content,
+#container .titulo ion-toolbar,
+.auto-card {
+  --background: var(--morado-gris);
+}
+
 /* header */
 #container .titulo {
-  margin-top: 14vh;
-  margin-bottom: 2vh;
+  margin-top: 5vh;
   text-align: center;
 }
 
-#container .titulo .toolbar-login ion-title {
-  color: var(--morado-oscuro);
-  font-weight: 900;
-  font-size: 2em;
-}
-
 /* formulario - dos contenedores: inputs y botones */
-#container .form-ingreso {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+#container .form-card {
+  border: 0.25em solid var(--morado-oscuro);
+  border-radius: 2%;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2), 
+              0 5px 10px rgba(0, 0, 0, 0.19);
 
-#container .form-ingreso .form-above,
-#container .form-ingreso .form-below {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 90vw;
-}
-
-#container .form-ingreso .form-above {
-  height: 15vh;
-}
-
-#container .form-ingreso .form-below {
-  margin-top: 1vh;
-  height: 12vh;
-
-  .opciones {
+  ion-list {
     display: flex;
-    justify-content: space-between;
-    width: 80vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-    .registrarse {
-      width: 20vw;
+    ion-input {
+      margin-top: 1vh;
+      border: 0;
+      --border-width: 0.2em;
+      --border-color: var(--morado-oscuro);
+      --background: white;
+    }
+
+    .opciones-item .opciones {
+      display: flex;
+      justify-content: space-between;
+      width: 72vw;
+      font-size: 0.75em;
+      font-weight: bold;
+      
+      ion-text {
+        transition: all 0.1s ease-in-out;
+
+        &:active {
+          color: var(--morado-claro);
+        }
+      }
     }
   }
 }
 
-#container .form-ingreso .form-below ion-text {
-  width: 80vw;
-  text-align: right;
-  font-weight: bold;
-  font-size: 0.8em;
-  color: var(--morado-oscuro);
-  transition: all 0.07s;
-
-  &:active {
-    color: var(--morado-claro);
-  }
+/* auto */
+#container .auto-card {
+  box-shadow: none;
 }
 
-/* auto */
 #container .auto-container {
   position: relative;
   width: 100%;
@@ -79,14 +73,14 @@
 
 #container .auto-container .auto-img {
   z-index: 2;
-  // animation: movimientoAuto 10s infinite 1s;
+  animation: movimientoAuto 10s infinite 1s;
 }
 
 #container .auto-container .sombra-img {
   z-index: 1;
   top: -2vh;
   width: 65%;
-  // animation: movimientoSombra 10s infinite 1s;
+  animation: movimientoSombra 10s infinite 1s;
 }
 
 #container .auto-container .humo-img {
@@ -96,37 +90,37 @@
   filter: drop-shadow(
     0 0 2px black
   );
-  // animation: movimientoHumo 10s infinite 1s;
+  animation: movimientoHumo 10s infinite 1s;
 }
 
 /* animacion */
 
 /* movimiento de la sombra + las ruedas */
-// @keyframes movimientoSombra {
-//   33.3% {
-//     transform: translateX(-16%) translateY(8%);
-//   }
-//   66.6% {
-//     transform: translateX(-71%) translateY(31%) scale(1.2);
-//   }
-// } 
+@keyframes movimientoSombra {
+  33.3% {
+    transform: translateX(-16%) translateY(8%);
+  }
+  66.6% {
+    transform: translateX(-71%) translateY(31%) scale(1.2);
+  }
+} 
 
-// /* movimiento del auto */
-// @keyframes movimientoAuto {
-//   33.3% {
-//     transform: translateX(-10%) translateY(8%) skewY(2deg);
-//   }
-//   66.6% {
-//     transform: translateX(-75%) translateY(35%) skewY(-2.5deg) scale(1.2);
-//   }
-// }
+/* movimiento del auto */
+@keyframes movimientoAuto {
+  33.3% {
+    transform: translateX(-10%) translateY(8%) skewY(2deg);
+  }
+  66.6% {
+    transform: translateX(-75%) translateY(35%) skewY(-2.5deg) scale(1.2);
+  }
+}
 
-// /* movimiento del humo */
-// @keyframes movimientoHumo {
-//   33.3% {
-//     transform: translateX(-20%) translateY(6%) skewY(2deg);
-//   }
-//   66.6% {
-//     transform: translateX(-70%) translateY(29%) skewY(-1.1deg) scale(1.2);
-//   }
-// }
+/* movimiento del humo */
+@keyframes movimientoHumo {
+  33.3% {
+    transform: translateX(-20%) translateY(6%) skewY(2deg);
+  }
+  66.6% {
+    transform: translateX(-70%) translateY(29%) skewY(-1.1deg) scale(1.2);
+  }
+}

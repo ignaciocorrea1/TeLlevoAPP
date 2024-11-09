@@ -10,18 +10,37 @@
     }
 
     .form-registro {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
         margin-top: 10vh;
-        padding: 1vh 0.25vw 1vh 0.25vw;
 
-        ion-input {
-            margin-bottom: 2vh;
-            width: 50vw;
-            min-height: 5vh;
-            --border-radius: 0.5em;
+        ion-card {
+            margin-bottom: 20vh;
+            box-shadow: none;
+            
+            ion-list {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                ion-item {
+                    margin-top: 1vh;
+
+                    ion-input {
+                        --background: var(--morado-gris);
+                        --highlight-height: 0;
+                    }
+                }
+
+                :nth-child(9),
+                :last-child {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        ion-card, ion-card-content, ion-list, ion-item {
+            --background: var(--morado-gris);
+            background-color: var(--morado-gris);
         }
     }
 }

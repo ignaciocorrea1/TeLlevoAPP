@@ -79,7 +79,7 @@ export class HomePage {
     };
   };
 
-  // Funcion para la animacion
+  /* Funcion para la animacion
   animacionAuto(){
     const auto = document.querySelector(".auto-img") as HTMLElement;
     const sombra = document.querySelector(".sombra-img") as HTMLElement;
@@ -134,10 +134,10 @@ export class HomePage {
     animacionS.play();
     animacionH.play();
   };
-
+  
   ngAfterContentInit() {
     this.animacionAuto();
-  };
+  };*/
 
   // Se vacian los campos al entrar a la vista
   ionViewWillEnter() {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApicontrollerService } from '../Servicios/apicontroller.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -12,7 +13,7 @@ export class RegistroPage implements OnInit {
     Falta la validacion de cada campo pero si se añaden
   */
 
-  constructor(private api:ApicontrollerService) { }
+  constructor(private api:ApicontrollerService, private router:Router) { }
   
   // Usuario
   user = {
@@ -23,22 +24,11 @@ export class RegistroPage implements OnInit {
     "correo": "",
     "contrasenia": "",
     "contrasenia2": "",
-    "tipo": ""
+    "estadoUsuario": "pasajero"
   }
 
-  selectedR = false;
-  selectedN = false;
-  selectedP = false;
-  selectedM = false;
-  selectedC = false;
-  selectedCc = false;
-  selectedCCC = false;
-
-  // Registrar
   registrar() {
-    // Se valida que las contraseñas coincidad
     if (this.user.contrasenia === this.user.contrasenia2) {
-      // Se crea un nuevo modelo de usuario
       const userNuevo = {
         "rut": this.user.rut,
         "nombres": this.user.nombres,
@@ -49,25 +39,27 @@ export class RegistroPage implements OnInit {
         "tipo": "pasajero"
       }
 
-      // Se asigna un usuario
       this.api.postUsuario(userNuevo).subscribe(
         respuesta => {
           this.limpiarInputs();
-          console.log("Registro exitoso")
+          this.msgError("exitoso")
+
+          setTimeout(() => {
+            this.router.navigate(["/home"])
+          }, 2000);
         },
         error => {
           this.msgError("registro")
           console.log("Registro erroneo", error)
         }
-      )
+      );
     } else {
+      this.msgError("contrasenias");
       console.log("CONTRASEÑAS INCORECTAS: ",this.user.contrasenia+" --- "+this.user.contrasenia2)
     }
   };
 
-  // Limpiar input post registro
   limpiarInputs() {
-    // Se obtienen los inputs 
     const input1 = document.getElementById("rut") as HTMLIonInputElement;
     const input2 = document.getElementById("nombres") as HTMLIonInputElement;
     const input3 = document.getElementById("paterno") as HTMLIonInputElement;
@@ -76,7 +68,6 @@ export class RegistroPage implements OnInit {
     const input6 = document.getElementById("password") as HTMLIonInputElement;
     const input7 = document.getElementById("password2") as HTMLIonInputElement;
 
-    // Si se obtienen se vacian
     if (input1 && input2 && input3 && input4 && input5 && input6 && input7 ) {
       input1.value = "";
       input2.value = "";
@@ -88,28 +79,26 @@ export class RegistroPage implements OnInit {
     };
   };
 
-  // Mensaje de error si el registro sale mal o los campos son incorrectos
   msgError(input:string) {
-    // Se obtiene el mensaje de error
     const msgError = document.getElementById("error-msg") as HTMLIonTextElement;
 
-    // Se resetea el display
     if (msgError) {
       msgError.style.display = "none";
     };
     
     if (input === "registro") {
-      // Si ocurre un error al registrar
       msgError.style.display = "block";
-      msgError.textContent = "Error al registrar";
+      msgError.textContent = "Problema al registrar, intente nuevamente :)";
+    } else if (input === "exitoso") {
+      msgError.style.display = "block";
+      msgError.textContent = "Redirigiendo al inicio...";
+    } else if (input === "contrasenias") {
+      msgError.style.display = "block";
+      msgError.textContent = "Las contraseñas no coinciden";
     } else {
       msgError.style.display = "none";
     };
   };
-
-  // labelPos(input:string) {
-     
-  // }
 
   ngOnInit() {
   }

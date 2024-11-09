@@ -17,7 +17,7 @@
       <div class="form-below">
         <div class="instructions">
           <ion-text class="custom-font ion-text-center" id="explicacion">
-            {{!mostrarCambio ? 'Por favor, ingrese su nombre de usuario para restableces la contraseña.' : 'Por favor, ingrese la nueva contraseña'}}
+            {{!mostrarCambio ? 'Por favor, ingrese su nombre de usuario para restablecer la contraseña.' : 'Por favor, ingrese la nueva contraseña'}}
           </ion-text>
         </div>
       </div>
@@ -28,9 +28,8 @@
           class="form-input custom-font"
           label="Usuario"
           labelPlacement="floating"
-          fill="outline"
-          shape="round"
-          style="margin-top: 2vh;"
+          fill="solid"
+          style="margin-top: 2vh; "
           placeholder="Ingrese su correo"
           [(ngModel)]="user.username"
         >
@@ -53,8 +52,7 @@
           [(ngModel)]="contrasenias.contrasenia1"
           id="pass1" 
           type="password"
-          fill="outline"
-          shape="round"
+          fill="solid"
           style="margin-top: 2vh; margin-bottom: 2vh;"
           placeholder="Ingrese la nueva contraseña"
           class="form-input"
@@ -63,8 +61,7 @@
           [(ngModel)]="contrasenias.contrasenia2"
           id="pass2" 
           type="password"
-          fill="outline"
-          shape="round"
+          fill="solid"
           placeholder="Confirmar contraseña"
           class="form-input"
         ></ion-input>

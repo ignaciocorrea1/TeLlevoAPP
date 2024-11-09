@@ -13,11 +13,9 @@
 
 /* Inputs */
 .form-input {
-    width: 85vw;
     font-weight: 600;
+    border: 0.2em solid var(--morado-oscuro);
     --color: var(--morado-oscuro);
-    --border-width: 0.2em;
-    --border-color: var(--morado-oscuro) !important;
     --placeholder-color: var(--morado-medio);
     --highlight-color: var(--morado-oscuro) !important;
 }
