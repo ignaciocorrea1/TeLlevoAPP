@@ -36,7 +36,7 @@ export class RegistroPage implements OnInit {
         "materno": this.user.materno,
         "correo": this.user.correo,
         "contrasenia": this.user.contrasenia,
-        "tipo": "pasajero"
+        "tipo": "normal"
       }
 
       this.api.postUsuario(userNuevo).subscribe(

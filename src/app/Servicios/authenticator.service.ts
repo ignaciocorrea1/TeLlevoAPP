@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApicontrollerService } from './apicontroller.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,63 +8,53 @@ import { ApicontrollerService } from './apicontroller.service';
 export class AuthenticatorService {
 
   /*  
-    Usar callback hace que el login no se siga ejecutando hasta obtener una respuesta
-    desde validarUsuario.
+    Usar callback hace que una funcion se ponga a la espera de una respuesta.
   */
 
-  constructor(private api:ApicontrollerService) { }
+  constructor(private api:ApicontrollerService, private strg: StorageService) { }
 
-  connectionStatus: boolean = false;
-
-  // login
+  // Login de usuario
   login(user: String, pass: String, callback: (resultado: boolean, usuario?: any) => void) {
     if (user !== "" && pass !== "") {
-      // Solicitud API
-      // Aqui el login queda a la espera del callback y no se sigue ejecutando
+      // Si los campos no son vacios se llama a la funcion para validar la existencia del usuario
       this.validarUsuario(user, pass, callback);
     } else {
-      this.connectionStatus = false;
+      this.strg.set("estado", false)
       callback(false);  
     }
   }
 
-  // Validar la existencia del usuario - proceso asincronico al realizar una solicitud
   validarUsuario(user: String, pass: String, callback: (resultado: boolean, usuario?: any) => void) {
-    // Se realiza la solicitud
+    // Se realiza la solicitud a la api
     this.api.getUsuario(user, pass).subscribe(
       data => {
+        // Si se obtienen datos, el primer objeto se asociará al usuario obtenido
         if (data.length > 0) {
-          // Si encuentra datos se asigna el primer objeto a una constante
           const usuarioObtenido = data[0];  
   
-          // Se validan las credenciales ingresadas con las del objeto encontrado
+          // Si las credencias son correctas
           if (usuarioObtenido.correo === user && usuarioObtenido.contrasenia === pass) {
-            // Si el correo y la contraseña son iguales el estado de conexion pasa a true y el 
-            // resultado del callback es true y ademas devuelve el usuario indicando que la 
-            // operacion fue exitosa. Al retornar true o false el callback, la funcion que 
-            // llame al callback podrá seguir ejecutandose ya que se termino el proceso
-            this.connectionStatus = true;
+            // Se cambia el estado de conexion y el callback se resuelve y se setea el localStorage      
+            this.strg.set("usuario", usuarioObtenido);
+            this.strg.set("estado", true);
             callback(true, usuarioObtenido);  
-            // Si se encontro el usuario se sale de la funcion
             return;
           } else {
-            // Si no se encontro el usuario el estado de conexion es false y el callback tambien
-            this.connectionStatus = false;
+            this.strg.set("estado", false);
             callback(false); 
           } 
         } else {
-          this.connectionStatus = false;
+          this.strg.set("estado", false);
           callback(false);  
         }
       },
       error => {
-        this.connectionStatus = false;
+        this.strg.set("estado", false);
         callback(false);  
       }
     );
   };
 
-  // Validar solo el usuario
   validarSoloUsuario(user: String, callback: (resultado: boolean, usuario?: any) => void) {
     this.api.getSoloUsuario(user).subscribe(
       data => {
@@ -81,14 +72,13 @@ export class AuthenticatorService {
     )
   };
 
-  //Logout para desconectar del sistema 
   logout() {
-    console.log(this.connectionStatus);
-    this.connectionStatus = false;
+    this.strg.remove("usuario")
+    this.strg.remove("estado");
   }
 
-  //Funcion para consultar el estado de conexion
-  isConected() {
-    return this.connectionStatus;
+  // Se tiene que esperar la respuesta del localStorage, si no encuentra valor es false
+  async isConected() {
+    return await this.strg.get("estado") ?? false;
   }
 }

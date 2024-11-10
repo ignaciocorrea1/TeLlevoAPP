@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from '../Servicios/storage.service';
+import { AuthenticatorService } from '../Servicios/authenticator.service';
 
 @Component({
   selector: 'app-inicio',
@@ -15,10 +17,11 @@ export class InicioPage implements OnInit {
     "paterno": "",
     "materno": "",
     "correo": "",
-    "contrasenia": ""
+    "contrasenia": "",
+    "tipo": ""
   }
 
-  constructor(private router:Router) { 
+  constructor(private router:Router, private strg:StorageService, private auth:AuthenticatorService) { 
     // Se reciben los datos enviados desde el login
     const navegacion = this.router.getCurrentNavigation();
     const state = navegacion?.extras.state as {
@@ -29,6 +32,7 @@ export class InicioPage implements OnInit {
       materno: "";
       correo: "";
       contrasenia: "";
+      tipo: "";
     };
     this.user.id = state.id;
     this.user.rut = state.rut;
@@ -37,10 +41,14 @@ export class InicioPage implements OnInit {
     this.user.materno = state.materno;
     this.user.correo = state.correo;
     this.user.contrasenia = state.contrasenia;
+    this.user.tipo = state.tipo;
 
   };
 
   ngOnInit() {
+    // console.log("Storage: ", this.strg.get("estado"))
+    // console.log("Storage: ", this.strg.get("usuario"))
+    // console.log("Auth: ", this.auth.isConected())
   }
 
 }

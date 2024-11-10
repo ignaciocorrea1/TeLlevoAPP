@@ -34,7 +34,7 @@ ion-content,
     .opciones-item .opciones {
       display: flex;
       justify-content: space-between;
-      width: 72vw;
+      width: 70vw;
       font-size: 0.75em;
       font-weight: bold;
       
@@ -46,20 +46,23 @@ ion-content,
         }
       }
     }
+
+    ion-button {
+      width: 30vw;
+      height: 4vh;
+    }
   }
 }
 
 /* auto */
 #container .auto-card {
   box-shadow: none;
+  height: 26.5vh;
 }
 
 #container .auto-container {
   position: relative;
   width: 100%;
-  height: 20vh;
-  margin-top: 2vh;
-  margin-bottom: 2vh;
 }
 
 #container .auto-container .auto-img,

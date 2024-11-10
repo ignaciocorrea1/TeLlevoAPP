@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AnimationController } from '@ionic/angular';
 import { AuthenticatorService } from '../Servicios/authenticator.service';
+import { StorageService } from '../Servicios/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { AuthenticatorService } from '../Servicios/authenticator.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  // Se crea un objeto del tipo usuario
+
   user = {
     "username": "",
     "password": ""
@@ -18,7 +19,8 @@ export class HomePage {
   constructor(
     private router:Router, 
     private animationController:AnimationController, 
-    private auth:AuthenticatorService
+    private auth:AuthenticatorService,
+    private strg: StorageService
   ) {}
 
   // Funcion para validar los campos
@@ -36,25 +38,24 @@ export class HomePage {
             paterno: usuarioObtenido.paterno,
             materno: usuarioObtenido.materno,
             correo: usuarioObtenido.correo,
-            contrasenia: usuarioObtenido.contrasenia
+            contrasenia: usuarioObtenido.contrasenia,
+            tipo: usuarioObtenido.tipo
           },
         };
   
         this.router.navigate(["/inicio"], navigationExtras);
       } else {
-        this.msgError("login");  // Mostrar error si el login falla
+        this.msgError("login");  
       }
     });
   }
 
   // Limpiar los campos user y pass
   limpiarInputs() {
-    // Se obtienen los inputs
     const inputU = document.getElementById("username") as HTMLIonInputElement;
     const inputP = document.getElementById("password") as HTMLIonInputElement;
 
     if (inputU && inputP) {
-        // Se vacian los campos
         inputU.value = "";
         inputP.value = "";
     };
@@ -62,16 +63,13 @@ export class HomePage {
 
   // Mensaje de error en formulario
   msgError(input:string) {
-    // Se obtiene el mensaje de error
     const msgError = document.getElementById("error-msg") as HTMLIonTextElement;
 
-    // Se resetea el display
     if (msgError) {
       msgError.style.display = "none";
     };
     
     if (input === "login") {
-      // Si el usuario o la contraseña estan
       msgError.style.display = "block";
       msgError.textContent = "Credenciales no validas.";
     } else {
@@ -145,5 +143,8 @@ export class HomePage {
     this.user.password = "";
     this.limpiarInputs();
     this.msgError("vacio");
+    // console.log("Storage: ", this.strg.get("estado"))
+    // console.log("Storage: ", this.strg.get("usuario"))
+    // console.log("Auth: ", this.auth.isConected())
   }
 };

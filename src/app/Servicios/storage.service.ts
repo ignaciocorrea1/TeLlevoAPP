@@ -6,40 +6,41 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class StorageService {
 
-  private bdd: Storage = new Storage();
+  private strg: Storage = new Storage();
   private storageReady: Promise<void>;
 
   constructor(private storage: Storage) {
     this.storageReady = this.init();
   }
 
-  
-  // Inicializar el almacenamiento
+  // Iniciar el almacenamiento
   async init(): Promise<void> {
+    // Se prepara la instancia del storage para poder usar el resto de funciones
     const storage = await this.storage.create();
-    this.bdd = storage;
+    this.strg = storage;
   }
 
-  async BDDConectada(): Promise<void> {
+  // Se espera a que el almacenamiento este listo
+  async StrgListo(): Promise<void> {
     await this.storageReady;
   }
+
   async get(key: string): Promise<any> {
-    await this.BDDConectada()
-    return this.bdd?.get(key);
+    await this.StrgListo()
+    return this.strg?.get(key);
   }
 
   async set(key: string, valor: any) {
-    await this.BDDConectada()
-    this.bdd.set(key, valor);
-    console.log("actualizado con exito")
+    await this.StrgListo()
+    this.strg.set(key, valor);
   }
   async remove(key: string) {
-    await this.BDDConectada()
-    this.bdd.remove(key);
+    await this.StrgListo()
+    this.strg.remove(key);
   }
 
   async limpiar() {
-    await this.BDDConectada()
-    this.bdd.clear();
+    await this.StrgListo()
+    this.strg.clear();
   }
 }

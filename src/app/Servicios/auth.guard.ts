@@ -11,13 +11,15 @@ export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthenticatorService);
   const router = inject(Router);
 
-  //Validamos si esta conectado
+  //Validamos si esta conectado consultando el estado de la key conectado en el localStorage
   //Si lo esta, tendra acceso a ciertas paginas
   //Si no , sera redireccionado a la pagina correspondiente
-  if (authService.isConected()) {
-    return true;
-  } else {
-    router.navigate(['/home']);
-    return false;
-  }
+  return authService.isConected().then((estado:boolean) => {
+    if (estado) {
+      return true;
+    } else {
+      router.navigate(["/home"]);
+      return false;
+    }
+  })
 };

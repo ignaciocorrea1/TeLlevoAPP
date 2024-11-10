@@ -13,14 +13,15 @@ export class ErrorPage implements OnInit {
 
   // Funcion para redireccionar al usuario
   errorRed() {
-    if (this.auth.isConected()) {
-      this.router.navigate(["/inicio"])
-    } else {
-      this.router.navigate(["/home"])
-    };
+    this.auth.isConected().then((estado:boolean) => {
+      if (estado) {
+        this.router.navigate(["/inicio"])
+      } else {
+        this.router.navigate(["/home"])
+      }
+    })
   };
 
   ngOnInit() {
   }
-
 }
