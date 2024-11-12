@@ -46,9 +46,9 @@ export class InicioPage implements OnInit {
   };
 
   ngOnInit() {
-    // console.log("Storage: ", this.strg.get("estado"))
-    // console.log("Storage: ", this.strg.get("usuario"))
-    // console.log("Auth: ", this.auth.isConected())
+    console.log("Storage en vista inicio (estado): ", this.strg.get("estado"))
+    console.log("Storage en vista inicio (usuario): ", this.strg.get("usuario"))
+    console.log("Auth en vista inicio: ", this.auth.isConected())
   }
 
 }

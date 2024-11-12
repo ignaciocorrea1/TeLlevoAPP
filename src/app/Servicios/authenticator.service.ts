@@ -75,6 +75,7 @@ export class AuthenticatorService {
   logout() {
     this.strg.remove("usuario")
     this.strg.remove("estado");
+    this.strg.limpiar();
   }
 
   // Se tiene que esperar la respuesta del localStorage, si no encuentra valor es false
