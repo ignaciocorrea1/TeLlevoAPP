@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { InicioPageRoutingModule } from './inicio-routing.module';
+import { ProgviajesPageRoutingModule } from './progviajes-routing.module';
 
-import { InicioPage } from './inicio.page';
+import { ProgviajesPage } from './progviajes.page';
 
 import { HeaderModule } from '../Base/Componentes/header/header.module';
 
@@ -15,9 +15,9 @@ import { HeaderModule } from '../Base/Componentes/header/header.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    InicioPageRoutingModule,
+    ProgviajesPageRoutingModule,
     HeaderModule
   ],
-  declarations: [InicioPage]
+  declarations: [ProgviajesPage]
 })
-export class InicioPageModule {}
+export class ProgviajesPageModule {}

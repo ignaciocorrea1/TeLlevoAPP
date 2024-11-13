@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../Servicios/storage.service';
 import { AuthenticatorService } from '../Servicios/authenticator.service';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-inicio',
@@ -21,7 +22,11 @@ export class InicioPage implements OnInit {
     "tipo": ""
   }
 
-  constructor(private router:Router, private strg:StorageService, private auth:AuthenticatorService) { 
+  constructor(
+    private router:Router, 
+    private strg:StorageService, 
+    private auth:AuthenticatorService,
+    private menuCtrl:MenuController) { 
     // Se reciben los datos enviados desde el login
     const navegacion = this.router.getCurrentNavigation();
     const state = navegacion?.extras.state as {
@@ -51,4 +56,13 @@ export class InicioPage implements OnInit {
     console.log("Auth en vista inicio: ", this.auth.isConected())
   }
 
+  irProgviajes() {
+    this.router.navigate(["/progviajes"]).then(() => {
+      this.menuCtrl.close()
+    });
+  }
+  
+  ionViewWillLeave(){
+    this.menuCtrl.close()
+  }
 }

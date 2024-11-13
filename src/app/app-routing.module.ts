@@ -22,6 +22,11 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'progviajes',
+    loadChildren: () => import('./progviajes/progviajes.module').then( m => m.ProgviajesPageModule),
+    canActivate: [authGuard]
+  },
+  {
     path: 'registro',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
   },
@@ -29,6 +34,7 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./error/error.module').then( m => m.ErrorPageModule)
   },
+
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-<ion-header id="main-content" class="header-page">
+<ion-header [id]="id" class="header-page">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button class="btn-menu"></ion-menu-button>
@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-menu contentId="main-content" class="menu-container">
+<ion-menu [contentId]="contentId" class="menu-container">
   <ion-header>
     <ion-toolbar>
       <ion-title class="ion-text-center custom-font">TeLlevoAPP</ion-title>

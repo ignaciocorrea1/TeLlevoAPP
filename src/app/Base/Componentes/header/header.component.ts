@@ -10,10 +10,21 @@ import { AuthenticatorService } from 'src/app/Servicios/authenticator.service';
 })
 export class HeaderComponent  implements OnInit {
 
-  constructor(private router:Router, private menuCtrl:MenuController, private auth:AuthenticatorService) { }
+  contentId:string;
+  id:string;
+
+  constructor(
+    private router:Router, 
+    private menuCtrl:MenuController, 
+    private auth:AuthenticatorService) {
+
+      this.contentId = 'main-content-'+this.router.url;
+      this.id = 'main-content-'+this.router.url;
+  }
+
 
   cerrarSesion() {
-    // El menú se quedaba abierto
+    // El menú se quedaba abierto al cerrar sesión
     this.router.navigate(["/home"]).then(() => {
       this.menuCtrl.close();
     });
@@ -22,6 +33,12 @@ export class HeaderComponent  implements OnInit {
     this.auth.logout();
   };
 
-  ngOnInit() {}
+  ionViewWillLeave(){
+    this.menuCtrl.close()
+  }
 
+  ngOnInit() {
+    console.log("Ruta header: ", this.id)
+    console.log("Ruta menu: ", this.contentId)
+  }
 };
