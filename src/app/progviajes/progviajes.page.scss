@@ -1,0 +1,33 @@
+.main-progviajes {
+
+    .titulo ion-text h1 {
+        font-weight: 900;
+    }
+
+    .card-progviajes {
+        margin-top: 10vh;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+
+        ion-card-content ion-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: none;
+            -webkit-box-shadow: none;
+    
+            .item-progviaje {
+                width: 100%;
+                margin-bottom: 1vh;
+                
+                ion-input {
+                    --background: transparent;
+                    --border-color: transparent;
+                }
+            }
+        }
+    }
+    
+    
+}

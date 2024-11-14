@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AuthenticatorService } from 'src/app/Servicios/authenticator.service';
@@ -10,35 +10,28 @@ import { AuthenticatorService } from 'src/app/Servicios/authenticator.service';
 })
 export class HeaderComponent  implements OnInit {
 
-  contentId:string;
-  id:string;
+  @Input() contentId!: string;
+  @Input() menuId!: string;
 
   constructor(
     private router:Router, 
     private menuCtrl:MenuController, 
-    private auth:AuthenticatorService) {
-
-      this.contentId = 'main-content-'+this.router.url;
-      this.id = 'main-content-'+this.router.url;
-  }
-
+    private auth:AuthenticatorService) {}
 
   cerrarSesion() {
     // El menú se quedaba abierto al cerrar sesión
     this.router.navigate(["/home"]).then(() => {
       this.menuCtrl.close();
     });
-
-    // El estado del usuario pasa a false
+    // El estado de conexion del usuario pasa a false
     this.auth.logout();
   };
 
-  ionViewWillLeave(){
-    this.menuCtrl.close()
+  navegarA(ruta:string) {
+    this.router.navigate([ruta]);
   }
 
   ngOnInit() {
-    console.log("Ruta header: ", this.id)
-    console.log("Ruta menu: ", this.contentId)
+    
   }
 };

@@ -14,12 +14,12 @@ export class AppComponent implements OnInit {
   // la repuesta
   async ngOnInit() {
     const estado = await this.strg.get("estado");
-    console.log("Estado de conexion al abrir la app: ", estado)
+    // console.log("Estado de conexion al abrir la app: ", estado)
 
     // Si el estado de conexion es true, se obtiene el usuario
     if (estado) {
       const usuarioObtenido = await this.strg.get("usuario");
-      console.log("Usuario obtenido al abrir la app: ", usuarioObtenido)
+      // console.log("Usuario obtenido al abrir la app: ", usuarioObtenido)
 
       // Si se encuentra un usuario se mandan los datos y se redirecciona al inicio
       if (usuarioObtenido) {

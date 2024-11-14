@@ -1,5 +1,94 @@
-<ion-content [fullscreen]="true">
-  <!-- header -->
-  <app-header class="header-comp"></app-header>
+<ion-content [fullscreen]="true" id="progviajes-container">
+  <!-- header y backbutton -->
+  <div class="header-progviajes">
+    <app-header
+      class="header-comp"
+      [contentId]="'progviajes-container'"
+      [menuId]="'menuProgviajes'"
+    ></app-header>
+    <div>
+      <ion-buttons slot="start">
+        <ion-buttons>
+          <ion-back-button class="button-back"></ion-back-button>
+        </ion-buttons>
+      </ion-buttons>
+    </div>
+  </div>
 
+  <div class="main-progviajes">
+    <div class="titulo">
+      <ion-text class="custom-font ion-text-center t-morado-oscuro">
+        <h1>Planifica tu regreso</h1>
+      </ion-text>
+    </div>
+
+    <ion-card class="card-progviajes">
+      <ion-card-content>
+        <ion-list>
+          <ion-item class="item-progviaje" lines="none">
+            <ion-text class="custom-font t-morado-oscuro ion-text-center">
+              Completa los datos para ofrecer tu viaje y compartirlo con quienes
+              lo necesiten.
+            </ion-text>
+          </ion-item>
+          <ion-item class="item-progviaje" lines="none">
+            <ion-input
+              [(ngModel)]="viaje.direccionInicio" 
+              type="text" 
+              fill="solid"
+              class="form-input custom-font"
+              placeholder="Dirección de inicio"
+            ></ion-input>
+          </ion-item>
+          <ion-item class="item-progviaje" lines="none">
+            <ion-input
+              [(ngModel)]="viaje.direccionFinal" 
+              type="text"
+              fill="solid"
+              class="form-input custom-font"
+              placeholder="Dirección de destino"
+            ></ion-input>
+          </ion-item>
+          <ion-item class="item-progviaje" lines="none">
+            <ion-input
+              [(ngModel)]="viaje.costoPersona" 
+              type="number"
+              fill="solid"
+              class="form-input custom-font"
+              placeholder="Costo por persona"
+            ></ion-input>
+          </ion-item>
+          <ion-item class="item-progviaje" lines="none">
+            <ion-input
+              [(ngModel)]="viaje.capacidadMaxima" 
+              type="number"
+              fill="solid"
+              class="form-input custom-font"
+              placeholder="Capacidad máxima de pasajeros"
+            ></ion-input>
+          </ion-item>
+          <ion-item class="item-progviaje" lines="none">
+            <ion-input
+              [(ngModel)]="viaje.horaInicio" 
+              type="time"
+              fill="solid"
+              class="form-input custom-font"
+              placeholder="Hora de inicio"
+            ></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-button
+              (click)="crearViaje()"
+              shape="round"
+              class="button-global custom-font"
+              strong="true"
+              style="width: 30vw; height: 5vh"
+            >
+              Ver ruta
+            </ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

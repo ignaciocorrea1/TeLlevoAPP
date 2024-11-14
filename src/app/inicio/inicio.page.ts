@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../Servicios/storage.service';
 import { AuthenticatorService } from '../Servicios/authenticator.service';
 import { MenuController } from '@ionic/angular';
@@ -12,7 +12,7 @@ import { MenuController } from '@ionic/angular';
 export class InicioPage implements OnInit {
   // Usuario
   user = {
-    "id": "",
+    "id": 0,
     "rut": "",
     "nombres": "",
     "paterno": "",
@@ -30,7 +30,7 @@ export class InicioPage implements OnInit {
     // Se reciben los datos enviados desde el login
     const navegacion = this.router.getCurrentNavigation();
     const state = navegacion?.extras.state as {
-      id: "";
+      id: number;
       rut: "";
       nombres: "";
       paterno: "";
@@ -56,13 +56,15 @@ export class InicioPage implements OnInit {
     console.log("Auth en vista inicio: ", this.auth.isConected())
   }
 
+  ionViewWillEnter(){
+    console.log("Usuario recibido desde home", this.user)
+  }
+
   irProgviajes() {
-    this.router.navigate(["/progviajes"]).then(() => {
+    let navigationExtras: NavigationExtras = { state : {id: this.user.id}}
+
+    this.router.navigate(["/progviajes"], navigationExtras).then(() => {
       this.menuCtrl.close()
     });
-  }
-  
-  ionViewWillLeave(){
-    this.menuCtrl.close()
   }
 }

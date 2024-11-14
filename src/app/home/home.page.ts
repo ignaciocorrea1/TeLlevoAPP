@@ -32,7 +32,7 @@ export class HomePage {
         // Se envían los datos del usuario y se redirecciona al inicio
         let navigationExtras: NavigationExtras = {
           state: {
-            id: usuarioObtenido.id,
+            id: usuarioObtenido.idUsuario,
             rut: usuarioObtenido.rut,
             nombres: usuarioObtenido.nombres,
             paterno: usuarioObtenido.paterno,
@@ -42,6 +42,10 @@ export class HomePage {
             tipo: usuarioObtenido.tipo
           },
         };
+
+        console.log("Usuario home: ", usuarioObtenido);
+        console.log("Id enviada a inicio: ", usuarioObtenido.idUsuario);
+        console.log("NavigationExtras antes de enviar a Inicio:", navigationExtras);
   
         this.router.navigate(["/inicio"], navigationExtras);
       } else {

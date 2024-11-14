@@ -26,6 +26,8 @@ export class ApicontrollerService {
   // Ruta de la api
   apiUrl = "https://jbwrbwdb-8000.brs.devtunnels.ms/api";
 
+  /* Usuarios */
+
   // Obtener usuario - Usuario y contraseña para el login
   getUsuario(user: String, pass: String):Observable<any> {
     const url = `${this.apiUrl}/usuarios/?correo=${user}&contasenia=${pass}`
@@ -38,14 +40,21 @@ export class ApicontrollerService {
     return this.http.get(url)
   }
 
-  // Agregar usuario
+  // Agregar 
   postUsuario(user: any): Observable<any> {
     return this.http.post(this.apiUrl + "/usuarios/", user);
   }
 
-  // Actualizar usuario
+  // Actualizar 
   putUsuario(id: number, data: any): Observable<any> {
     const url = `${this.apiUrl}/usuarios/${id}/`;  
     return this.http.put(url, data);
+  }
+
+  /* Viajes */
+  
+  // Agregar
+  postViaje(viaje:any): Observable<any> {
+    return this.http.post(this.apiUrl + "/viajes/", viaje)
   }
 }
