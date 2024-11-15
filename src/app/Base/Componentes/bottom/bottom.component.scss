@@ -4,8 +4,9 @@
     align-items: center;
     position: absolute;
     bottom: 0;
+    padding: 0;
     background: white;
-    height: 9vh;
+    height: 8vh;
     width: 100%;
     box-shadow: 0 -1px 1px rgb(0, 0, 0, 0.3);
 
@@ -14,9 +15,31 @@
         flex-direction: column;
         align-items: center;
         text-align: center;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        transition: all 10s ease-in-out;
+        --box-shadow: none;
+        --background: transparent;
 
-        ion-icon {
-            font-size: 1.5em;
+        div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+            ion-icon {
+                font-size: 1.5em;
+            }
+
+            ion-text {
+                font-size: 0.9em;
+            }
         }
+
+    }
+
+    .opciones:active {
+        --background: var(--morado-gris);
     }
 }

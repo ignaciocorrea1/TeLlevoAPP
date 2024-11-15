@@ -24,7 +24,7 @@ export class ApicontrollerService {
   constructor(private http: HttpClient) { }
 
   // Ruta de la api
-  apiUrl = "https://jbwrbwdb-8000.brs.devtunnels.ms/api";
+  apiUrl = "https://bct1wqzs-8000.brs.devtunnels.ms//api";
 
   /* Usuarios */
 
