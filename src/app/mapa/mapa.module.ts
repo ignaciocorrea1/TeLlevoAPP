@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ProgviajesPageRoutingModule } from './progviajes-routing.module';
+import { MapaPageRoutingModule } from './mapa-routing.module';
 
-import { ProgviajesPage } from './progviajes.page';
+import { MapaPage } from './mapa.page';
 
 import { HeaderModule } from '../Base/Componentes/header/header.module';
 import { BottomModule } from '../Base/Componentes/bottom/bottom.module';
@@ -16,10 +16,10 @@ import { BottomModule } from '../Base/Componentes/bottom/bottom.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    ProgviajesPageRoutingModule,
+    MapaPageRoutingModule,
     HeaderModule,
     BottomModule
   ],
-  declarations: [ProgviajesPage]
+  declarations: [MapaPage]
 })
-export class ProgviajesPageModule {}
+export class MapaPageModule {}

@@ -27,11 +27,24 @@ export class HeaderComponent  implements OnInit {
     this.auth.logout();
   };
 
+  visibilidadBackButton() {
+    if (this.router.url == "/inicio") {
+      const backButton = document.getElementById("back-button") as HTMLIonBackButtonElement;
+
+      backButton.style.display = "none";
+    } else if (this.router.url == "/mapa") {
+      const backButton = document.getElementById("back-button") as HTMLIonBackButtonElement;
+
+      backButton.style.display = "none";
+    }
+  };
+
   navegarA(ruta:string) {
     this.router.navigate([ruta]);
-  }
+  };
 
   ngOnInit() {
-    
-  }
+    this.visibilidadBackButton();
+    console.log("Router ruta:", this.router.url)
+  };
 };

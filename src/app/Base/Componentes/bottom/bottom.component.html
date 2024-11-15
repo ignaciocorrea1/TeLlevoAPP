@@ -1,12 +1,12 @@
 <div class="bottom-opciones">
-  <ion-button class="opciones opcion-1">
+  <ion-button (click)="navegarA('/inicio')" class="opciones opcion-1">
     <div>
       <ion-icon name="home-outline" class="t-morado-oscuro"></ion-icon>
       <ion-text class="custom-font t-morado-oscuro">Inicio</ion-text>
     </div>  
   </ion-button>
   
-  <ion-button class="opciones opcion-2">
+  <ion-button (click)="navegarA('/mapa')" class="opciones opcion-2">
     <div>
       <ion-icon name="map-outline" class="t-morado-oscuro"></ion-icon>
       <ion-text class="custom-font t-morado-oscuro">Ubicación</ion-text>
