@@ -10,6 +10,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
 
 import { HeaderModule } from './Base/Componentes/header/header.module';
+import { BottomModule } from './Base/Componentes/bottom/bottom.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,8 @@ import { HeaderModule } from './Base/Componentes/header/header.module';
     }),
     AppRoutingModule,
     IonicStorageModule.forRoot(),
-    HeaderModule
+    HeaderModule,
+    BottomModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

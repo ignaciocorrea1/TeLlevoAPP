@@ -1,6 +1,10 @@
 <ion-content [fullscreen]="true" id="inicio-container">
   <!-- header -->
-  <app-header class="header-comp"[contentId]="'inicio-container'" [menuId]="'menuInicio'"></app-header>
+  <app-header
+    class="header-comp"
+    [contentId]="'inicio-container'"
+    [menuId]="'menuInicio'"
+  ></app-header>
 
   <!-- main -->
   <div class="main-container">
@@ -13,19 +17,33 @@
 
     <!-- Opciones del usuario -->
     <div class="opciones">
-      <ion-list lines="none">
-        <ion-item>
-          <ion-button (click)="irProgviajes()" class="button-global custom-font btn-opcion" shape="round" strong="true">
-            Programar viajes
-          </ion-button>
-        </ion-item>
+      <div class="card-opciones card-1">
+        <ion-text class="custom-font t-morado-oscuro ion-text-center">
+          Ofrece tu viaje y ayuda a otros estudiantes.
+        </ion-text>
+        <ion-button
+          (click)="irProgviajes()"
+          class="button-global custom-font btn-opcion"
+          shape="round"
+          strong="true"
+        >
+          Programar viaje
+        </ion-button>
+      </div>
 
-        <ion-item>
-          <ion-button class="button-global custom-font btn-opcion" shape="round" strong="true">
-            Ver viajes
-          </ion-button>
-        </ion-item>
-      </ion-list>
+      <div class="card-opciones card-2">
+        <ion-text class="custom-font t-morado-oscuro ion-text-center">
+          Busca un viaje que se ajuste a tu ruta y horario. ¡Es fácil y rápido!
+        </ion-text>
+        <ion-button
+          class="button-global custom-font btn-opcion"
+          shape="round"
+          strong="true"
+        >
+          Ver viajes
+        </ion-button>
+      </div>
     </div>
   </div>
+  <app-bottom></app-bottom>
 </ion-content>

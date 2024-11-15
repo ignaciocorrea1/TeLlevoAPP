@@ -1,9 +1,29 @@
-.header-page ion-toolbar {
-    --background: var(--morado-oscuro);
-    
-    .btn-menu {
-        --color: white;
-        --background: transparent;
+.header-page {
+    ion-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%; 
+        z-index: 1;
+        position: relative;
+        top: 5px;
+        left: 5px;
+        box-shadow: 0 -2px 8px rgb(0, 0, 0, 0.3),
+                    0 4px 8px rgb(0, 0, 0, 0.3);
+        --background: var(--morado-claro);
+
+        .btn-menu {
+            position: absolute;
+            font-size: 3em;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            --color: white;
+            --background: transparent;
+        }
     }
 }
 

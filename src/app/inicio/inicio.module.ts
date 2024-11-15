@@ -9,6 +9,7 @@ import { InicioPageRoutingModule } from './inicio-routing.module';
 import { InicioPage } from './inicio.page';
 
 import { HeaderModule } from '../Base/Componentes/header/header.module';
+import { BottomModule } from '../Base/Componentes/bottom/bottom.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { HeaderModule } from '../Base/Componentes/header/header.module';
     FormsModule,
     IonicModule,
     InicioPageRoutingModule,
-    HeaderModule
+    HeaderModule,
+    BottomModule
   ],
   declarations: [InicioPage]
 })
