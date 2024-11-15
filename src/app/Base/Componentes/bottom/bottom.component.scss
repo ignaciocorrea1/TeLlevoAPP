@@ -4,7 +4,6 @@
     align-items: center;
     position: fixed;
     bottom: 0;
-    padding: 0;
     background: white;
     height: 8vh;
     width: 100%;
@@ -17,10 +16,7 @@
         text-align: center;
         height: 100%;
         width: 100%;
-        margin: 0;
-        transition: all 10s ease-in-out;
-        --box-shadow: none;
-        --background: transparent;
+        --ripple-color: var(--morado-oscuro);
 
         div {
             display: flex;
@@ -37,9 +33,5 @@
             }
         }
 
-    }
-
-    .opciones:active {
-        --background: var(--morado-gris);
     }
 }

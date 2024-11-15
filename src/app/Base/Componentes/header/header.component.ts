@@ -13,6 +13,8 @@ export class HeaderComponent  implements OnInit {
   @Input() contentId!: string;
   @Input() menuId!: string;
 
+  mostrarBoton = true;
+
   constructor(
     private router:Router, 
     private menuCtrl:MenuController, 
@@ -29,13 +31,9 @@ export class HeaderComponent  implements OnInit {
 
   visibilidadBackButton() {
     if (this.router.url == "/inicio") {
-      const backButton = document.getElementById("back-button") as HTMLIonBackButtonElement;
-
-      backButton.style.display = "none";
+      this.mostrarBoton = false;
     } else if (this.router.url == "/mapa") {
-      const backButton = document.getElementById("back-button") as HTMLIonBackButtonElement;
-
-      backButton.style.display = "none";
+      this.mostrarBoton = false;
     }
   };
 

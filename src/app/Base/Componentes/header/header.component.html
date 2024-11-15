@@ -9,8 +9,8 @@
   
   <div class="div-back">
     <ion-buttons slot="end">
-      <ion-buttons>
-        <ion-back-button id="back-button" class="button-back"></ion-back-button>
+      <ion-buttons *ngIf="mostrarBoton">
+        <ion-back-button class="button-back"></ion-back-button>
       </ion-buttons>
     </ion-buttons>
   </div>
