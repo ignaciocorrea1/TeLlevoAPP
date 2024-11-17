@@ -3,6 +3,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { StorageService } from '../Servicios/storage.service';
 import { AuthenticatorService } from '../Servicios/authenticator.service';
 import { MenuController } from '@ionic/angular';
+import { GeolocationService } from '../Servicios/geolocation.service';
 
 @Component({
   selector: 'app-inicio',
@@ -26,7 +27,8 @@ export class InicioPage implements OnInit {
     private router:Router, 
     private strg:StorageService, 
     private auth:AuthenticatorService,
-    private menuCtrl:MenuController) { 
+    private menuCtrl:MenuController,
+    private geo:GeolocationService) { 
     // Se reciben los datos enviados desde el login
     const navegacion = this.router.getCurrentNavigation();
     const state = navegacion?.extras.state as {
@@ -39,7 +41,7 @@ export class InicioPage implements OnInit {
       contrasenia: "";
       tipo: "";
     };
-    this.user.id = state.id;
+    this.user.id = Number(state.id);
     this.user.rut = state.rut;
     this.user.nombres = state.nombres;
     this.user.paterno = state.paterno;
@@ -50,16 +52,6 @@ export class InicioPage implements OnInit {
 
   };
 
-  ngOnInit() {
-    console.log("Storage en vista inicio (estado): ", this.strg.get("estado"))
-    console.log("Storage en vista inicio (usuario): ", this.strg.get("usuario"))
-    console.log("Auth en vista inicio: ", this.auth.isConected())
-  }
-
-  ionViewWillEnter(){
-    console.log("Usuario recibido desde home", this.user)
-  }
-
   irProgviajes() {
     let navigationExtras: NavigationExtras = { state : {id: this.user.id}}
 
@@ -67,4 +59,15 @@ export class InicioPage implements OnInit {
       this.menuCtrl.close()
     });
   }
+  
+  ionViewWillEnter(){
+    console.log("Usuario recibido desde home", this.user)
+  }
+
+  ngOnInit() {
+    console.log("Storage en vista inicio (estado): ", this.strg.get("estado"))
+    console.log("Storage en vista inicio (usuario): ", this.strg.get("usuario"))
+    console.log("Auth en vista inicio: ", this.auth.isConected())
+  };
+  
 }

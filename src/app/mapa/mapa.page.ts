@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GeolocationService } from '../Servicios/geolocation.service';
 
 @Component({
   selector: 'app-mapa',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MapaPage implements OnInit {
 
-  constructor() { }
+  constructor(private geo: GeolocationService) { }
+
+  
 
   ngOnInit() {
   }
