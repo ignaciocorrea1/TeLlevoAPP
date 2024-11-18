@@ -1,12 +1,12 @@
 <div class="header-componente">
   <ion-header class="header-page">
     <ion-toolbar>
-      <ion-buttons >
+      <ion-buttons>
         <ion-menu-button class="btn-menu" [menu]="menuId"></ion-menu-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  
+
   <div class="div-back">
     <ion-buttons slot="end">
       <ion-buttons *ngIf="mostrarBoton">
@@ -14,7 +14,20 @@
       </ion-buttons>
     </ion-buttons>
   </div>
+
+  <div class="alerta-ubi" *ngIf="mostrarAlerta">
+    <div class="card">
+      <div class="alerta-text">
+        <ion-text (click)="settings()" class="custom-font t-morado-oscuro ion-text-center">
+          La opción para compartir la ubicación está desactivada. Haz clic aquí para
+          activarla
+        </ion-text>
+      </div>
+      <ion-icon name="alert" class="alert"></ion-icon>
+    </div>
+  </div>
 </div>
+
 
 <ion-menu [menuId]="menuId" [contentId]="contentId" class="menu-container">
   <ion-header>
@@ -26,13 +39,17 @@
     <div class="lista-opciones">
       <ion-list lines="none">
         <ion-item>
-          <ion-label (click)="navegarA('/inicio')" class="custom-font">Inicio</ion-label>
+          <ion-label (click)="navegarA('/inicio')" class="custom-font"
+            >Inicio</ion-label
+          >
         </ion-item>
         <ion-item>
           <ion-label class="custom-font">Ver perfil</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label (click)="navegarA('/progviajes')" class="custom-font">Programar viajes</ion-label>
+          <ion-label (click)="navegarA('/progviajes')" class="custom-font"
+            >Programar viajes</ion-label
+          >
         </ion-item>
         <ion-item>
           <ion-label class="custom-font">Ver viajes disponibles</ion-label>

@@ -4,10 +4,37 @@
     align-items: center;
 
     .header-page, .div-back {
-        
         position: relative;
         top: 5px;
         left: 5px;
+    }
+
+    .alerta-ubi .card {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 80vw;
+        height: 10vh;
+        margin-top: 1vh;
+        padding: 0.4em;
+        background: white;
+        border: 0.1em solid var(--morado-oscuro);
+        border-top-left-radius: 15%;
+        border-bottom-left-radius: 15%;
+        box-shadow: 1.5px 3px 5px rgb(0, 0, 0, 0.3),
+                    -1.5px 3px 5px rgb(0, 0, 0, 0.3);
+
+        ion-text {
+            font-size: 0.8em;
+        }
+
+        ion-icon {
+            background-color: var(--morado-claro);
+            color: white;
+            width: 50px;
+            height: 25px;
+            border-radius: 50%;
+        }
     }
 }
 

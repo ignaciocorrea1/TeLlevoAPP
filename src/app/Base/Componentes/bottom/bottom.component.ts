@@ -11,14 +11,20 @@ export class BottomComponent  implements OnInit {
 
   constructor(private router:Router, private geo:GeolocationService) { }
 
-  // navegarA(ruta:string) {
-  //   this.router.navigate([ruta]);
-  // };
+  navegarA(ruta:string) {
+    if (ruta != '/mapa') {
+      this.router.navigate([ruta]);
+    } else {
+      this.geo.getCurrentLocation().then((position) => {
+        if (position) {
+          console.log("Bottom position: ", position);
+        }
+      })
+    }
+  };
 
-  ubicacion() {
-    this.geo.getCurrentLocation();
+  ngOnInit() {
+    
   }
-  
-  ngOnInit() {}
 
 }
