@@ -1,14 +1,9 @@
 <ion-content [fullscreen]="true"  id="mapa-container">
-  <app-header
-    [contentId]="'mapa-container'"
-    [menuId]="'menuMapa'"
-  ></app-header>
+  <app-header [contentId]="'mapa-container'" [menuId]="'menuMapa'"></app-header>
 
-  <div class="mapa-container">
-    <ion-button expand="block" fill="clear" shape="round">
-      Click me
-    </ion-button>
-  </div>
+  <div id="map" tabindex="0"></div>
 
   <app-bottom></app-bottom>
+
 </ion-content>
+

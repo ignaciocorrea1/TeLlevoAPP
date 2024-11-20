@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GeolocationService } from '../Servicios/geolocation.service';
+import { MapaService } from '../Servicios/mapa.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-mapa',
@@ -8,11 +10,27 @@ import { GeolocationService } from '../Servicios/geolocation.service';
 })
 export class MapaPage implements OnInit {
 
-  constructor(private geo: GeolocationService) { }
+  position = {
+    "lng": 0,
+    "lat": 0
+  }
 
-  
+  constructor(private geo: GeolocationService, private map: MapaService, private router: Router) {
+    const navegacion = this.router.getCurrentNavigation();
+    const state = navegacion?.extras.state as {
+      lng: number,
+      lat: number
+    };
+    this.position.lng = state.lng;
+    this.position.lat = state.lat;
+  }
 
   ngOnInit() {
   }
 
+  ionViewWillEnter() {
+    this.map.buildMap(this.position.lng, this.position.lat);
+    this.map.addMarker(this.position.lng, this.position.lat);
+    this.map.geolocateControl();
+  }
 }

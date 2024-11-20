@@ -1,4 +1,9 @@
-<div class="header-componente">
+<div
+  class="header-componente"
+  id="header-componente"
+  *ngIf="mostrarHeader"
+  [ngStyle]="{'width': headerWidth, 'margin-left': marginLeft}"
+>
   <ion-header class="header-page">
     <ion-toolbar>
       <ion-buttons>
@@ -18,16 +23,18 @@
   <div class="alerta-ubi" *ngIf="mostrarAlerta">
     <div class="card">
       <div class="alerta-text">
-        <ion-text (click)="settings()" class="custom-font t-morado-oscuro ion-text-center">
-          La opción para compartir la ubicación está desactivada. Haz clic aquí para
-          activarla
+        <ion-text
+          (click)="settings()"
+          class="custom-font t-morado-oscuro ion-text-center"
+        >
+          La opción para compartir la ubicación está desactivada. Haz clic aquí
+          para activarla
         </ion-text>
       </div>
       <ion-icon name="alert" class="alert"></ion-icon>
     </div>
   </div>
 </div>
-
 
 <ion-menu [menuId]="menuId" [contentId]="contentId" class="menu-container">
   <ion-header>

@@ -17,6 +17,10 @@ export class HeaderComponent  implements OnInit {
 
   mostrarBoton = true;
   mostrarAlerta = false;
+  mostrarHeader = true;
+  headerWidth: string = '100%';
+  marginLeft: string = '0';
+
   private locationCheck!: Subscription;
 
   constructor(
@@ -64,9 +68,20 @@ export class HeaderComponent  implements OnInit {
     })
   }
 
+  actualizarStyle() {
+    if (this.router.url === "/mapa") {
+      this.headerWidth = '80%';
+      this.marginLeft = '0';
+    } else {
+      this.headerWidth = '100%';
+      this.marginLeft = '0';
+    }
+  }
+
   ngOnInit() {
     this.visibilidadBackButton();
     this.checkPermissions();
+    this.actualizarStyle();
   }
 
   ngOnDestroy(): void {

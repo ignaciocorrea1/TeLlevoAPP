@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { GeolocationService } from 'src/app/Servicios/geolocation.service';
 
 @Component({
@@ -9,17 +9,25 @@ import { GeolocationService } from 'src/app/Servicios/geolocation.service';
 })
 export class BottomComponent  implements OnInit {
 
-  constructor(private router:Router, private geo:GeolocationService) { }
+  constructor(
+    private router:Router, 
+    private geo:GeolocationService) { }
 
-  navegarA(ruta:string) {
+  async navegarA(ruta:string) {
     if (ruta != '/mapa') {
       this.router.navigate([ruta]);
     } else {
-      this.geo.getCurrentLocation().then((position) => {
+      await this.geo.getCurrentLocation().then((position) => {
         if (position) {
-          console.log("Bottom position: ", position);
+          let navigationExtras : NavigationExtras = {
+            state: {
+              lng: position.longitude,
+              lat: position.latitude
+            } 
+          }
+          this.router.navigate([ruta], navigationExtras);
         }
-      })
+      });
     }
   };
 
