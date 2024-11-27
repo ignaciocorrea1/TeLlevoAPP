@@ -19,14 +19,35 @@
             .item-progviaje {
                 width: 100%;
                 margin-bottom: 1vh;
-                
+ 
                 ion-input {
+                    min-height: 6vh;
                     --background: transparent;
                     --border-color: transparent;
                 }
             }
+
+            .direccion-progviaje {
+                ion-grid, ion-col, ion-searchbar {
+                    padding: 0;
+                }
+                
+                ion-searchbar {
+                    width: 100%;
+                    min-height: 6vh;
+                    border: 0.2em solid var(--morado-oscuro);
+                    --placeholder-font-weight: 600;
+                    --color: var(--morado-oscuro);
+                    --icon-color: var(--morado-medio);
+                    --placeholder-color: var(--morado-medio);
+                }
+
+                div ion-list ion-item {
+                    color: var(--morado-oscuro);
+                    margin-bottom: 1.5vh;
+                }
+            }
         }
     }
-    
-    
 }
+

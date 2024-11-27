@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
       if (usuarioObtenido) {
         let navigationExtras: NavigationExtras = {
           state: {
-            id: usuarioObtenido.id,
+            id: usuarioObtenido.idUsuario,
             rut: usuarioObtenido.rut,
             nombres: usuarioObtenido.nombres,
             paterno: usuarioObtenido.paterno,

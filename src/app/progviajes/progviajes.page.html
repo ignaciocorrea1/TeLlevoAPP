@@ -24,27 +24,75 @@
               lo necesiten.
             </ion-text>
           </ion-item>
-          <ion-item class="item-progviaje" lines="none">
-            <ion-input
-              [(ngModel)]="viaje.direccionInicio" 
-              type="text" 
-              fill="solid"
-              class="form-input custom-font"
-              placeholder="Dirección de inicio"
-            ></ion-input>
+          <ion-item class="item-progviaje direccion-progviaje" lines="none">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="12">
+                  <ion-searchbar
+                    class="custom-font custom-font-weight"
+                    (ionInput)="buscador1($event)"
+                    [value]="selectedDireccion1?.place_name"
+                    placeholder="Direccion inicial"
+                  ></ion-searchbar>
+                  <div style="z-index: 999">
+                    <ion-list lines="none" *ngIf="direcciones1.length > 0">
+                      <ion-item
+                        class="custom-font"
+                        button
+                        *ngFor="let address of direcciones1"
+                        (click)="onSelect1(address)"
+                      >
+                        <ion-icon
+                          name="location-outline"
+                          style="
+                            color: var(--morado-oscuro);
+                            padding-right: 3.5vw;
+                          "
+                        ></ion-icon>
+                        {{ address.place_name }}
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+          <ion-item class="item-progviaje direccion-progviaje" lines="none">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="12">
+                  <ion-searchbar
+                    class="custom-font custom-font-weight"
+                    (ionInput)="buscador2($event)"
+                    [value]="selectedDireccion2?.place_name"
+                    placeholder="Direccion final"
+                  ></ion-searchbar>
+                  <div style="z-index: 999">
+                    <ion-list lines="none" *ngIf="direcciones2.length > 0">
+                      <ion-item
+                        class="custom-font"
+                        button
+                        *ngFor="let address of direcciones2"
+                        (click)="onSelect2(address)"
+                      >
+                        <ion-icon
+                          name="location-outline"
+                          style="
+                            color: var(--morado-oscuro);
+                            padding-right: 3.5vw;
+                          "
+                        ></ion-icon>
+                        {{ address.place_name }}
+                      </ion-item>
+                    </ion-list>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-item>
           <ion-item class="item-progviaje" lines="none">
             <ion-input
-              [(ngModel)]="viaje.direccionFinal" 
-              type="text"
-              fill="solid"
-              class="form-input custom-font"
-              placeholder="Dirección de destino"
-            ></ion-input>
-          </ion-item>
-          <ion-item class="item-progviaje" lines="none">
-            <ion-input
-              [(ngModel)]="viaje.costoPersona" 
+              [(ngModel)]="viaje.costoPersona"
               type="number"
               fill="solid"
               class="form-input custom-font"
@@ -53,7 +101,7 @@
           </ion-item>
           <ion-item class="item-progviaje" lines="none">
             <ion-input
-              [(ngModel)]="viaje.capacidadMaxima" 
+              [(ngModel)]="viaje.capacidadMaxima"
               type="number"
               fill="solid"
               class="form-input custom-font"
@@ -62,7 +110,7 @@
           </ion-item>
           <ion-item class="item-progviaje" lines="none">
             <ion-input
-              [(ngModel)]="viaje.horaInicio" 
+              [(ngModel)]="viaje.horaInicio"
               type="time"
               fill="solid"
               class="form-input custom-font"

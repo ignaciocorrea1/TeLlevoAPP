@@ -53,9 +53,7 @@ export class InicioPage implements OnInit {
   };
 
   irProgviajes() {
-    let navigationExtras: NavigationExtras = { state : {id: this.user.id}}
-
-    this.router.navigate(["/progviajes"], navigationExtras).then(() => {
+    this.router.navigate(["/progviajes"]).then(() => {
       this.menuCtrl.close()
     });
   }
