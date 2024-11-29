@@ -57,4 +57,16 @@ export class ApicontrollerService {
   postViaje(viaje:any): Observable<any> {
     return this.http.post(this.apiUrl + "/viajes/", viaje)
   }
+
+  // Obtener el viaje iniciado del conductor
+  getViajeC(userId: number): Observable<any> {
+    const url = `${this.apiUrl}/viajes/?conductor=${userId}&estado=iniciado`
+    return this.http.get(url)
+  }
+
+  // Actualizar 
+  putViaje(id: number, data: any): Observable<any> {
+    const url = `${this.apiUrl}/viajes/${id}/`;  
+    return this.http.put(url, data);
+  }
 }

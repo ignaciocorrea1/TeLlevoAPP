@@ -147,8 +147,5 @@ export class HomePage {
     this.user.password = "";
     this.limpiarInputs();
     this.msgError("vacio");
-    // console.log("Storage: ", this.strg.get("estado"))
-    // console.log("Storage: ", this.strg.get("usuario"))
-    // console.log("Auth: ", this.auth.isConected())
   }
 };

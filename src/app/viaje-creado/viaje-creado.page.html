@@ -1,0 +1,30 @@
+<ion-content [fullscreen]="true" id="vcreado-container">
+  <app-header
+    [contentId]="'vcreado-container'"
+    [menuId]="'menuCreado'"
+  ></app-header>
+
+  <div class="vcreado-main" *ngIf="cargandoDatos">
+    <ion-card>
+      <ion-list>
+        <ion-item>
+          <ion-text class="custom-font t-morado-oscuro">
+            Dirección inicial: {{viaje.direccionInicio || "Cargando..."}}
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-text class="custom-font t-morado-oscuro">
+            Dirección final: {{viaje.direccionFinal || "Cargando..."}}
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-text class="custom-font t-morado-oscuro">
+            Hora de inicio: {{viaje.horaInicio || "Cargando..."}}
+          </ion-text>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </div>
+
+  <app-bottom></app-bottom>
+</ion-content>

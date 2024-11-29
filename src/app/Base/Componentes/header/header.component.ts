@@ -21,6 +21,7 @@ export class HeaderComponent  implements OnInit {
   headerWidth: string = '100%';
   marginLeft: string = '0';
 
+  // Para verificar el permiso de ubicacion del usuario
   private locationCheck!: Subscription;
 
   constructor(
@@ -38,6 +39,7 @@ export class HeaderComponent  implements OnInit {
     this.auth.logout();
   };
 
+  // Dependiendo de la ruta se oculta el boton volver atras en el header
   visibilidadBackButton() {
     if (this.router.url == "/inicio") {
       this.mostrarBoton = false;
@@ -46,14 +48,17 @@ export class HeaderComponent  implements OnInit {
     }
   };
 
+  // Navegar a cierta ruta
   navegarA(ruta:string) {
     this.router.navigate([ruta]);
   };
 
+  // Si la ubicacion esta desactivada aparece una alerta, va de la mano con la funcion de checkPermissions de momento
   settings() {
     this.geo.openSettings();
   }
 
+  // Se verifica el permiso de usuario cada cierto tiempo
   checkPermissions() {
     this.locationCheck = interval(500000).subscribe(() => {
       this.geo.checkPermissions().then((permissions) => {
@@ -68,6 +73,7 @@ export class HeaderComponent  implements OnInit {
     })
   }
 
+  // Dependiendo la ruta el tamaño del header debe cambiar para no tener problemas con el mapa
   actualizarStyle() {
     if (this.router.url === "/mapa") {
       this.headerWidth = '80%';
@@ -84,6 +90,7 @@ export class HeaderComponent  implements OnInit {
     this.actualizarStyle();
   }
 
+  // La suscripcion se "destruye" 
   ngOnDestroy(): void {
     if (this.locationCheck) {
       this.locationCheck.unsubscribe();

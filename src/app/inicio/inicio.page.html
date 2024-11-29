@@ -17,7 +17,8 @@
 
     <!-- Opciones del usuario -->
     <div class="opciones">
-      <div class="card-opciones card-1">
+      <!-- Si es true se muestra -->
+      <div class="card-opciones card-1" *ngIf="opciones">
         <ion-text class="custom-font t-morado-oscuro ion-text-center">
           Ofrece tu viaje y ayuda a otros estudiantes.
         </ion-text>
@@ -31,7 +32,8 @@
         </ion-button>
       </div>
 
-      <div class="card-opciones card-2">
+      <!-- Si es true se muestra -->
+      <div class="card-opciones card-2" *ngIf="opciones">
         <ion-text class="custom-font t-morado-oscuro ion-text-center">
           Busca un viaje que se ajuste a tu ruta y horario. ¡Es fácil y rápido!
         </ion-text>
@@ -41,6 +43,35 @@
           strong="true"
         >
           Ver viajes
+        </ion-button>
+      </div>
+
+      <!-- Si es true se muestra -->
+      <div class="card-opciones card-2" *ngIf="opcionConductor">
+        <ion-text class="custom-font t-morado-oscuro ion-text-center">
+          Ve aquí el viaje que generaste!!
+        </ion-text>
+        <ion-button
+          (click)="irViajeCreado()" 
+          class="button-global custom-font btn-opcion"
+          shape="round"
+          strong="true"
+        >
+          Ver viajes creados
+        </ion-button>
+      </div>
+
+      <!-- Si es true se muestra -->
+      <div class="card-opciones card-2" *ngIf="opcionPasajero">
+        <ion-text class="custom-font t-morado-oscuro ion-text-center">
+          Ve aquí la información del viaje al que te uniste
+        </ion-text>
+        <ion-button
+          class="button-global custom-font btn-opcion"
+          shape="round"
+          strong="true"
+        >
+          Ver viaje
         </ion-button>
       </div>
     </div>

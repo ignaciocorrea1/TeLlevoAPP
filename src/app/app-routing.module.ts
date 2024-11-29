@@ -35,9 +35,21 @@ const routes: Routes = [
     loadChildren: () => import('./mapa/mapa.module').then( m => m.MapaPageModule)
   },
   {
+    path: 'confirmar',
+    loadChildren: () => import('./confirmar/confirmar.module').then( m => m.ConfirmarPageModule)
+  },
+  {
+    path: 'viaje-creado',
+    loadChildren: () => import('./viaje-creado/viaje-creado.module').then( m => m.ViajeCreadoPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./error/error.module').then( m => m.ErrorPageModule)
+  },  {
+    path: 'viajesdisponibles',
+    loadChildren: () => import('./viajesdisponibles/viajesdisponibles.module').then( m => m.ViajesdisponiblesPageModule)
   },
+
 ];
 
 @NgModule({

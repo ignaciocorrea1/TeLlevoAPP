@@ -14,6 +14,7 @@ export class BottomComponent  implements OnInit {
     private geo:GeolocationService) { }
 
   async navegarA(ruta:string) {
+    // Validacion de ruta para enviar las coordenadas del usuario a la vista de ubicacion
     if (ruta != '/mapa') {
       this.router.navigate([ruta]);
     } else {

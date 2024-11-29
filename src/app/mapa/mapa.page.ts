@@ -29,7 +29,7 @@ export class MapaPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.map.buildMap(this.position.lng, this.position.lat);
+    this.map.buildMap("map-ubicacion", this.position.lng, this.position.lat);
     this.map.addMarker(this.position.lng, this.position.lat);
     this.map.geolocateControl();
   }

@@ -22,7 +22,7 @@ export class ProgviajesPage implements OnInit {
   idUsuario = 0;
 
   viaje = {
-    "conductor": "",
+    "conductor": 0,
     "costoPersona": "",
     "capacidadActual": "",
     "capacidadMaxima": "",
@@ -35,9 +35,11 @@ export class ProgviajesPage implements OnInit {
     "horaInicio": ""
   }
 
+  // Buscador direccion inicio
   direcciones1: {place_name: string, latitude: number, longitude: number}[] = [];
   selectedDireccion1: {place_name: string, latitude: number, longitude: number} | null = null;
 
+  // Buscador direccion final
   direcciones2: {place_name: string, latitude: number, longitude: number}[] = [];
   selectedDireccion2: {place_name: string, latitude: number, longitude: number} | null = null;
 
@@ -79,7 +81,8 @@ export class ProgviajesPage implements OnInit {
     this.direcciones2 = []
   }
 
-  crearViaje() {
+  // Navegar a la ruta para confirmar la creacion del viaje
+  irConfirmarcion() {
     if (this.selectedDireccion1 && this.selectedDireccion2) {
       const viaje = {
         "conductor": this.idUsuario,
@@ -90,24 +93,32 @@ export class ProgviajesPage implements OnInit {
         "direccionFinal": this.selectedDireccion2.place_name,
         "coordenadasInicioLat": this.selectedDireccion1.latitude,
         "coordenadasInicioLng": this.selectedDireccion1.longitude,
-        "coordenadasFinalLat": this.selectedDireccion1.latitude,
-        "coordenadasFinalLng": this.selectedDireccion1.longitude,
+        "coordenadasFinalLat": this.selectedDireccion2.latitude,
+        "coordenadasFinalLng": this.selectedDireccion2.longitude,
         "horaInicio": this.viaje.horaInicio
       }
-      console.log(viaje)
 
-      this.api.postViaje(viaje).subscribe(
-        resultado => {
-          console.log("Viaje creado")
-        },
-        error => {
-          console.log("Error al crear el viaje: ", error)
-          console.log("Error en viaje: ", viaje)
+      let navigationExtras: NavigationExtras = {
+        state: {
+          conductor: viaje.conductor,
+          costoPersona: Number(viaje.costoPersona),
+          capacidadActual: Number(viaje.capacidadActual),
+          capacidadMaxima: Number(viaje.capacidadMaxima),
+          direccionInicio: viaje.direccionInicio,
+          direccionFinal: viaje.direccionFinal,
+          coordenadasInicioLat: viaje.coordenadasInicioLat,
+          coordenadasInicioLng: viaje.coordenadasInicioLng,
+          coordenadasFinalLat: viaje.coordenadasFinalLat,
+          coordenadasFinalLng: viaje.coordenadasFinalLng,
+          horaInicio: viaje.horaInicio
         }
-      )
+      };
+
+      this.router.navigate(["/confirmar"], navigationExtras)
     }
   }
 
+  // Obtener la idUsuario a traves del storage ya que el navigationextras se bugea
   async ngOnInit() {
     const usuario = await this.strg.get("usuario");
     

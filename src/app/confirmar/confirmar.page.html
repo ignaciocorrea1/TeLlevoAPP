@@ -1,0 +1,47 @@
+<ion-content [fullscreen]="true" id="confirmar-container">
+  <app-header
+    [contentId]="'confirmar-container'"
+    [menuId]="'menuConfirmar'"
+  ></app-header>
+
+  <div class="mapa" id="map-confirmacion" tabindex="0"></div>
+
+  <ion-card style="
+    display: flex; 
+    justify-content: center;
+    position: fixed;
+    bottom: 10vh;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    background: transparent;
+  ">
+    <ion-button
+      (click)="cancelarViaje()"
+      shape="round"
+      class="button-global custom-font"
+      strong="true"
+      style="
+        width: 46vw; 
+        height: 5vh;
+        filter: drop-shadow(1px 2px 3px rgb(0, 0, 0, 0.3));
+      "
+    >
+      Cancelar viaje
+    </ion-button>
+    <ion-button
+      (click)="crearViaje()"
+      shape="round"
+      class="button-global custom-font"
+      strong="true"
+      style="
+        width: 46vw; 
+        height: 5vh;
+        filter: drop-shadow(1px 2px 3px rgb(0, 0, 0, 0.3));
+      "
+    >
+      Confirmar viaje
+    </ion-button>
+  </ion-card>
+
+  <app-bottom></app-bottom>
+</ion-content>

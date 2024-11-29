@@ -21,7 +21,22 @@ export class InicioPage implements OnInit {
     "correo": "",
     "contrasenia": "",
     "tipo": ""
-  }
+  };
+
+  userStorage = {
+    "idUsuario": 0,
+    "rut": "",
+    "nombres": "",
+    "paterno": "",
+    "materno": "",
+    "correo": "",
+    "contrasenia": "",
+    "tipo": ""
+  };
+
+  opciones = true;
+  opcionConductor = false;
+  opcionPasajero = false;
 
   constructor(
     private router:Router, 
@@ -52,20 +67,47 @@ export class InicioPage implements OnInit {
 
   };
 
+  // Para evitar problemas con el menu
   irProgviajes() {
     this.router.navigate(["/progviajes"]).then(() => {
       this.menuCtrl.close()
     });
   }
+
+  mostrarOpciones() {
+    if (this.userStorage.tipo === "conductor") {
+      this.opciones = false;
+      this.opcionConductor = true;
+    } else {
+      this.opciones = true;
+      this.opcionConductor = false;
+    }
+  }
   
-  ionViewWillEnter(){
-    console.log("Usuario recibido desde home", this.user)
+  irViajeCreado() {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        "idUsuario": this.userStorage.idUsuario
+      }
+    }
+    this.router.navigate(["/viaje-creado"], navigationExtras);
+  }
+
+  async ionViewWillEnter(){
+    const usuario = await this.strg.get("usuario")
+
+    if (usuario) {
+      this.userStorage = usuario;
+      this.mostrarOpciones();
+      console.log("Usuario storage inicio: ", this.userStorage)
+    } else {
+      console.error("No hay usuario storage inicio")
+    }
   }
 
   ngOnInit() {
-    console.log("Storage en vista inicio (estado): ", this.strg.get("estado"))
-    console.log("Storage en vista inicio (usuario): ", this.strg.get("usuario"))
-    console.log("Auth en vista inicio: ", this.auth.isConected())
+    this.mostrarOpciones();
+    console.log("Usuario recibido desde home", this.user)
   };
   
 }
