@@ -32,17 +32,17 @@ export class ConfirmarPage implements OnInit {
       coordenadasFinalLng: number,
       horaInicio: string
     }
-    this.viaje.conductor = state.conductor;
-    this.viaje.costoPersona = state.costoPersona;
-    this.viaje.capacidadActual = state.capacidadActual;
-    this.viaje.capacidadMaxima = state.capacidadMaxima;
-    this.viaje.direccionInicio = state.direccionInicio;
-    this.viaje.direccionFinal = state.direccionFinal;
-    this.viaje.coordenadasInicioLat = state.coordenadasInicioLat;
-    this.viaje.coordenadasInicioLng = state.coordenadasInicioLng;
-    this.viaje.coordenadasFinalLat = state.coordenadasFinalLat;
-    this.viaje.coordenadasFinalLng = state.coordenadasFinalLng;
-    this.viaje.horaInicio = state.horaInicio;
+    this.viaje.conductor ? state.conductor:0;
+    this.viaje.costoPersona ? state.costoPersona:0;
+    this.viaje.capacidadActual ? state.capacidadActual:0;
+    this.viaje.capacidadMaxima ? state.capacidadMaxima:0;
+    this.viaje.direccionInicio ? state.direccionInicio:"";
+    this.viaje.direccionFinal ? state.direccionFinal:"";
+    this.viaje.coordenadasInicioLat ? state.coordenadasInicioLat:0;
+    this.viaje.coordenadasInicioLng ? state.coordenadasInicioLng:0;
+    this.viaje.coordenadasFinalLat ? state.coordenadasFinalLat:0;
+    this.viaje.coordenadasFinalLng ? state.coordenadasFinalLng:0;
+    this.viaje.horaInicio ? state.horaInicio:"";
   }
 
   viaje = {

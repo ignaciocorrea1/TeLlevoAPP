@@ -56,14 +56,14 @@ export class InicioPage implements OnInit {
       contrasenia: "";
       tipo: "";
     };
-    this.user.id = Number(state.id);
-    this.user.rut = state.rut;
-    this.user.nombres = state.nombres;
-    this.user.paterno = state.paterno;
-    this.user.materno = state.materno;
-    this.user.correo = state.correo;
-    this.user.contrasenia = state.contrasenia;
-    this.user.tipo = state.tipo;
+    this.user.id ? Number(state.id):0;
+    this.user.rut ? state.rut:"";
+    this.user.nombres ? state.nombres:"";
+    this.user.paterno ? state.paterno:"";
+    this.user.materno ? state.materno:"";
+    this.user.correo ? state.correo:"";
+    this.user.contrasenia ? state.contrasenia:"";
+    this.user.tipo ? state.tipo:"";
 
   };
 

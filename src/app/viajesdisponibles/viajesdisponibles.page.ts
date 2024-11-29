@@ -18,7 +18,7 @@ export class ViajesdisponiblesPage implements OnInit {
     const state = navegacion?.extras.state as {
       idUsuario: number;
     };
-    this.idUsuario = state.idUsuario;
+    this.idUsuario ? state.idUsuario:0;
   }
 
   idUsuario = 0;

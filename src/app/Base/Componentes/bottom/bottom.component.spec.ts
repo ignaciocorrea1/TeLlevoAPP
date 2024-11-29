@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { BottomComponent } from './bottom.component';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('BottomComponent', () => {
   let component: BottomComponent;
@@ -10,7 +11,8 @@ describe('BottomComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ BottomComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot()],
+      providers: [provideHttpClient()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BottomComponent);
