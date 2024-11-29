@@ -1,0 +1,25 @@
+<ion-content [fullscreen]="true" id="vdisponibles-container">
+  <app-header
+    [contentId]="'vdisponibles-container'"
+    [menuId]="'menuVdisponibles'"
+  ></app-header>
+
+  <div>
+    <ion-list *ngFor="let viaje of viajes">
+      <ion-item>
+        <ion-text> {{viaje.direccionInicio}} </ion-text>
+        <ion-text> {{viaje.direccionFinal}} </ion-text>
+      </ion-item>
+      <ion-button
+        (click)="solicitarViaje(viaje.idViaje)"
+        expand="block"
+        fill="clear"
+        shape="round"
+        >
+        Solicitar Viaje
+      </ion-button>
+    </ion-list>
+  </div>
+
+  <app-bottom></app-bottom>
+</ion-content>

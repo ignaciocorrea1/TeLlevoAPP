@@ -40,6 +40,12 @@ export class ApicontrollerService {
     return this.http.get(url)
   }
 
+  // Obtener pasajero
+  getPasajero(idUsuario: number): Observable <any> {
+    const url = `${this.apiUrl}/usuarios/?idUsuario=${idUsuario}`
+    return this.http.get(url)
+  }
+
   // Agregar 
   postUsuario(user: any): Observable<any> {
     return this.http.post(this.apiUrl + "/usuarios/", user);
@@ -59,14 +65,39 @@ export class ApicontrollerService {
   }
 
   // Obtener el viaje iniciado del conductor
-  getViajeC(userId: number): Observable<any> {
-    const url = `${this.apiUrl}/viajes/?conductor=${userId}&estado=iniciado`
+  getViajeC(userId: number, estado:string): Observable<any> {
+    const url = `${this.apiUrl}/viajes/?conductor=${userId}&estado=${estado}`
+    return this.http.get(url)
+  }
+  
+  // Obtener los viajes disponibles para el usuario
+  getViajes(): Observable<any> {
+    const url = `${this.apiUrl}/viajes/?estado=iniciado`
     return this.http.get(url)
   }
 
   // Actualizar 
   putViaje(id: number, data: any): Observable<any> {
     const url = `${this.apiUrl}/viajes/${id}/`;  
+    return this.http.put(url, data);
+  }
+
+  /* Solicitudes de viajes */
+  
+  // Agregar
+  postSolicitud(solicitud:any): Observable<any> {
+    return this.http.post(this.apiUrl + "/solicitudes/", solicitud)
+  }
+
+  // Obtener las solicitudes del viaje del conductor
+  getSolicitudes(viaje: number): Observable<any> {
+    const url = `${this.apiUrl}/solicitudes/?viaje${viaje}`
+    return this.http.get(url)
+  }
+
+  // Actualizar solicitud a aceptada
+  putSolicitud(idSolicitud: number, data: any): Observable<any> {
+    const url = `${this.apiUrl}/solicitudes/${idSolicitud}/`;  
     return this.http.put(url, data);
   }
 }

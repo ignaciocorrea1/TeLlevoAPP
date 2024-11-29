@@ -93,6 +93,15 @@ export class InicioPage implements OnInit {
     this.router.navigate(["/viaje-creado"], navigationExtras);
   }
 
+  irViajesDisponibles() {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        "idUsuario": this.userStorage.idUsuario
+      }
+    }
+    this.router.navigate(["/viajesdisponibles"], navigationExtras);
+  }
+
   async ionViewWillEnter(){
     const usuario = await this.strg.get("usuario")
 

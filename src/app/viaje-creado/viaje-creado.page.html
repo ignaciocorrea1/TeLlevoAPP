@@ -24,6 +24,21 @@
         </ion-item>
       </ion-list>
     </ion-card>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Solicitudes</ion-card-title>
+      </ion-card-header>
+      <ion-list *ngFor="let solicitud of solicitudes">
+        <ion-item>
+          <ion-text>
+            <h1>{{solicitud.pasajero.nombres}} {{solicitud.pasajero.paterno}} {{solicitud.pasajero.materno}}</h1>
+          </ion-text>
+          <ion-button (click)="aceptarSolicitud(solicitud.idSolicitud, solicitud.pasajero.idUsuario)" expand="block" fill="clear" shape="round">
+            Aceptar solicitud
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card>
   </div>
 
   <app-bottom></app-bottom>
