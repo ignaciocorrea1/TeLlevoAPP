@@ -1,0 +1,27 @@
+.estado-main {
+    h1 {
+        font-weight: bold;
+    }
+
+    ion-list {
+        width: 100%;
+        height: 100%;
+
+        ion-item {
+            width: 100%;
+            margin-bottom: 2vh;
+
+            ion-text {
+                width: 100%;
+            }
+
+            .desc {
+                font-weight: bold;
+            }
+
+            ion-button {
+                margin: 0 auto;
+            }
+        }
+    }
+}

@@ -47,10 +47,13 @@ const routes: Routes = [
     loadChildren: () => import('./viajesdisponibles/viajesdisponibles.module').then( m => m.ViajesdisponiblesPageModule)
   },
   {
+    path: 'estado',
+    loadChildren: () => import('./estado/estado.module').then( m => m.EstadoPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./error/error.module').then( m => m.ErrorPageModule)
   },
-
 ];
 
 @NgModule({

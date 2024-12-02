@@ -1,0 +1,86 @@
+<ion-content [fullscreen]="true" id="estado-container">
+  <app-header
+    [contentId]="'estado-container'"
+    [menuId]="'menuEstado'"
+  ></app-header>
+
+  <div class="estado-main">
+    <ion-text class="custom-font t-morado-oscuro ion-text-center">
+      <h1>Solicitud de viaje</h1>
+    </ion-text>
+    <ion-list>
+      <ion-item
+        class="custom-font t-morado-oscuro ion-text-center"
+        lines="none"
+      >
+        <ion-text>
+          Aquí están los detalles del viaje que solicitaste. No olvides revisar
+          cada uno de los detalles y estar preparado.
+        </ion-text>
+      </ion-item>
+      <ion-item class="custom-font t-morado-oscuro" lines="none">
+        <ion-text class="desc ion-text-start">Conductor: </ion-text>
+        <ion-text> {{nombreConductor || "Cargando..."}} </ion-text>
+      </ion-item>
+      <ion-item class="custom-font t-morado-oscuro" lines="none">
+        <ion-text class="desc ion-text-start">Dirección de inicio: </ion-text>
+        <ion-text> {{infoViaje.direccionInicio || "Cargando..."}} </ion-text>
+      </ion-item>
+      <ion-item class="custom-font t-morado-oscuro" lines="none">
+        <ion-text class="desc ion-text-start">Dirección final: </ion-text>
+        <ion-text> {{infoViaje.direccionFinal || "Cargando..."}} </ion-text>
+      </ion-item>
+      <ion-item class="custom-font t-morado-oscuro" lines="none">
+        <ion-text class="desc ion-text-start">Hora de inicio: </ion-text>
+        <ion-text> {{infoViaje.horaInicio || "Cargando..."}} </ion-text>
+      </ion-item>
+      <ion-item class="custom-font t-morado-oscuro" lines="none">
+        <ion-text class="desc ion-text-start">Estado solicitud: </ion-text>
+        <ion-text> {{solicitud.estado || "Cargando..."}} </ion-text>
+      </ion-item>
+      <ion-item
+        class="custom-font t-morado-oscuro"
+        lines="none"
+        *ngIf="solicitud.estado === 'No aceptada'"
+      >
+        <ion-button
+          class="button-global custom-font"
+          shape="round"
+          strong="true"
+          style="width: 50vw; height: 5vh"
+        >
+          Cancelar solicitud
+        </ion-button>
+      </ion-item>
+      <ion-item
+        style="margin-top: 2vh"
+        class="custom-font t-morado-oscuro ion-text-center"
+        lines="none"
+        *ngIf="solicitud.estado === 'Aceptada'"
+      >
+        <ion-text>
+          El conductor aceptó tu solicitud. Recuerda ser puntual!!!
+        </ion-text>
+      </ion-item>
+      <div
+        style="margin-top: 2vh"
+        class="custom-font t-morado-oscuro ion-text-center"
+        lines="none"
+        *ngIf="solicitud.estado === 'Rechazada'"
+      >
+        <ion-text> Tu solicitud no fue aceptada :(</ion-text>
+        <ion-button
+          (click)="verViajes()"
+          class="button-global custom-font"
+          shape="round"
+          strong="true"
+          style="width: 50vw; height: 5vh; margin: 0 auto; margin-top: 2vh;"
+        >
+          Ver más viajes
+        </ion-button>
+      </div>
+    </ion-list>
+  </div>
+
+  <app-bottom></app-bottom>
+</ion-content>

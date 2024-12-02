@@ -4,20 +4,65 @@
     [menuId]="'menuVdisponibles'"
   ></app-header>
 
-  <div>
+  <div class="vdisponibles-main">
+    <ion-text class="custom-font t-morado-oscuro ion-text-center">
+      <h1>Viajes disponibles</h1>
+    </ion-text>
+    
+    <div class="msg-estado">
+      <ion-text class="custom-font t-morado-oscuro ion-text-center">
+        ¡Aquí puedes encontrar los viajes disponibles! Envía tu solicitud y prepárate para viajar.
+      </ion-text>
+    </div>
+
     <ion-list *ngFor="let viaje of viajes">
-      <ion-item>
-        <ion-text> {{viaje.direccionInicio}} </ion-text>
-        <ion-text> {{viaje.direccionFinal}} </ion-text>
-      </ion-item>
-      <ion-button
-        (click)="solicitarViaje(viaje.idViaje)"
-        expand="block"
-        fill="clear"
-        shape="round"
-        >
-        Solicitar Viaje
-      </ion-button>
+      <ion-card>
+        <ion-card-content>
+          <ion-list class="list-card">
+              <!-- Problemas de logica para poner el conductor correcto en cada viaje -->
+              <!-- <ion-item >
+              <ion-text class="desc ion-text-start">Conductor: </ion-text>
+              <ion-text *ngFor="let conductor of conductores"> 
+                {{conductor?.nombres 
+                   ? conductor.nombres + ' ' + conductor.paterno + ' ' + conductor.materno : 'Cargando...'
+                }}
+              </ion-text> 
+            </ion-item> -->
+            <ion-item class="custom-font t-morado-oscuro" lines="none">
+              <ion-text class="desc ion-text-start">Dirección de inicio: </ion-text>
+              <ion-text> {{viaje.direccionInicio || "Cargando..."}} </ion-text>
+            </ion-item>
+            <ion-item class="custom-font t-morado-oscuro" lines="none">
+              <ion-text class="desc ion-text-start">Dirección final: </ion-text>
+              <ion-text> {{viaje.direccionFinal || "Cargando..."}} </ion-text>
+            </ion-item>
+            <ion-item class="custom-font t-morado-oscuro" lines="none">
+              <ion-text class="desc ion-text-start">Hora de inicio: </ion-text>
+              <ion-text> {{viaje.horaInicio || "Cargando..."}} </ion-text>
+            </ion-item>
+            <ion-item class="custom-font t-morado-oscuro" lines="none">
+              <ion-text class="desc ion-text-start">Capacidad: </ion-text>
+              <ion-text> 
+                {{ viaje?.capacidadActual !== null && viaje?.capacidadMaxima !== null
+                  ? viaje.capacidadActual + '/' + viaje.capacidadMaxima
+                  : 'Cargando...' 
+                }}
+             </ion-text>
+            </ion-item>
+            <ion-item class="custom-font t-morado-oscuro" lines="none">
+              <ion-button
+              (click)="solicitarViaje(viaje.idViaje)"
+              class="button-global custom-font"
+              shape="round"
+              strong="true"
+              style="width: 50vw; height: 5vh; margin: 0 auto"
+            >
+              Solicitar Viaje
+            </ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
     </ion-list>
   </div>
 

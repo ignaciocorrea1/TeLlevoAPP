@@ -16,7 +16,7 @@
     </div>
 
     <!-- Opciones del usuario -->
-    <div class="opciones">
+    <div class="opciones" [ngStyle]="{'height': userStorage.tipo === 'pasajero' ? '100%' : '45vh'}">
       <!-- Si es true se muestra -->
       <div class="card-opciones card-1" *ngIf="opciones">
         <ion-text class="custom-font t-morado-oscuro ion-text-center">
@@ -58,21 +58,22 @@
           shape="round"
           strong="true"
         >
-          Ver viajes creados
+          Ver viaje
         </ion-button>
       </div>
 
       <!-- Si es true se muestra -->
       <div class="card-opciones card-2" *ngIf="opcionPasajero">
         <ion-text class="custom-font t-morado-oscuro ion-text-center">
-          Ve aquí la información del viaje al que te uniste
+          Ve aquí el estado de las solicitudes a viajes
         </ion-text>
         <ion-button
+          (click)="irEstado()" 
           class="button-global custom-font btn-opcion"
           shape="round"
           strong="true"
         >
-          Ver viaje
+          Ver estado
         </ion-button>
       </div>
     </div>

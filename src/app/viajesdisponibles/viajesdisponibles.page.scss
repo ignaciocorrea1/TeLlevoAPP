@@ -1,0 +1,38 @@
+.vdisponibles-main {
+    h1 {
+        font-weight: bold;
+    }
+
+    .msg-estado {
+        text-align: center;
+        padding: 0 1em 0 1em;
+    }
+
+    ion-list ion-card {
+        margin-bottom: 10vh;
+
+        ion-card-content {
+            padding: 0;
+
+            .list-card {
+                width: 100%;
+    
+                ion-item {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    margin-bottom: 2vh;
+    
+                    ion-text {
+                        width: 100%;
+                        padding-right: 1em;
+                    }
+    
+                    .desc {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+}

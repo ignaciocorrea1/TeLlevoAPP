@@ -56,15 +56,26 @@ export class InicioPage implements OnInit {
       contrasenia: "";
       tipo: "";
     };
-    this.user.id ? Number(state.id):0;
-    this.user.rut ? state.rut:"";
-    this.user.nombres ? state.nombres:"";
-    this.user.paterno ? state.paterno:"";
-    this.user.materno ? state.materno:"";
-    this.user.correo ? state.correo:"";
-    this.user.contrasenia ? state.contrasenia:"";
-    this.user.tipo ? state.tipo:"";
-
+    
+    if (state) {
+      this.user.id = Number(state.id);
+      this.user.rut = state.rut;
+      this.user.nombres = state.nombres;
+      this.user.paterno = state.paterno;
+      this.user.materno = state.materno;
+      this.user.correo = state.correo;
+      this.user.contrasenia = state.contrasenia;
+      this.user.tipo = state.tipo;
+    } else {
+      this.user.id = 0;
+      this.user.rut = "";
+      this.user.nombres = "";
+      this.user.paterno = "";
+      this.user.materno = "";
+      this.user.correo = "";
+      this.user.contrasenia = "";
+      this.user.tipo = "";
+    }
   };
 
   // Para evitar problemas con el menu
@@ -77,9 +88,15 @@ export class InicioPage implements OnInit {
   mostrarOpciones() {
     if (this.userStorage.tipo === "conductor") {
       this.opciones = false;
+      this.opcionPasajero = false;
       this.opcionConductor = true;
+    } else if (this.userStorage.tipo === "pasajero") {
+      this.opciones = false;
+      this.opcionPasajero = true;
+      this.opcionConductor = false;
     } else {
       this.opciones = true;
+      this.opcionPasajero = false;
       this.opcionConductor = false;
     }
   }
@@ -90,6 +107,7 @@ export class InicioPage implements OnInit {
         "idUsuario": this.userStorage.idUsuario
       }
     }
+    console.log("Id enviada desde storage: ", this.userStorage.idUsuario)
     this.router.navigate(["/viaje-creado"], navigationExtras);
   }
 
@@ -100,6 +118,15 @@ export class InicioPage implements OnInit {
       }
     }
     this.router.navigate(["/viajesdisponibles"], navigationExtras);
+  }
+
+  irEstado() {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        "idUsuario": this.userStorage.idUsuario
+      }
+    }
+    this.router.navigate(["/estado"], navigationExtras);
   }
 
   async ionViewWillEnter(){

@@ -5,39 +5,138 @@
   ></app-header>
 
   <div class="vcreado-main" *ngIf="cargandoDatos">
-    <ion-card>
-      <ion-list>
-        <ion-item>
-          <ion-text class="custom-font t-morado-oscuro">
-            Dirección inicial: {{viaje.direccionInicio || "Cargando..."}}
-          </ion-text>
-        </ion-item>
-        <ion-item>
-          <ion-text class="custom-font t-morado-oscuro">
-            Dirección final: {{viaje.direccionFinal || "Cargando..."}}
-          </ion-text>
-        </ion-item>
-        <ion-item>
-          <ion-text class="custom-font t-morado-oscuro">
-            Hora de inicio: {{viaje.horaInicio || "Cargando..."}}
-          </ion-text>
-        </ion-item>
-      </ion-list>
-    </ion-card>
-    <ion-card>
+    <ion-text class="custom-font t-morado-oscuro ion-text-center">
+      <h1 class="vcreado-title">Información del viaje</h1>
+    </ion-text>
+
+    <!-- Card detalle del viaje -->
+
+    <ion-card class="card-viaje">
       <ion-card-header>
-        <ion-card-title>Solicitudes</ion-card-title>
+        <ion-card-title class="custom-font t-morado-oscuro ion-text-center"
+          >Detalle</ion-card-title
+        >
       </ion-card-header>
-      <ion-list *ngFor="let solicitud of solicitudes">
-        <ion-item>
-          <ion-text>
-            <h1>{{solicitud.pasajero.nombres}} {{solicitud.pasajero.paterno}} {{solicitud.pasajero.materno}}</h1>
-          </ion-text>
-          <ion-button (click)="aceptarSolicitud(solicitud.idSolicitud, solicitud.pasajero.idUsuario)" expand="block" fill="clear" shape="round">
-            Aceptar solicitud
-          </ion-button>
-        </ion-item>
-      </ion-list>
+      <ion-card-content>
+        <ion-list>
+          <ion-item class="custom-font t-morado-oscuro" lines="none">
+            <ion-text class="desc ion-text-start">Dirección de inicio: </ion-text>
+            <ion-text> {{viaje.direccionInicio || "Cargando..."}} </ion-text>
+          </ion-item>
+          <ion-item class="custom-font t-morado-oscuro" lines="none">
+            <ion-text class="desc ion-text-start">Dirección final: </ion-text>
+            <ion-text> {{viaje.direccionFinal || "Cargando..."}} </ion-text>
+          </ion-item>
+          <ion-item class="custom-font t-morado-oscuro" lines="none">
+            <ion-text class="desc ion-text-start">Hora de inicio: </ion-text>
+            <ion-text> {{viaje.horaInicio || "Cargando..."}} </ion-text>
+          </ion-item>
+          <ion-item class="custom-font t-morado-oscuro" lines="none">
+            <ion-text class="desc ion-text-start">Capacidad: </ion-text>
+            <ion-text>
+              {{ viaje.capacidadActual !== null && viaje.capacidadMaxima !== null
+              ? viaje.capacidadActual + '/' + viaje.capacidadMaxima :
+              'Cargando...' }}
+            </ion-text>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Card detalle pasajeros -->
+
+    <ion-card class="card-detalle">
+      <ion-card-header>
+        <ion-card-title class="custom-font t-morado-oscuro ion-text-center"
+          >Pasajeros</ion-card-title
+        >
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list *ngFor="let pasajero of pasajerosDetalle">
+          <ion-item>
+            <ion-text class="desc custom-font t-morado-oscuro"> Pasajero: </ion-text>
+            <ion-text class="custom-font t-morado-oscuro ion-text-start">
+              {{pasajero?.nombres 
+                  ? pasajero.nombres + ' ' + pasajero.paterno + ' ' + pasajero.materno : 'Cargando...'
+              }}
+            </ion-text>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+      <ion-text *ngIf="!hayDetalles">
+        <h5
+          class="custom-font t-morado-medio ion-text-center"
+          style="font-weight: bold; opacity: 50%"
+        >
+          No hay pasajeros aún :/
+        </h5>
+      </ion-text>
+    </ion-card>
+
+    <!-- Card solicitudes -->
+
+    <ion-card class="card-solicitudes">
+      <ion-card-header>
+        <ion-card-title class="custom-font t-morado-oscuro ion-text-center"
+          >Solicitudes</ion-card-title
+        >
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list
+          class="list-solicitudes"
+          *ngFor="let solicitud of solicitudes"
+        >
+          <div>
+            <ion-item lines="none">
+              <div class="solicitud-pasajero">
+                <ion-text class="desc custom-font t-morado-oscuro ion-text-start"> Pasajero: </ion-text>
+                <!-- Mismo problema que con los viajes disponibles, problema en la logica para colocar el
+                     nombre correcto del pasajero en cada solicitud.
+                -->
+                <ion-text>
+                  <h1 class="custom-font t-morado-oscuro ion-text-start">{{solicitud.pasajero}}</h1>
+                </ion-text>
+              </div>
+            </ion-item>
+            <ion-item>
+              <div class="solicitud-buttons" *ngIf="!confirmado || !rechazado">
+                <ion-button
+                  (click)="aceptarSolicitud(solicitud.idSolicitud, solicitud.pasajero); cargarSolicitudes(viaje.idViaje)"
+                  class="button-global custom-font"
+                  shape="round"
+                  strong="true"
+                  style="width: 50vw; height: 5vh; margin: 0 auto"
+                >
+                  Aceptar solicitud
+                </ion-button>
+                <ion-button
+                  (click)="rechazarSolicitud(solicitud.idSolicitud, solicitud.pasajero); cargarSolicitudes(viaje.idViaje)"
+                  class="button-global custom-font"
+                  shape="round"
+                  strong="true"
+                  style="width: 50vw; height: 5vh; margin: 0 auto"
+                >
+                  Rechazar solicitud
+                </ion-button>
+              </div>
+              <!-- <ion-text *ngIf="confirmado" class="custom-font t-morado-medio ion-text-center">
+                Aceptado!!!
+              </ion-text>
+              <ion-text *ngIf="rechazado" class="custom-font t-morado-medio ion-text-center">
+                Rechazado
+              </ion-text> -->
+            </ion-item>
+          </div>
+        </ion-list>
+      </ion-card-content>
+      <ion-text *ngIf="!haySolicitudes">
+        <h5
+          class="custom-font t-morado-medio ion-text-center"
+          style="font-weight: bold; opacity: 50%"
+        >
+          No hay solicitudes aún :/
+        </h5>
+      </ion-text>
     </ion-card>
   </div>
 

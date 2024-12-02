@@ -32,17 +32,32 @@ export class ConfirmarPage implements OnInit {
       coordenadasFinalLng: number,
       horaInicio: string
     }
-    this.viaje.conductor ? state.conductor:0;
-    this.viaje.costoPersona ? state.costoPersona:0;
-    this.viaje.capacidadActual ? state.capacidadActual:0;
-    this.viaje.capacidadMaxima ? state.capacidadMaxima:0;
-    this.viaje.direccionInicio ? state.direccionInicio:"";
-    this.viaje.direccionFinal ? state.direccionFinal:"";
-    this.viaje.coordenadasInicioLat ? state.coordenadasInicioLat:0;
-    this.viaje.coordenadasInicioLng ? state.coordenadasInicioLng:0;
-    this.viaje.coordenadasFinalLat ? state.coordenadasFinalLat:0;
-    this.viaje.coordenadasFinalLng ? state.coordenadasFinalLng:0;
-    this.viaje.horaInicio ? state.horaInicio:"";
+
+    if (state) {
+      this.viaje.conductor = state.conductor;
+      this.viaje.costoPersona = state.costoPersona;
+      this.viaje.capacidadActual = state.capacidadActual;
+      this.viaje.capacidadMaxima = state.capacidadMaxima;
+      this.viaje.direccionInicio = state.direccionInicio;
+      this.viaje.direccionFinal = state.direccionFinal;
+      this.viaje.coordenadasInicioLat = state.coordenadasInicioLat;
+      this.viaje.coordenadasInicioLng = state.coordenadasInicioLng;
+      this.viaje.coordenadasFinalLat = state.coordenadasFinalLat;
+      this.viaje.coordenadasFinalLng = state.coordenadasFinalLng;
+      this.viaje.horaInicio = state.horaInicio;
+    } else {
+      this.viaje.conductor = 0;
+      this.viaje.costoPersona = 0;
+      this.viaje.capacidadActual = 0;
+      this.viaje.capacidadMaxima = 0;
+      this.viaje.direccionInicio = "";
+      this.viaje.direccionFinal = "";
+      this.viaje.coordenadasInicioLat = 0;
+      this.viaje.coordenadasInicioLng = 0;
+      this.viaje.coordenadasFinalLat = 0;
+      this.viaje.coordenadasFinalLng = 0;
+      this.viaje.horaInicio = "";
+    }
   }
 
   viaje = {
@@ -60,7 +75,7 @@ export class ConfirmarPage implements OnInit {
     "estado": ""
   }
 
-  usuarioEcontrado = {
+  usuarioEncontrado = {
     "idUsuario": 0,
     "rut": "",
     "nombres": "",
@@ -92,27 +107,27 @@ export class ConfirmarPage implements OnInit {
     this.api.postViaje(viaje).subscribe(
       resultado => {
         const usuarioActualizado = {
-          "rut": this.usuarioEcontrado.rut,
-          "nombres": this.usuarioEcontrado.nombres,
-          "paterno": this.usuarioEcontrado.paterno,
-          "materno": this.usuarioEcontrado.materno,
-          "correo": this.usuarioEcontrado.correo,
-          "contrasenia": this.usuarioEcontrado.contrasenia,
+          "rut": this.usuarioEncontrado.rut,
+          "nombres": this.usuarioEncontrado.nombres,
+          "paterno": this.usuarioEncontrado.paterno,
+          "materno": this.usuarioEncontrado.materno,
+          "correo": this.usuarioEncontrado.correo,
+          "contrasenia": this.usuarioEncontrado.contrasenia,
           "tipo": "conductor"
         };
 
-        this.api.putUsuario(this.usuarioEcontrado.idUsuario, usuarioActualizado).subscribe(
+        this.api.putUsuario(this.usuarioEncontrado.idUsuario, usuarioActualizado).subscribe(
           respuesta => {
             this.strg.remove("usuario")
             
             const usuarioActualizado2 = {
-              "idUsuario": this.usuarioEcontrado.idUsuario,
-              "rut": this.usuarioEcontrado.rut,
-              "nombres": this.usuarioEcontrado.nombres,
-              "paterno": this.usuarioEcontrado.paterno,
-              "materno": this.usuarioEcontrado.materno,
-              "correo": this.usuarioEcontrado.correo,
-              "contrasenia": this.usuarioEcontrado.contrasenia,
+              "idUsuario": this.usuarioEncontrado.idUsuario,
+              "rut": this.usuarioEncontrado.rut,
+              "nombres": this.usuarioEncontrado.nombres,
+              "paterno": this.usuarioEncontrado.paterno,
+              "materno": this.usuarioEncontrado.materno,
+              "correo": this.usuarioEncontrado.correo,
+              "contrasenia": this.usuarioEncontrado.contrasenia,
               "tipo": "conductor"
             };
             
@@ -160,8 +175,8 @@ export class ConfirmarPage implements OnInit {
     const user = await this.strg.get("usuario");
 
     if (user) {
-      this.usuarioEcontrado = user;
-      console.log("Usuario obtenido storage: ", this.usuarioEcontrado)
+      this.usuarioEncontrado = user;
+      console.log("Usuario obtenido storage: ", this.usuarioEncontrado)
     } else {
       console.log("Error con el storage en confirmacion")
     }

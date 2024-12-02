@@ -21,8 +21,14 @@ export class MapaPage implements OnInit {
       lng: number,
       lat: number
     };
-    this.position.lng ? state.lng:0;
-    this.position.lat ? state.lat:0;
+    if (state) {
+      this.position.lng = state.lng;
+      this.position.lat = state.lat;
+
+    } else {
+      this.position.lng = 0;
+      this.position.lat = 0;
+    }
   }
 
   ngOnInit() {
