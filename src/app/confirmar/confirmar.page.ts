@@ -89,7 +89,7 @@ export class ConfirmarPage implements OnInit {
   // Crear el viaje del usuario
   crearViaje() {
     const viaje = {
-      "conductor": this.viaje.conductor,
+      "conductor_id": this.viaje.conductor,
       "costoPersona": this.viaje.costoPersona,
       "capacidadActual": 0,
       "capacidadMaxima": this.viaje.capacidadMaxima,
@@ -135,12 +135,12 @@ export class ConfirmarPage implements OnInit {
             this.router.navigate(["/inicio"]);
           },
           error => {
-            console.error("Error al crear el viaje: ", error)
+            console.error("Error en putUsuario en crearViaje: ", error)
           }
         )
       },
       error => {
-        console.log("Error al crear el viaje: ", error)
+        console.log("Error en postViaje en crearViaje: ", error)
       }
     )
   }

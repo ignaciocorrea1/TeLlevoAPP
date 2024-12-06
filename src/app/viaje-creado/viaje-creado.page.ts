@@ -60,20 +60,18 @@ export class ViajeCreadoPage implements OnInit {
 
   pasajeros: any = [];
 
-  pasajerosDetalle: any = [];
-
   // Aceptar la solicitud al viaje
   aceptarSolicitud(idSolicitud: number, idPasajero: number) {
     // Creacion de la solicitud actualizada
     const solicitudActualizada = {
-      "viaje": this.viaje.idViaje,
-      "pasajero": idPasajero,
+      "viaje_id": this.viaje.idViaje,
+      "pasajero_id": idPasajero,
       "estado": "Aceptada"
     }
     // Creacion del detalle del viaje
     const detalle = {
-      "idViaje": this.viaje.idViaje,
-      "pasajero": idPasajero
+      "viaje_id": this.viaje.idViaje,
+      "pasajero_id": idPasajero
     }
 
     // Solicitud para actualizar
@@ -105,8 +103,8 @@ export class ViajeCreadoPage implements OnInit {
   rechazarSolicitud(idSolicitud: number, idPasajero: number) {
     // Solicitud actualizada
     const solicitudActualizada = {
-      "viaje": this.viaje.idViaje,
-      "pasajero": idPasajero,
+      "viaje_id": this.viaje.idViaje,
+      "pasajero_id": idPasajero,
       "estado": "Rechazada"
     }
 
@@ -139,7 +137,7 @@ export class ViajeCreadoPage implements OnInit {
               this.haySolicitudes = true;
               
               // Se obtiene la info del pasajero asociado
-              this.api.getConPas(tmp.pasajero).subscribe(
+              this.api.getConPas(tmp.pasajero.idUsuario).subscribe(
                 (respuesta: any = []) => {
                   if (respuesta.length > 0) {
                     this.pasajeros.push(respuesta[0])
@@ -152,18 +150,6 @@ export class ViajeCreadoPage implements OnInit {
         } 
       },
       error => console.error("No se obtenieron las solicitudes: ", error)
-    )
-  }
-
-  obtenerInfoDetalle(pasajero: number) {
-    this.api.getConPas(pasajero).subscribe(
-      (respuesta: any = []) => {
-        if (respuesta.length > 0) {
-          this.pasajerosDetalle.push(respuesta[0]);
-          console.log("Respuesta de getConPas (infoDetalle): ", respuesta)
-        }
-      },
-      error => console.error("Error en getConPas (infoDetalle): ", error)
     )
   }
 
@@ -180,12 +166,10 @@ export class ViajeCreadoPage implements OnInit {
           this.hayDetalles = true;
 
           resultados.forEach(tmp => {
-            this.obtenerInfoDetalle(tmp.pasajero);
             console.log("idPasajero detalle: ", tmp.pasajero)
           });
 
           console.log("Resultado de getDetalles array: ", this.detalles)
-          console.log("Pasajeros detalle: ", this.pasajerosDetalle)
         } 
       },
       error => console.error("No se obtenieron los detalles: ", error)

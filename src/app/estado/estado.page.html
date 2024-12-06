@@ -20,19 +20,25 @@
       </ion-item>
       <ion-item class="custom-font t-morado-oscuro" lines="none">
         <ion-text class="desc ion-text-start">Conductor: </ion-text>
-        <ion-text> {{nombreConductor || "Cargando..."}} </ion-text>
+        <ion-text>
+          {{nombreConductor || "Cargando..."}}
+        </ion-text>
       </ion-item>
       <ion-item class="custom-font t-morado-oscuro" lines="none">
         <ion-text class="desc ion-text-start">Dirección de inicio: </ion-text>
-        <ion-text> {{infoViaje.direccionInicio || "Cargando..."}} </ion-text>
+        <ion-text>
+          {{solicitud.viaje.direccionInicio || "Cargando..."}}
+        </ion-text>
       </ion-item>
       <ion-item class="custom-font t-morado-oscuro" lines="none">
         <ion-text class="desc ion-text-start">Dirección final: </ion-text>
-        <ion-text> {{infoViaje.direccionFinal || "Cargando..."}} </ion-text>
+        <ion-text>
+          {{solicitud.viaje.direccionFinal || "Cargando..."}}
+        </ion-text>
       </ion-item>
       <ion-item class="custom-font t-morado-oscuro" lines="none">
         <ion-text class="desc ion-text-start">Hora de inicio: </ion-text>
-        <ion-text> {{infoViaje.horaInicio || "Cargando..."}} </ion-text>
+        <ion-text> {{solicitud.viaje.horaInicio || "Cargando..."}} </ion-text>
       </ion-item>
       <ion-item class="custom-font t-morado-oscuro" lines="none">
         <ion-text class="desc ion-text-start">Estado solicitud: </ion-text>
@@ -74,7 +80,7 @@
           class="button-global custom-font"
           shape="round"
           strong="true"
-          style="width: 50vw; height: 5vh; margin: 0 auto; margin-top: 2vh;"
+          style="width: 50vw; height: 5vh; margin: 0 auto; margin-top: 2vh"
         >
           Ver más viajes
         </ion-button>

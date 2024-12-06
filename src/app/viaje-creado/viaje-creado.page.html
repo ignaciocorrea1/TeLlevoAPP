@@ -52,12 +52,12 @@
         >
       </ion-card-header>
       <ion-card-content>
-        <ion-list *ngFor="let pasajero of pasajerosDetalle">
+        <ion-list *ngFor="let detalle of detalles">
           <ion-item>
             <ion-text class="desc custom-font t-morado-oscuro"> Pasajero: </ion-text>
             <ion-text class="custom-font t-morado-oscuro ion-text-start">
-              {{pasajero?.nombres 
-                  ? pasajero.nombres + ' ' + pasajero.paterno + ' ' + pasajero.materno : 'Cargando...'
+              {{detalle?.pasajero ? 
+                detalle.pasajero.nombres + ' ' + detalle.pasajero.paterno + ' ' + detalle.pasajero.materno : 'Cargando...'
               }}
             </ion-text>
           </ion-item>
@@ -90,18 +90,19 @@
             <ion-item lines="none">
               <div class="solicitud-pasajero">
                 <ion-text class="desc custom-font t-morado-oscuro ion-text-start"> Pasajero: </ion-text>
-                <!-- Mismo problema que con los viajes disponibles, problema en la logica para colocar el
-                     nombre correcto del pasajero en cada solicitud.
-                -->
                 <ion-text>
-                  <h1 class="custom-font t-morado-oscuro ion-text-start">{{solicitud.pasajero}}</h1>
+                  <ion-text class="custom-font t-morado-oscuro ion-text-start">
+                    {{solicitud?.pasajero ? 
+                      solicitud.pasajero.nombres + ' ' + solicitud.pasajero.paterno + ' ' + solicitud.pasajero.materno : 'Cargando...'
+                    }}
+                  </ion-text>
                 </ion-text>
               </div>
             </ion-item>
             <ion-item>
               <div class="solicitud-buttons" *ngIf="!confirmado || !rechazado">
                 <ion-button
-                  (click)="aceptarSolicitud(solicitud.idSolicitud, solicitud.pasajero); cargarSolicitudes(viaje.idViaje)"
+                  (click)="aceptarSolicitud(solicitud.idSolicitud, solicitud.pasajero.idUsuario); cargarSolicitudes(viaje.idViaje)"
                   class="button-global custom-font"
                   shape="round"
                   strong="true"
@@ -110,7 +111,7 @@
                   Aceptar solicitud
                 </ion-button>
                 <ion-button
-                  (click)="rechazarSolicitud(solicitud.idSolicitud, solicitud.pasajero); cargarSolicitudes(viaje.idViaje)"
+                  (click)="rechazarSolicitud(solicitud.idSolicitud, solicitud.pasajero.idUsuario); cargarSolicitudes(viaje.idViaje)"
                   class="button-global custom-font"
                   shape="round"
                   strong="true"

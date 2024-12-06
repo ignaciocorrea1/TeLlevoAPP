@@ -43,24 +43,11 @@ export class ViajesdisponiblesPage implements OnInit {
     "contrasenia": "",
     "tipo": ""
   }
-  
-  infoConductor = {
-    "idUsuario": 0,
-    "rut": "",
-    "nombres": "",
-    "paterno": "",
-    "materno": "",
-    "correo": "",
-    "contrasenia": "",
-    "tipo": ""
-  }
-
-  conductores: any = [];
 
   solicitarViaje(idViaje: number) {
     const solicitud = {
-      "viaje": idViaje,
-      "pasajero": this.idUsuario,
+      "viaje_id": idViaje,
+      "pasajero_id": this.idUsuario,
       "estado": "No aceptada"
     };
 
@@ -106,18 +93,6 @@ export class ViajesdisponiblesPage implements OnInit {
     )
   }
 
-  obtenerInfoConductores(conductor: number) {
-    this.api.getConPas(conductor).subscribe(
-      (respuesta: any = []) => {
-        if (respuesta.length > 0) {
-          this.conductores.push(respuesta[0]);
-          console.log("Respuesta de getConPas (Conductores): ", respuesta)
-        }
-      },
-      error => console.error("Error en getConPas (Conductores): ", error)
-    )
-  }
-
   async ngAfterContentInit() {
     const user = await this.strg.get("usuario");
 
@@ -137,7 +112,6 @@ export class ViajesdisponiblesPage implements OnInit {
           console.log("Resultado getViajes: ", this.viajes);
 
           resultados.forEach(tmp => {
-            this.obtenerInfoConductores(tmp.conductor);
             console.log("tmp conductor: ", tmp.conductor);
           });
         };

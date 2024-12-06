@@ -3,11 +3,48 @@ import { Router, NavigationExtras } from '@angular/router';
 import { ApicontrollerService } from '../Servicios/apicontroller.service';
 import { StorageService } from '../Servicios/storage.service';
 
+interface Conductor {
+  idUsuario: number;
+  rut: string;
+  nombres: string;
+  paterno: string;
+  materno: string;
+  correo: string;
+  tipo: string;
+}
+
+interface Viaje {
+  idViaje: number;
+  capacidadActual: number;
+  capacidadMaxima: number;
+  conductor: Conductor;
+  costoPersona: number;
+  direccionInicio: string;
+  direccionFinal: string;
+  coordenadasInicioLat: number;
+  coordenadasInicioLng: number;
+  coordenadasFinalLat: number;
+  coordenadasFinalLng: number;
+  horaInicio: string;
+  estado: string;
+}
+
+interface Pasajero {
+  idUsuario: number;
+  rut: string;
+  nombres: string;
+  paterno: string;
+  materno: string;
+  correo: string;
+  contrasenia: string;
+  tipo: string;
+}
+
 interface Solicitud {
   idSolicitud: number;
   estado: string;
-  viaje: number;
-  pasajero: number;
+  viaje: Viaje;
+  pasajero: Pasajero;
 }
 
 @Component({
@@ -34,40 +71,43 @@ export class EstadoPage implements OnInit {
   }
  
   idUsuario = 0;
-
-  solicitud = {
-    "idSolicitud": 0,
-    "estado": "",
-    "viaje": 0,
-    "pasajero": 0
+  solicitud: Solicitud = {
+    idSolicitud: 0,
+    estado: '',
+    viaje: {
+      idViaje: 0,
+      capacidadActual: 0,
+      capacidadMaxima: 0,
+      conductor: {
+        idUsuario: 0,
+        rut: '',
+        nombres: '',
+        paterno: '',
+        materno: '',
+        correo: '',
+        tipo: ''
+      },
+      costoPersona: 0,
+      direccionInicio: '',
+      direccionFinal: '',
+      coordenadasInicioLat: 0,
+      coordenadasInicioLng: 0,
+      coordenadasFinalLat: 0,
+      coordenadasFinalLng: 0,
+      horaInicio: '',
+      estado: ''
+    },
+    pasajero: {
+      idUsuario: 0,
+      rut: '',
+      nombres: '',
+      paterno: '',
+      materno: '',
+      correo: '',
+      contrasenia: '',
+      tipo: ''
+    }
   };
-
-  infoViaje = {
-    "idViaje": 0,
-    "conductor": 0,
-    "costoPersona": 0,
-    "capacidadActual": 0,
-    "capacidadMaxima": 0,
-    "direccionInicio": "",
-    "direccionFinal": "",
-    "coordenadasInicioLat": 0,
-    "coordenadasInicioLng": 0,
-    "coordenadasFinalLat": 0,
-    "coordenadasFinalLng": 0,
-    "horaInicio": "",
-    "estado": ""
-  }
-
-  infoConductor = {
-    "idUsuario": 0,
-    "rut": "",
-    "nombres": "",
-    "paterno": "",
-    "materno": "",
-    "correo": "",
-    "contrasenia": "",
-    "tipo": ""
-  }
 
   usuarioEncontrado = {
     "idUsuario": 0,
@@ -82,39 +122,6 @@ export class EstadoPage implements OnInit {
 
   nombreConductor = "";
 
-  // Obtener la informacion del conductor del viaje
-  obtenerInfoConductor(conductor:number) {
-    // Solicitud para obtener la informacion del conductor "usuario"
-    this.api.getConPas(conductor).subscribe(
-      (respuesta: any = []) => {
-        if (respuesta.length > 0) {
-          this.infoConductor = respuesta[0];
-
-          this.nombreConductor = this.infoConductor.nombres + " " + this.infoConductor.paterno + " " + this.infoConductor.materno;
-          console.log("Respuesta en infoConductor: ", respuesta);
-        }
-      },
-      error => console.error("Error en infoConductor: ", error)
-    )
-  }
-
-  // Obtener la informacion del viaje
-  obtenerInfoViaje(idViaje:number) {
-    // Solicitud para obtener el viaje asociado a la solicitud del pasajero
-    this.api.getViajeP(idViaje).subscribe(
-      (respuesta: any = []) => {
-        if (respuesta.length > 0) {
-          this.infoViaje = respuesta[0];
-
-          // Obtener la informaciond el conductor
-          this.obtenerInfoConductor(this.infoViaje.conductor);
-        }
-        console.log("Respuesta obtenerInfoViaje: ", respuesta)
-      },
-      error => console.error("Error en obtenerInfoViaje: ", error)
-    )
-  }
-
   // Cuando la solicitud se rechaza el usuario se actualiza a normal nuevamente
   // y se redirecciona a la vista de viajes disponibles
   verViajes() {
@@ -128,6 +135,8 @@ export class EstadoPage implements OnInit {
       "contrasenia": this.usuarioEncontrado.contrasenia,
       "tipo": "normal"
     };
+
+    console.log("Usuario actualizado 1: ", usuarioActualizado)
 
     // Se manda la solicitud
     this.api.putUsuario(this.idUsuario, usuarioActualizado).subscribe(
@@ -178,20 +187,20 @@ export class EstadoPage implements OnInit {
   ngOnInit() {
     // Solicitud para obtener la solicitud del pasajero
     this.api.getSolicitud(this.idUsuario).subscribe(
-      (respuesta: any = []) => {
-        if (respuesta.length > 0) {
-        // Busca la solicitud con el idSolicitud más alto
-        this.solicitud = respuesta.reduce((max: Solicitud, current: Solicitud) => 
+      (respuesta: any) => {
+        if (respuesta && respuesta.length > 0) {
+        // Se busca la solicitud más reciente
+        const solicitudReciente = respuesta.reduce((max: any, current: any) => 
           current.idSolicitud > max.idSolicitud ? current : max, respuesta[0]);
         
-        if (this.solicitud) {
-          // Se obtiene la información del viaje y usuario
-          this.obtenerInfoViaje(this.solicitud.viaje);
-          this.obtenerInfoUsuario(this.idUsuario);
+        this.solicitud = solicitudReciente;
 
-          console.log("Respuesta getSolicitud: ", respuesta);
-          console.log("Objeto Solicitud: ", this.solicitud);
-        }
+        this.nombreConductor = 
+                this.solicitud.viaje.conductor.nombres + " " +
+                this.solicitud.viaje.conductor.paterno + " " +
+                this.solicitud.viaje.conductor.materno;
+
+        this.obtenerInfoUsuario(this.solicitud.pasajero.idUsuario);
       }
       },
       error => console.error("Error en getSolicitud: ", error)
