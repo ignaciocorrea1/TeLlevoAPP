@@ -50,6 +50,7 @@
         *ngIf="solicitud.estado === 'No aceptada'"
       >
         <ion-button
+          (click)="cancelarViaje(solicitud.idSolicitud, solicitud.viaje.idViaje, solicitud.pasajero.idUsuario)" 
           class="button-global custom-font"
           shape="round"
           strong="true"

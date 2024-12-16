@@ -184,6 +184,70 @@ export class EstadoPage implements OnInit {
     )
   }
 
+  // Cancelar viaje
+  cancelarViaje(idSolicitud: number, idViaje: number, idPasajero: number) {
+    // Se crea la solicitud actualizada  
+    const solicitudActualizada = {
+      "viaje_id": idViaje,
+      "pasajero_id": idPasajero,
+      "estado": "Cancelada"
+    }
+
+    // Se crea el pasajero actualizado
+    const usuarioActualizado = {
+      "rut": this.usuarioEncontrado.rut,
+      "nombres": this.usuarioEncontrado.nombres,
+      "paterno": this.usuarioEncontrado.paterno,
+      "materno": this.usuarioEncontrado.materno,
+      "correo": this.usuarioEncontrado.correo,
+      "contrasenia": this.usuarioEncontrado.contrasenia,
+      "tipo": "normal"
+    };
+
+    // Se manda la solicitud actualizada
+    this.api.putSolicitud(idSolicitud, solicitudActualizada).subscribe(
+      res => {
+        // Si se actualiza la solicitud se actualiza el pasajero a normal
+        this.api.putUsuario(idPasajero, usuarioActualizado).subscribe(
+          respuesta => {
+            // Se actualiza la informacion local
+            this.strg.remove("usuario")
+            
+            const usuarioActualizado2 = {
+              "idUsuario": this.usuarioEncontrado.idUsuario,
+              "rut": this.usuarioEncontrado.rut,
+              "nombres": this.usuarioEncontrado.nombres,
+              "paterno": this.usuarioEncontrado.paterno,
+              "materno": this.usuarioEncontrado.materno,
+              "correo": this.usuarioEncontrado.correo,
+              "contrasenia": this.usuarioEncontrado.contrasenia,
+              "tipo": "normal"
+            };
+            
+            this.strg.set("usuario", usuarioActualizado2)
+
+            // Se redirecciona al inicio
+            let navigationExtras: NavigationExtras = {
+              state: {
+                id: this.usuarioEncontrado.idUsuario,
+                rut: this.usuarioEncontrado.rut,
+                nombres: this.usuarioEncontrado.nombres,
+                paterno: this.usuarioEncontrado.paterno,
+                materno: this.usuarioEncontrado.materno,
+                correo: this.usuarioEncontrado.correo,
+                contrasenia: this.usuarioEncontrado.contrasenia,
+                tipo: this.usuarioEncontrado.tipo
+              }
+            }
+            this.router.navigate(["/inicio"], navigationExtras)
+          },
+          error => console.error("Error en putUsuario en cancelarViaje(): ", error)
+        )
+      },
+      error => console.error("Error en putSolicitud en cancelarViaje(): ", error)
+    )
+  }
+
   ngOnInit() {
     // Solicitud para obtener la solicitud del pasajero
     this.api.getSolicitud(this.idUsuario).subscribe(
