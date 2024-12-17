@@ -20,7 +20,9 @@
       <ion-card-content>
         <ion-list>
           <ion-item class="custom-font t-morado-oscuro" lines="none">
-            <ion-text class="desc ion-text-start">Dirección de inicio: </ion-text>
+            <ion-text class="desc ion-text-start"
+              >Dirección de inicio:
+            </ion-text>
             <ion-text> {{viaje.direccionInicio || "Cargando..."}} </ion-text>
           </ion-item>
           <ion-item class="custom-font t-morado-oscuro" lines="none">
@@ -34,8 +36,8 @@
           <ion-item class="custom-font t-morado-oscuro" lines="none">
             <ion-text class="desc ion-text-start">Capacidad: </ion-text>
             <ion-text>
-              {{ viaje.capacidadActual !== null && viaje.capacidadMaxima !== null
-              ? viaje.capacidadActual + '/' + viaje.capacidadMaxima :
+              {{ viaje.capacidadActual !== null && viaje.capacidadMaxima !==
+              null ? viaje.capacidadActual + '/' + viaje.capacidadMaxima :
               'Cargando...' }}
             </ion-text>
           </ion-item>
@@ -54,11 +56,13 @@
       <ion-card-content>
         <ion-list *ngFor="let detalle of detalles">
           <ion-item>
-            <ion-text class="desc custom-font t-morado-oscuro"> Pasajero: </ion-text>
+            <ion-text class="desc custom-font t-morado-oscuro">
+              Pasajero:
+            </ion-text>
             <ion-text class="custom-font t-morado-oscuro ion-text-start">
-              {{detalle?.pasajero ? 
-                detalle.pasajero.nombres + ' ' + detalle.pasajero.paterno + ' ' + detalle.pasajero.materno : 'Cargando...'
-              }}
+              {{detalle?.pasajero ? detalle.pasajero.nombres + ' ' +
+              detalle.pasajero.paterno + ' ' + detalle.pasajero.materno :
+              'Cargando...' }}
             </ion-text>
           </ion-item>
         </ion-list>
@@ -89,12 +93,16 @@
           <div>
             <ion-item lines="none">
               <div class="solicitud-pasajero">
-                <ion-text class="desc custom-font t-morado-oscuro ion-text-start"> Pasajero: </ion-text>
+                <ion-text
+                  class="desc custom-font t-morado-oscuro ion-text-start"
+                >
+                  Pasajero:
+                </ion-text>
                 <ion-text>
                   <ion-text class="custom-font t-morado-oscuro ion-text-start">
-                    {{solicitud?.pasajero ? 
-                      solicitud.pasajero.nombres + ' ' + solicitud.pasajero.paterno + ' ' + solicitud.pasajero.materno : 'Cargando...'
-                    }}
+                    {{solicitud?.pasajero ? solicitud.pasajero.nombres + ' ' +
+                    solicitud.pasajero.paterno + ' ' +
+                    solicitud.pasajero.materno : 'Cargando...' }}
                   </ion-text>
                 </ion-text>
               </div>
@@ -139,6 +147,40 @@
         </h5>
       </ion-text>
     </ion-card>
+
+    <!-- Opciones viaje -->
+    <div class="opciones-viaje">
+      <ion-button
+        *ngIf="viaje?.estado === 'iniciado'"
+        (click)="opcionViaje(viaje.idViaje, 'en ruta')"
+        class="button-global custom-font"
+        shape="round"
+        strong="true"
+        style="width: 50vw; height: 5vh"
+      >
+        Iniciar viaje
+      </ion-button>
+      <ion-button
+        *ngIf="viaje?.estado === 'iniciado'"
+        (click)="opcionViaje(viaje.idViaje, 'cancelado')"
+        class="button-global custom-font"
+        shape="round"
+        strong="true"
+        style="width: 50vw; height: 5vh"
+      >
+        Cancelar viaje
+      </ion-button>
+      <ion-button
+        *ngIf="viaje?.estado === 'en ruta'"
+        (click)="opcionViaje(viaje.idViaje, 'terminado')"
+        class="button-global custom-font"
+        shape="round"
+        strong="true"
+        style="width: 50vw; height: 5vh"
+      >
+        Terminar viaje
+      </ion-button>
+    </div>
   </div>
 
   <app-bottom></app-bottom>

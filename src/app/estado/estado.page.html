@@ -20,9 +20,7 @@
       </ion-item>
       <ion-item class="custom-font t-morado-oscuro" lines="none">
         <ion-text class="desc ion-text-start">Conductor: </ion-text>
-        <ion-text>
-          {{nombreConductor || "Cargando..."}}
-        </ion-text>
+        <ion-text> {{nombreConductor || "Cargando..."}} </ion-text>
       </ion-item>
       <ion-item class="custom-font t-morado-oscuro" lines="none">
         <ion-text class="desc ion-text-start">Dirección de inicio: </ion-text>
@@ -40,17 +38,71 @@
         <ion-text class="desc ion-text-start">Hora de inicio: </ion-text>
         <ion-text> {{solicitud.viaje.horaInicio || "Cargando..."}} </ion-text>
       </ion-item>
-      <ion-item class="custom-font t-morado-oscuro" lines="none">
+      <ion-item
+        class="custom-font t-morado-oscuro"
+        lines="none"
+        *ngIf="solicitud.viaje.estado == 'iniciado'"
+      >
         <ion-text class="desc ion-text-start">Estado solicitud: </ion-text>
         <ion-text> {{solicitud.estado || "Cargando..."}} </ion-text>
       </ion-item>
       <ion-item
         class="custom-font t-morado-oscuro"
         lines="none"
-        *ngIf="solicitud.estado === 'No aceptada'"
+        *ngIf="solicitud.viaje.estado == 'en ruta'"
+      >
+        <ion-text class="desc ion-text-start">Estado viaje: </ion-text>
+        <ion-text>
+          Tu viaje está en progreso. Disfruta el trayecto y recuerda llegar a tu
+          destino seguro
+        </ion-text>
+      </ion-item>
+      <ion-item
+        class="custom-font t-morado-oscuro"
+        lines="none"
+        *ngIf="solicitud.viaje.estado == 'terminado'"
+      >
+        <ion-text class="desc ion-text-start">Estado viaje: </ion-text>
+        <ion-text>
+          Tu viaje ha finalizado. Esperamos verte pronto en otro viaje.
+        </ion-text>
+      </ion-item>
+      <ion-item
+        style="margin-top: 2vh"
+        class="custom-font t-morado-oscuro ion-text-center"
+        lines="none"
+        *ngIf="solicitud.estado === 'Aceptada' && solicitud.viaje.estado === 'iniciado'"
+      >
+        <ion-text>
+          El conductor aceptó tu solicitud. Recuerda ser puntual!!!
+        </ion-text>
+      </ion-item>
+      <ion-item
+        style="margin-top: 2vh"
+        class="custom-font t-morado-oscuro ion-text-center"
+        lines="none"
+        *ngIf="solicitudEstado === 'Rechazada'"
+      >
+        <ion-text> Tu solicitud no fue aceptada :(</ion-text>
+      </ion-item>
+      <ion-item
+        style="margin-top: 2vh"
+        class="custom-font t-morado-oscuro ion-text-center"
+        lines="none"
+        *ngIf="solicitud.viaje.estado === 'cancelado'"
+      >
+        <ion-text>
+          El conductor ha cancelado el viaje. Lamentamos el inconveniente.
+          Puedes buscar otros viajes disponibles.
+        </ion-text>
+      </ion-item>
+      <ion-item
+        class="custom-font t-morado-oscuro"
+        lines="none"
+        *ngIf="solicitud.estado === 'No aceptada' && solicitud.viaje.estado !== 'cancelado'"
       >
         <ion-button
-          (click)="cancelarViaje(solicitud.idSolicitud, solicitud.viaje.idViaje, solicitud.pasajero.idUsuario)" 
+          (click)="cancelarViaje(solicitud.idSolicitud, solicitud.viaje.idViaje, solicitud.pasajero.idUsuario)"
           class="button-global custom-font"
           shape="round"
           strong="true"
@@ -59,33 +111,28 @@
           Cancelar solicitud
         </ion-button>
       </ion-item>
-      <ion-item
-        style="margin-top: 2vh"
-        class="custom-font t-morado-oscuro ion-text-center"
-        lines="none"
-        *ngIf="solicitud.estado === 'Aceptada'"
-      >
-        <ion-text>
-          El conductor aceptó tu solicitud. Recuerda ser puntual!!!
-        </ion-text>
-      </ion-item>
-      <div
-        style="margin-top: 2vh"
-        class="custom-font t-morado-oscuro ion-text-center"
-        lines="none"
-        *ngIf="solicitud.estado === 'Rechazada'"
-      >
-        <ion-text> Tu solicitud no fue aceptada :(</ion-text>
+      <ion-item class="custom-font t-morado-oscuro" lines="none">
         <ion-button
-          (click)="verViajes()"
+          (click)="opcionViaje('terminado')"
+          class="button-global custom-font"
+          shape="round"
+          strong="true"
+          style="width: 50vw; height: 5vh"
+          *ngIf="solicitud.viaje.estado == 'terminado'"
+        >
+          Volver
+        </ion-button>
+        <ion-button
+          (click)="opcionViaje('cancelado')"
           class="button-global custom-font"
           shape="round"
           strong="true"
           style="width: 50vw; height: 5vh; margin: 0 auto; margin-top: 2vh"
+          *ngIf="solicitud.viaje.estado == 'cancelado'"
         >
           Ver más viajes
         </ion-button>
-      </div>
+      </ion-item>
     </ion-list>
   </div>
 

@@ -53,12 +53,11 @@ interface Solicitud {
   styleUrls: ['./estado.page.scss'],
 })
 export class EstadoPage implements OnInit {
-
   constructor(
     private router: Router,
     private api: ApicontrollerService,
     private strg: StorageService
-  ) { 
+  ) {
     const navegacion = this.router.getCurrentNavigation();
     const state = navegacion?.extras.state as {
       idUsuario: number;
@@ -69,7 +68,7 @@ export class EstadoPage implements OnInit {
       this.idUsuario = 0;
     }
   }
- 
+
   idUsuario = 0;
   solicitud: Solicitud = {
     idSolicitud: 0,
@@ -85,7 +84,7 @@ export class EstadoPage implements OnInit {
         paterno: '',
         materno: '',
         correo: '',
-        tipo: ''
+        tipo: '',
       },
       costoPersona: 0,
       direccionInicio: '',
@@ -95,7 +94,7 @@ export class EstadoPage implements OnInit {
       coordenadasFinalLat: 0,
       coordenadasFinalLng: 0,
       horaInicio: '',
-      estado: ''
+      estado: '',
     },
     pasajero: {
       idUsuario: 0,
@@ -105,68 +104,82 @@ export class EstadoPage implements OnInit {
       materno: '',
       correo: '',
       contrasenia: '',
-      tipo: ''
-    }
+      tipo: '',
+    },
   };
 
   usuarioEncontrado = {
-    "idUsuario": 0,
-    "rut": "",
-    "nombres": "",
-    "paterno": "",
-    "materno": "",
-    "correo": "",
-    "contrasenia": "",
-    "tipo": ""
-  }
+    idUsuario: 0,
+    rut: '',
+    nombres: '',
+    paterno: '',
+    materno: '',
+    correo: '',
+    contrasenia: '',
+    tipo: '',
+  };
 
-  nombreConductor = "";
+  nombreConductor = '';
+  solicitudEstado = '';
 
-  // Cuando la solicitud se rechaza el usuario se actualiza a normal nuevamente
-  // y se redirecciona a la vista de viajes disponibles
-  verViajes() {
-    // Se crea el objeto del usuario
-    const usuarioActualizado = {
-      "rut": this.usuarioEncontrado.rut,
-      "nombres": this.usuarioEncontrado.nombres,
-      "paterno": this.usuarioEncontrado.paterno,
-      "materno": this.usuarioEncontrado.materno,
-      "correo": this.usuarioEncontrado.correo,
-      "contrasenia": this.usuarioEncontrado.contrasenia,
-      "tipo": "normal"
+  // Cancelar viaje
+  cancelarViaje(idSolicitud: number, idViaje: number, idPasajero: number) {
+    // Se crea la solicitud actualizada
+    const solicitudActualizada = {
+      viaje_id: idViaje,
+      pasajero_id: idPasajero,
+      estado: 'Cancelada',
     };
 
-    console.log("Usuario actualizado 1: ", usuarioActualizado)
+    // Se manda la solicitud actualizada
+    this.api.putSolicitud(idSolicitud, solicitudActualizada).subscribe(
+      (res) => {
+        // Si se actualiza la solicitud se actualiza el pasajero a normal
+        this.actualizacionUsuario(idPasajero);
 
-    // Se manda la solicitud
-    this.api.putUsuario(this.idUsuario, usuarioActualizado).subscribe(
-      respuesta => {
-        // Se actualiza la informacion local
-        this.strg.remove("usuario")
-        
-        const usuarioActualizado2 = {
-          "idUsuario": this.usuarioEncontrado.idUsuario,
-          "rut": this.usuarioEncontrado.rut,
-          "nombres": this.usuarioEncontrado.nombres,
-          "paterno": this.usuarioEncontrado.paterno,
-          "materno": this.usuarioEncontrado.materno,
-          "correo": this.usuarioEncontrado.correo,
-          "contrasenia": this.usuarioEncontrado.contrasenia,
-          "tipo": "normal"
-        };
-        
-        this.strg.set("usuario", usuarioActualizado2)
-
-        // Se redirecciona a la otra vista
-        let navigationExtras: NavigationExtras = {
-          state: {
-            idUsuario: this.idUsuario
-          }
-        }
-        this.router.navigate(["/viajesdisponibles"], navigationExtras)
+        // Se redirecciona al inicio
+        setTimeout(() => {
+          let navigationExtras: NavigationExtras = {
+            state: {
+              id: this.usuarioEncontrado.idUsuario,
+              rut: this.usuarioEncontrado.rut,
+              nombres: this.usuarioEncontrado.nombres,
+              paterno: this.usuarioEncontrado.paterno,
+              materno: this.usuarioEncontrado.materno,
+              correo: this.usuarioEncontrado.correo,
+              contrasenia: this.usuarioEncontrado.contrasenia,
+              tipo: this.usuarioEncontrado.tipo,
+            },
+          };
+          this.router.navigate(['/inicio'], navigationExtras);
+        }, 1000);
       },
-      error => console.error("Error en putUsuario en verViajes(): ", error)
-    )
+      (error) =>
+        console.error('Error en putSolicitud en cancelarViaje(): ', error)
+    );
+  }
+
+  // Volver a usuario normal una vez se terminó el viaje
+  opcionViaje(situacion: string) {
+    // Se crea el objeto del usuario
+    this.actualizacionUsuario(this.idUsuario);
+
+    // Se redirecciona a la otra vista
+    let navigationExtras: NavigationExtras = {
+      state: {
+        idUsuario: this.idUsuario,
+      },
+    };
+
+    if (situacion === 'terminado') {
+      setTimeout(() => {
+        this.router.navigate(['/inicio'], navigationExtras);
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        this.router.navigate(['/viajesdisponibles'], navigationExtras);
+      }, 1000);
+    }
   }
 
   // Obtener la informacion completa del pasajero para poder actualizar sus datos
@@ -176,76 +189,48 @@ export class EstadoPage implements OnInit {
         if (resultado.length > 0) {
           this.usuarioEncontrado = resultado[0];
 
-          console.log("Respuesta getConPas en obtenerInfoUsuario: ", resultado);
-          console.log("Usuario encontrado: ", this.usuarioEncontrado);
+          console.log('Respuesta getConPas en obtenerInfoUsuario: ', resultado);
+          console.log('Usuario encontrado: ', this.usuarioEncontrado);
         }
       },
-      error => console.error("Error en getConPas en obtenerInfoUsuario", error)
-    )
+      (error) =>
+        console.error('Error en getConPas en obtenerInfoUsuario', error)
+    );
   }
 
-  // Cancelar viaje
-  cancelarViaje(idSolicitud: number, idViaje: number, idPasajero: number) {
-    // Se crea la solicitud actualizada  
-    const solicitudActualizada = {
-      "viaje_id": idViaje,
-      "pasajero_id": idPasajero,
-      "estado": "Cancelada"
-    }
-
-    // Se crea el pasajero actualizado
+  // Actualizacion del conductor a normal
+  actualizacionUsuario(idUsuario: number) {
     const usuarioActualizado = {
-      "rut": this.usuarioEncontrado.rut,
-      "nombres": this.usuarioEncontrado.nombres,
-      "paterno": this.usuarioEncontrado.paterno,
-      "materno": this.usuarioEncontrado.materno,
-      "correo": this.usuarioEncontrado.correo,
-      "contrasenia": this.usuarioEncontrado.contrasenia,
-      "tipo": "normal"
+      rut: this.usuarioEncontrado.rut,
+      nombres: this.usuarioEncontrado.nombres,
+      paterno: this.usuarioEncontrado.paterno,
+      materno: this.usuarioEncontrado.materno,
+      correo: this.usuarioEncontrado.correo,
+      contrasenia: this.usuarioEncontrado.contrasenia,
+      tipo: 'normal',
     };
 
-    // Se manda la solicitud actualizada
-    this.api.putSolicitud(idSolicitud, solicitudActualizada).subscribe(
-      res => {
-        // Si se actualiza la solicitud se actualiza el pasajero a normal
-        this.api.putUsuario(idPasajero, usuarioActualizado).subscribe(
-          respuesta => {
-            // Se actualiza la informacion local
-            this.strg.remove("usuario")
-            
-            const usuarioActualizado2 = {
-              "idUsuario": this.usuarioEncontrado.idUsuario,
-              "rut": this.usuarioEncontrado.rut,
-              "nombres": this.usuarioEncontrado.nombres,
-              "paterno": this.usuarioEncontrado.paterno,
-              "materno": this.usuarioEncontrado.materno,
-              "correo": this.usuarioEncontrado.correo,
-              "contrasenia": this.usuarioEncontrado.contrasenia,
-              "tipo": "normal"
-            };
-            
-            this.strg.set("usuario", usuarioActualizado2)
+    this.api.putUsuario(idUsuario, usuarioActualizado).subscribe(
+      (respuesta) => {
+        // Se actualiza la informacion local
+        this.strg.remove('usuario');
 
-            // Se redirecciona al inicio
-            let navigationExtras: NavigationExtras = {
-              state: {
-                id: this.usuarioEncontrado.idUsuario,
-                rut: this.usuarioEncontrado.rut,
-                nombres: this.usuarioEncontrado.nombres,
-                paterno: this.usuarioEncontrado.paterno,
-                materno: this.usuarioEncontrado.materno,
-                correo: this.usuarioEncontrado.correo,
-                contrasenia: this.usuarioEncontrado.contrasenia,
-                tipo: this.usuarioEncontrado.tipo
-              }
-            }
-            this.router.navigate(["/inicio"], navigationExtras)
-          },
-          error => console.error("Error en putUsuario en cancelarViaje(): ", error)
-        )
+        const usuarioActualizado2 = {
+          idUsuario: this.usuarioEncontrado.idUsuario,
+          rut: this.usuarioEncontrado.rut,
+          nombres: this.usuarioEncontrado.nombres,
+          paterno: this.usuarioEncontrado.paterno,
+          materno: this.usuarioEncontrado.materno,
+          correo: this.usuarioEncontrado.correo,
+          contrasenia: this.usuarioEncontrado.contrasenia,
+          tipo: 'normal',
+        };
+
+        this.strg.set('usuario', usuarioActualizado2);
       },
-      error => console.error("Error en putSolicitud en cancelarViaje(): ", error)
-    )
+      (error) =>
+        console.error('Error en putUsuario en actualizacionUsuario(): ', error)
+    );
   }
 
   ngOnInit() {
@@ -253,21 +238,42 @@ export class EstadoPage implements OnInit {
     this.api.getSolicitud(this.idUsuario).subscribe(
       (respuesta: any) => {
         if (respuesta && respuesta.length > 0) {
-        // Se busca la solicitud más reciente
-        const solicitudReciente = respuesta.reduce((max: any, current: any) => 
-          current.idSolicitud > max.idSolicitud ? current : max, respuesta[0]);
-        
-        this.solicitud = solicitudReciente;
+          // Se busca la solicitud más reciente
+          const solicitudReciente = respuesta.reduce(
+            (max: any, current: any) =>
+              current.idSolicitud > max.idSolicitud ? current : max,
+            respuesta[0]
+          );
 
-        this.nombreConductor = 
-                this.solicitud.viaje.conductor.nombres + " " +
-                this.solicitud.viaje.conductor.paterno + " " +
-                this.solicitud.viaje.conductor.materno;
+          this.solicitud = solicitudReciente;
 
-        this.obtenerInfoUsuario(this.solicitud.pasajero.idUsuario);
-      }
+          if (this.solicitud.estado === 'Aceptada') {
+            this.solicitudEstado = 'Aceptada';
+          } else if (this.solicitud.estado === 'Rechazada') {
+            this.solicitudEstado = 'Rechazada';
+          } else {
+            this.solicitudEstado = '';
+          }
+
+          if (
+            this.solicitud.viaje.estado === 'cancelado' ||
+            this.solicitud.viaje.estado === 'terminado'
+          ) {
+            this.solicitudEstado = 'cancelado';
+          }
+
+          this.nombreConductor =
+            this.solicitud.viaje.conductor.nombres +
+            ' ' +
+            this.solicitud.viaje.conductor.paterno +
+            ' ' +
+            this.solicitud.viaje.conductor.materno;
+
+          this.obtenerInfoUsuario(this.solicitud.pasajero.idUsuario);
+          console.log('Solicitud obtenida: ', respuesta);
+        }
       },
-      error => console.error("Error en getSolicitud: ", error)
-    )
+      (error) => console.error('Error en getSolicitud: ', error)
+    );
   }
 }

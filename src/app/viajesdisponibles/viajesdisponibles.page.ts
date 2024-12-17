@@ -108,12 +108,10 @@ export class ViajesdisponiblesPage implements OnInit {
     this.api.getViajes().subscribe(
       (resultados: any[]) => {
         if (resultados.length > 0) {
-          this.viajes = resultados;
+          this.viajes = resultados.filter(tmp => tmp.estado === "iniciado");
           console.log("Resultado getViajes: ", this.viajes);
 
-          resultados.forEach(tmp => {
-            console.log("tmp conductor: ", tmp.conductor);
-          });
+          console.log("Viajes con estado iniciado: ", this.viajes)
         };
       },
       error => {

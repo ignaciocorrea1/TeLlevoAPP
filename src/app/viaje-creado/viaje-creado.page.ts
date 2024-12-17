@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ApicontrollerService } from '../Servicios/apicontroller.service';
 import { StorageService } from '../Servicios/storage.service';
+import { NavigationExtras } from '@angular/router';
 
 import { Router } from '@angular/router';
 
@@ -52,6 +53,17 @@ export class ViajeCreadoPage implements OnInit {
     "estado": ""
   };
 
+  usuarioEncontrado = {
+    "idUsuario": 0,
+    "rut": "",
+    "nombres": "",
+    "paterno": "",
+    "materno": "",
+    "correo": "",
+    "contrasenia": "",
+    "tipo": ""
+  }
+
   solicitudes: any = [];
   haySolicitudes = false;
 
@@ -59,6 +71,7 @@ export class ViajeCreadoPage implements OnInit {
   hayDetalles = false;
 
   pasajeros: any = [];
+
 
   // Aceptar la solicitud al viaje
   aceptarSolicitud(idSolicitud: number, idPasajero: number) {
@@ -87,6 +100,8 @@ export class ViajeCreadoPage implements OnInit {
             this.detalles.push(resDetalle)
             this.hayDetalles = true;
 
+            this.actualizarDatos();
+
             console.log("Detalle creado")
             console.log("this.detalles: ", this.detalles)
           },
@@ -112,6 +127,9 @@ export class ViajeCreadoPage implements OnInit {
     this.api.putSolicitud(idSolicitud, solicitudActualizada).subscribe(
       res => {
         this.rechazado = true;
+        
+        this.actualizarDatos();
+
         console.log("Solicitud actualizada a rechazada")
         console.log("Solicitudes array: ", this.solicitudes)
       },
@@ -176,23 +194,129 @@ export class ViajeCreadoPage implements OnInit {
     )
   }
 
-  // Obtener el viaje al iniciar la vista
-  ngOnInit() {
-    // Solicitud a la api para obtener el viaje del usuario
-    this.api.getViajeC(this.idUsuario, "iniciado").subscribe(
+  // Opcion para iniciar o terminar el viaje
+  opcionViaje(idViaje: number, estado: string) {
+    const viaje = {
+      "conductor_id": this.viaje.conductor,
+      "costoPersona": this.viaje.costoPersona,
+      "capacidadActual": 0,
+      "capacidadMaxima": this.viaje.capacidadMaxima,
+      "direccionInicio": this.viaje.direccionInicio,
+      "direccionFinal": this.viaje.direccionFinal,
+      "coordenadasInicioLat": this.viaje.coordenadasInicioLat,
+      "coordenadasInicioLng": this.viaje.coordenadasInicioLng,
+      "coordenadasFinalLat": this.viaje.coordenadasFinalLat,
+      "coordenadasFinalLng": this.viaje.coordenadasFinalLng,
+      "horaInicio": this.viaje.horaInicio,
+      "estado": estado
+    }
+
+    // Se manda la solicitud para actualizar el viaje
+    this.api.putViaje(idViaje, viaje).subscribe(
+      res => {
+        if (estado === 'terminado' || estado === 'cancelado') {
+          this.actualizacionConductor(this.usuarioEncontrado.idUsuario)
+        } else {
+          this.actualizarDatos();
+        }
+      },
+      error => console.error("Error en putViaje en terminarViaje(): ", error)
+    )
+  }
+
+  // Actualizacion del conductor a normal
+  actualizacionConductor(idConductor: number) {
+    const usuarioActualizado = {
+      "rut": this.usuarioEncontrado.rut,
+      "nombres": this.usuarioEncontrado.nombres,
+      "paterno": this.usuarioEncontrado.paterno,
+      "materno": this.usuarioEncontrado.materno,
+      "correo": this.usuarioEncontrado.correo,
+      "contrasenia": this.usuarioEncontrado.contrasenia,
+      "tipo": "normal"
+    };
+
+    this.api.putUsuario(idConductor, usuarioActualizado).subscribe(
+      respuesta => {
+        // Se actualiza la informacion local
+        this.strg.remove("usuario")
+        
+        const usuarioActualizado2 = {
+          "idUsuario": this.usuarioEncontrado.idUsuario,
+          "rut": this.usuarioEncontrado.rut,
+          "nombres": this.usuarioEncontrado.nombres,
+          "paterno": this.usuarioEncontrado.paterno,
+          "materno": this.usuarioEncontrado.materno,
+          "correo": this.usuarioEncontrado.correo,
+          "contrasenia": this.usuarioEncontrado.contrasenia,
+          "tipo": "normal"
+        };
+        
+        this.strg.set("usuario", usuarioActualizado2)
+
+        // Se redirecciona a la otra vista
+        let navigationExtras: NavigationExtras = {
+          state: {
+            idUsuario: this.idUsuario
+          }
+        }
+        this.router.navigate(["/inicio"], navigationExtras)
+      },
+      error => console.error("Error en putUsuario en actualizacionConductor(): ", error)
+    )
+  }
+
+  // Obtener la info del conductor para actualizar una vez termine o cancele el viaje
+  obtenerInfoConductor(idConductor: number) {
+    this.api.getConPas(idConductor).subscribe(
+      (resultado: any = []) => {
+        if (resultado.length > 0) {
+          this.usuarioEncontrado = resultado[0];
+
+          console.log("Respuesta getConPas en obtenerInfoUsuario(): ", resultado);
+          console.log("Usuario encontrado en getConPas en obtenerInfoUsuario(): ", this.usuarioEncontrado);
+        }
+      },
+      error => console.error("Error en getConPas en obtenerInfoUsuario", error)
+    )
+  }
+
+  // Recargar los datos
+  actualizarDatos() {
+    // Obtener el viaje actualizado
+    this.api.getViajeC(this.idUsuario, "activo").subscribe(
       (resultado: any[]) => {
         if (resultado.length > 0) {
           this.viaje = resultado[0];
-          console.log("Resultado getViajeC: ", this.viaje)
+          // Recargar solicitudes y detalles
+          this.cargarSolicitudes(this.viaje.idViaje);
+          this.cargarDetalles(this.viaje.idViaje);
+        }
+      },
+      error => console.error("Error al actualizar datos: ", error)
+    );
+  }
+
+  // Obtener el viaje al iniciar la vista
+  ngOnInit() {
+    // Solicitud a la api para obtener el viaje del usuario
+    this.api.getViajeC(this.idUsuario, "activo").subscribe(
+      (resultado: any[]) => {
+        if (resultado.length > 0) {
+          this.viaje = resultado[0];
+          console.log("Resultado getViajeC: ", this.viaje);
 
           this.cargarSolicitudes(this.viaje.idViaje);
           this.cargarDetalles(this.viaje.idViaje);
+          this.obtenerInfoConductor(this.idUsuario)
 
         } else {
           console.error("No se encontraron viajes para este usuario");
         }
       },
-      error => console.error("Error con el viaje obtenido: ", error)
+      error => {
+        console.error("Error con el viaje obtenido: ", error);
+      }
     );
   }
 }
