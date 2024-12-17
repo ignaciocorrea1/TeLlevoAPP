@@ -128,7 +128,7 @@
           shape="round"
           strong="true"
           style="width: 50vw; height: 5vh; margin: 0 auto; margin-top: 2vh"
-          *ngIf="solicitud.viaje.estado == 'cancelado'"
+          *ngIf="solicitud.viaje.estado == 'cancelado' || solicitud.estado === 'Rechazada'"
         >
           Ver más viajes
         </ion-button>
